@@ -112,6 +112,48 @@ is to make a small edit and see it work in the browser.
 - [W3C guide to image alt text](https://www.w3.org/WAI/tutorials/images/decision-tree/)
   — a quick decision guide for writing image descriptions.
 
+## Add AI and Codex to your workflow
+
+Codex is a useful coding partner for beginners: it can explain an unfamiliar
+HTML or CSS file, suggest a small change, help diagnose an error, and review
+your work. It works best when you give it a focused goal and enough context.
+
+- [Codex quickstart](https://developers.openai.com/codex/quickstart) — setup
+  guidance for getting started with ChatGPT and Codex.
+- [Get started with Codex](https://openai.com/codex/get-started/) — an overview
+  of the product and how it can support coding work.
+
+Use this repeatable process for an update:
+
+1. Choose one small task, such as changing the class schedule or adding one
+   gallery photo.
+2. Tell Codex what you want, which file to edit, and what must not change.
+3. Ask it to explain the changes in beginner-friendly language.
+4. Read the changed file, run the local server, and check the result in a
+   browser before keeping the change.
+5. Commit and push only changes you understand and want to keep.
+
+Try prompts like these:
+
+```text
+I am new to HTML and CSS. Explain the purpose of each section in index.html
+without changing any files.
+```
+
+```text
+Update the event placeholder in index.html. Keep the current simple design,
+then tell me exactly what you changed and how I can check it locally.
+```
+
+```text
+Review my changes to this website for broken links, spelling mistakes, and
+mobile readability. Do not make changes yet; explain any problems first.
+```
+
+Never share passwords, API keys, private client details, or other sensitive
+information in a prompt. AI can speed up the work, but you are responsible for
+reviewing, testing, and publishing the final website.
+
 ## Get ideas from Novus websites
 
 Use the following websites to study choices, not to copy them. For each site,

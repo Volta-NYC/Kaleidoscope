@@ -79,6 +79,10 @@ such as `Replace #` and `Add` to find values that need real links, contact
 details, names, and media. Save the file and refresh `http://localhost:4173` to
 see your changes.
 
+The site starts in English. The button in the top-right corner switches the
+page to Russian. The Russian wording is stored in `script.js`; update the
+matching text there whenever you change English text in `index.html`.
+
 To add an image later, place the file in a new `images` folder and replace a
 placeholder block with an image tag such as:
 
@@ -140,6 +144,7 @@ experienced collaborator for help resolving it.
 ```text
 kaleidoscope/
 ├── index.html   # Page content and structure
+├── script.js    # English/Russian language switcher
 ├── styles.css   # Visual styles
 └── README.md    # This guide
 ```

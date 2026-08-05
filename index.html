@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,155 +7,166 @@
       name="description"
       content="A simple starter template for Folk Dance Club Kaleidoscope."
     />
-    <title>Клуб народного танца «Калейдоскоп»</title>
+    <title>Folk Dance Club Kaleidoscope</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <div class="container">
         <!-- Replace this with the club logo when one is ready. -->
-        <a class="site-name" href="#home">Клуб народного танца «Калейдоскоп»</a>
-        <p class="site-support">При поддержке Мультикультурного Центра «Калейдоскоп»</p>
+        <a class="site-name" href="#home" data-i18n="siteName">Folk Dance Club Kaleidoscope</a>
+        <p class="site-support" data-i18n="siteSupport">
+          Supported by the Multicultural Center Kaleidoscope
+        </p>
 
-        <nav aria-label="Основная навигация">
-          <ul class="nav-list">
-            <li><a href="#home">Главная</a></li>
-            <li><a href="#news">Новости</a></li>
-            <li><a href="#events">Мероприятия</a></li>
-            <li><a href="#gallery">Галерея</a></li>
-            <li><a href="#press">СМИ о нас</a></li>
-            <li><a href="#about">О нас</a></li>
-            <li><a href="#contacts">Контакты</a></li>
-          </ul>
-        </nav>
+        <div class="header-nav-row">
+          <nav aria-label="Main navigation" data-i18n-aria-label="mainNavigation">
+            <ul class="nav-list">
+              <li><a href="#home" data-i18n="navHome">Home</a></li>
+              <li><a href="#news" data-i18n="navNews">News</a></li>
+              <li><a href="#events" data-i18n="navEvents">Events</a></li>
+              <li><a href="#gallery" data-i18n="navGallery">Gallery</a></li>
+              <li><a href="#press" data-i18n="navPress">Press</a></li>
+              <li><a href="#about" data-i18n="navAbout">About</a></li>
+              <li><a href="#contacts" data-i18n="navContacts">Contact</a></li>
+            </ul>
+          </nav>
+
+          <button class="language-toggle" id="language-toggle" type="button">
+            Русский
+          </button>
+        </div>
       </div>
     </header>
 
     <main>
       <section class="section" id="home">
         <div class="container">
-          <h1>Народный танец, культура и сообщество</h1>
-          <p>
-            Короткое приветствие для посетителей. Расскажите здесь, кому помогает клуб,
-            чему посвящены занятия и почему к вам стоит присоединиться.
+          <h1 data-i18n="heroTitle">Folk dance, culture, and community</h1>
+          <p data-i18n="heroText">
+            Use this short welcome to explain who the club supports, what happens in classes,
+            and why someone should join.
           </p>
-          <p><a href="#contacts">Записаться или задать вопрос</a></p>
+          <p><a href="#contacts" data-i18n="heroLink">Register or ask a question</a></p>
         </div>
       </section>
 
       <section class="section" aria-labelledby="support-title">
         <div class="container">
-          <h2 id="support-title">Поддержать клуб</h2>
-          <p>
-            Мультикультурный Центр «Калейдоскоп» — некоммерческая организация.
-            Здесь можно кратко объяснить, на что пойдут пожертвования.
+          <h2 id="support-title" data-i18n="supportTitle">Support the club</h2>
+          <p data-i18n="supportText">
+            The Multicultural Center Kaleidoscope is a nonprofit organization. Explain here
+            how donations will support the club.
           </p>
           <!-- Replace # with a real donation page URL. -->
-          <p><a href="#">Сделать пожертвование</a></p>
+          <p><a href="#" data-i18n="donateLink">Make a donation</a></p>
         </div>
       </section>
 
       <section class="section" id="about">
         <div class="container">
-          <h2>О клубе</h2>
-          <p>
-            Основная задача клуба — дать детям и молодёжи пространство для танца,
-            физического развития, творчества и знакомства с культурами разных народов.
+          <h2 data-i18n="aboutTitle">About the club</h2>
+          <p data-i18n="aboutText">
+            The club gives children and young people a place for dance, physical development,
+            creativity, and learning about the cultures of many peoples.
           </p>
 
-          <h3>Наши цели</h3>
+          <h3 data-i18n="goalsTitle">Our goals</h3>
           <ul>
-            <li>Регулярные занятия танцем и физической подготовкой.</li>
-            <li>Знакомство с культурными традициями разных стран.</li>
-            <li>Развитие уверенности, дисциплины и командной работы.</li>
-            <li>Участие в жизни сообщества и волонтёрских проектах.</li>
+            <li data-i18n="goalOne">Regular dance classes and physical training.</li>
+            <li data-i18n="goalTwo">Learning about cultural traditions from around the world.</li>
+            <li data-i18n="goalThree">Building confidence, discipline, and teamwork.</li>
+            <li data-i18n="goalFour">Taking part in community and volunteer projects.</li>
           </ul>
 
-          <h3>Команда</h3>
+          <h3 data-i18n="teamTitle">Our team</h3>
           <!-- Add, remove, or replace these roles and names. -->
           <ul class="plain-list">
-            <li><strong>Имя Фамилия</strong> — президент клуба</li>
-            <li><strong>Имя Фамилия</strong> — хореограф и художник по костюмам</li>
-            <li><strong>Имя Фамилия</strong> — помощник хореографа</li>
+            <li><strong data-i18n="nameOne">First Last</strong> <span data-i18n="roleOne">— club president</span></li>
+            <li><strong data-i18n="nameTwo">First Last</strong> <span data-i18n="roleTwo">— choreographer and costume designer</span></li>
+            <li><strong data-i18n="nameThree">First Last</strong> <span data-i18n="roleThree">— assistant choreographer</span></li>
           </ul>
         </div>
       </section>
 
       <section class="section" aria-labelledby="classes-title">
         <div class="container">
-          <h2 id="classes-title">Занятия</h2>
-          <p>
-            Добавьте возрастные группы, адрес и актуальное расписание. Например:
-            занятия проходят по будням с 18:00 до 20:00.
+          <h2 id="classes-title" data-i18n="classesTitle">Classes</h2>
+          <p data-i18n="classesText">
+            Add age groups, the address, and the current schedule. For example: classes run
+            weekdays from 6:00 PM to 8:00 PM.
           </p>
           <ol>
-            <li>Разминка, растяжка и физическая подготовка.</li>
-            <li>Основы классического танца и хореографии.</li>
-            <li>Изучение движений и трюков в небольших группах.</li>
-            <li>Репетиция, импровизация и актёрское мастерство.</li>
+            <li data-i18n="classOne">Warm-up, stretching, and physical preparation.</li>
+            <li data-i18n="classTwo">Classical dance and choreography fundamentals.</li>
+            <li data-i18n="classThree">Small-group work on movements and tricks.</li>
+            <li data-i18n="classFour">Rehearsal, improvisation, and acting.</li>
           </ol>
         </div>
       </section>
 
       <section class="section" id="news">
         <div class="container">
-          <h2>Новости</h2>
+          <h2 data-i18n="newsTitle">News</h2>
           <article class="content-item">
-            <h3><a href="#">Заголовок последней новости</a></h3>
-            <p>Дата · Краткое описание новости в одном или двух предложениях.</p>
+            <h3><a href="#" data-i18n="newsOneTitle">Most recent news headline</a></h3>
+            <p data-i18n="newsOneText">Date · A one- or two-sentence summary of the news item.</p>
           </article>
           <article class="content-item">
-            <h3><a href="#">Заголовок второй новости</a></h3>
-            <p>Дата · Краткое описание новости в одном или двух предложениях.</p>
+            <h3><a href="#" data-i18n="newsTwoTitle">Second news headline</a></h3>
+            <p data-i18n="newsTwoText">Date · A one- or two-sentence summary of the news item.</p>
           </article>
-          <p><a href="#">Все новости</a></p>
+          <p><a href="#" data-i18n="allNewsLink">All news</a></p>
         </div>
       </section>
 
       <section class="section" id="events">
         <div class="container">
-          <h2>Ближайшие мероприятия</h2>
+          <h2 data-i18n="eventsTitle">Upcoming events</h2>
           <article class="content-item">
-            <h3>Название мероприятия</h3>
-            <p><strong>Дата и время:</strong> Добавьте дату и время</p>
-            <p><strong>Место:</strong> Добавьте адрес или название площадки</p>
-            <p>Коротко опишите выступление, концерт, фестиваль или встречу.</p>
+            <h3 data-i18n="eventName">Event name</h3>
+            <p><strong data-i18n="dateTimeLabel">Date and time:</strong> <span data-i18n="dateTimeValue">Add a date and time</span></p>
+            <p><strong data-i18n="placeLabel">Location:</strong> <span data-i18n="placeValue">Add an address or venue name</span></p>
+            <p data-i18n="eventText">Briefly describe the performance, concert, festival, or gathering.</p>
           </article>
         </div>
       </section>
 
       <section class="section" id="gallery">
         <div class="container">
-          <h2>Галерея</h2>
-          <p>Замените эти блоки фотографиями или видео с выступлений и репетиций.</p>
+          <h2 data-i18n="galleryTitle">Gallery</h2>
+          <p data-i18n="galleryText">
+            Replace these blocks with photos or videos from performances and rehearsals.
+          </p>
           <div class="media-grid">
-            <div class="media-placeholder">Фото или видео 1</div>
-            <div class="media-placeholder">Фото или видео 2</div>
-            <div class="media-placeholder">Фото или видео 3</div>
+            <div class="media-placeholder" data-i18n="mediaOne">Photo or video 1</div>
+            <div class="media-placeholder" data-i18n="mediaTwo">Photo or video 2</div>
+            <div class="media-placeholder" data-i18n="mediaThree">Photo or video 3</div>
           </div>
         </div>
       </section>
 
       <section class="section" id="press">
         <div class="container">
-          <h2>СМИ о нас</h2>
+          <h2 data-i18n="pressTitle">Press</h2>
           <ul class="plain-list">
-            <li><a href="#">Название публикации или интервью</a> — издание, дата</li>
-            <li><a href="#">Название публикации или интервью</a> — издание, дата</li>
+            <li><a href="#" data-i18n="pressOne">Publication or interview title</a> <span data-i18n="pressDetails">— publication, date</span></li>
+            <li><a href="#" data-i18n="pressTwo">Publication or interview title</a> <span data-i18n="pressDetails">— publication, date</span></li>
           </ul>
         </div>
       </section>
 
       <section class="section" id="contacts">
         <div class="container">
-          <h2>Контакты</h2>
+          <h2 data-i18n="contactsTitle">Contact</h2>
           <ul class="plain-list">
-            <li><strong>Адрес:</strong> Добавьте адрес занятий</li>
-            <li><strong>Телефон:</strong> <a href="tel:+10000000000">+1 (000) 000-0000</a></li>
-            <li><strong>Email:</strong> <a href="mailto:hello@example.org">hello@example.org</a></li>
+            <li><strong data-i18n="addressLabel">Address:</strong> <span data-i18n="addressValue">Add the class address</span></li>
+            <li><strong data-i18n="phoneLabel">Phone:</strong> <a href="tel:+10000000000">+1 (000) 000-0000</a></li>
+            <li><strong data-i18n="emailLabel">Email:</strong> <a href="mailto:hello@example.org">hello@example.org</a></li>
           </ul>
 
-          <h3>Мы в социальных сетях</h3>
+          <h3 data-i18n="socialTitle">Find us online</h3>
           <!-- Replace # with the club's current social-media URLs. -->
           <ul class="plain-list social-list">
             <li><a href="#">Facebook</a></li>
@@ -169,7 +180,7 @@
 
     <footer class="site-footer">
       <div class="container">
-        <p>© 2026 Клуб народного танца «Калейдоскоп»</p>
+        <p data-i18n="footer">© 2026 Folk Dance Club Kaleidoscope</p>
       </div>
     </footer>
   </body>

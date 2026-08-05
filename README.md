@@ -3,7 +3,9 @@
 A plain HTML and CSS starter site for the Folk Dance Club “Kaleidoscope.” It is
 an intentionally simple outline of the current website: home, club information,
 classes, news, events, gallery, press, and contacts. It has no framework, no
-build step, and no packages to install.
+build step, and no packages to install. It also includes a resources section
+with beginner learning links, inspiration sites, and a website quality
+checklist.
 
 ## What you need
 
@@ -73,6 +75,7 @@ website and will be needed as the site grows.
 
 - `index.html` contains all of the page content and section structure.
 - `styles.css` contains the small amount of visual styling.
+- `script.js` switches the visible content between English and Russian.
 
 Start by changing the placeholder text in `index.html`. Search for comments
 such as `Replace #` and `Add` to find values that need real links, contact
@@ -93,6 +96,57 @@ placeholder block with an image tag such as:
 Always write useful `alt` text so visitors using screen readers understand what
 the image shows.
 
+## Learn HTML, CSS, and GitHub
+
+Learn one topic, then try it in this project. The best way to build confidence
+is to make a small edit and see it work in the browser.
+
+- [MDN Learn Web Development](https://developer.mozilla.org/en-US/docs/Learn_web_development)
+  — a thorough, trustworthy place to start with HTML, CSS, and JavaScript.
+- [web.dev Learn CSS](https://web.dev/learn/css) — short, free lessons focused
+  on CSS.
+- [freeCodeCamp Responsive Web Design](https://www.freecodecamp.org/learn/2022/responsive-web-design/)
+  — hands-on HTML and CSS practice projects.
+- [GitHub Skills](https://skills.github.com/) — interactive Git and GitHub
+  courses.
+- [W3C guide to image alt text](https://www.w3.org/WAI/tutorials/images/decision-tree/)
+  — a quick decision guide for writing image descriptions.
+
+## Get ideas from Novus websites
+
+Use the following websites to study choices, not to copy them. For each site,
+open it on a computer and on a phone-sized browser window. Write down:
+
+1. What does the first screen tell a new visitor?
+2. What action does the website want the visitor to take?
+3. Where are the contact details, hours, address, menu, or schedule?
+4. Which sections would help a dance club website, and which would not?
+
+Start with [Novus NYC](https://www.novusnyc.org/) and use its **Our Work** area
+to find more completed projects. These are three useful direct examples:
+
+- [Phobar](https://pho-bar.vercel.app/)
+- [Taqueria El Buchon](https://taqueria-el-buchonsi.vercel.app/)
+- [Papazzio](https://www.papazzio.com/)
+
+Make an “inspiration notes” document instead of copying another website’s code,
+writing, photos, or logo. Record the section idea in your own words, then adapt
+it to the club’s real needs and content.
+
+## A simple checklist for a good website
+
+Before publishing an update, check that:
+
+- A new visitor can quickly tell who the site is for and what it offers.
+- There is one clear next step, such as **Contact us**, **Register**, or
+  **Donate**.
+- The phone number, email, address, and schedule are accurate and easy to find.
+- Navigation labels are short and familiar.
+- Headings are in a sensible order, images have `alt` descriptions, and links
+  say where they go.
+- The page is comfortable to read on a phone as well as a computer.
+- You have checked spelling, links, and the page after every significant edit.
+
 ## Save and upload your changes to GitHub
 
 In Terminal, still inside the project folder:
@@ -106,7 +160,7 @@ In Terminal, still inside the project folder:
 2. Add your changes:
 
    ```bash
-   git add index.html styles.css
+   git add index.html styles.css script.js README.md
    ```
 
    Use `git add .` only when you have checked `git status` and want to add every

@@ -8,26 +8,29 @@
       content="A simple starter template for Folk Dance Club Kaleidoscope."
     />
     <title>Folk Dance Club Kaleidoscope</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=4" />
     <script src="script.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <div class="container">
-        <!-- Replace this with the club logo when one is ready. -->
-        <a class="site-name" href="#home" data-i18n="siteName">Folk Dance Club Kaleidoscope</a>
+        <h1 class="site-title" data-i18n="siteName">Folk Dance Club Kaleidoscope</h1>
         <p class="site-support" data-i18n="siteSupport">
           Supported by the Multicultural Center Kaleidoscope
         </p>
-
+        <img
+          src="images/kaleidoscope-logo.jpg"
+          alt="Folk Dance Club Kaleidoscope"
+          class="site-logo"
+        />
         <div class="header-nav-row">
           <nav aria-label="Main navigation" data-i18n-aria-label="mainNavigation">
             <ul class="nav-list">
               <li><a href="#home" data-i18n="navHome">Home</a></li>
-              <li><a href="#news" data-i18n="navNews">News</a></li>
+              <li><a href="#projects" data-i18n="navProjects">Our projects</a></li>
               <li><a href="#events" data-i18n="navEvents">Events</a></li>
               <li><a href="#gallery" data-i18n="navGallery">Gallery</a></li>
-              <li><a href="#press" data-i18n="navPress">Press</a></li>
+              <li><a href="#registration" data-i18n="navRegistration">Registration</a></li>
               <li><a href="#about" data-i18n="navAbout">About</a></li>
               <li><a href="#contacts" data-i18n="navContacts">Contact</a></li>
               <li><a href="#resources" data-i18n="navResources">Resources</a></li>
@@ -44,12 +47,20 @@
     <main>
       <section class="section" id="home">
         <div class="container">
-          <h1 data-i18n="heroTitle">Folk dance, culture, and community</h1>
+          <h1 data-i18n="heroTitle">Our Mission</h1>
           <p data-i18n="heroText">
-            Use this short welcome to explain who the club supports, what happens in classes,
-            and why someone should join.
+           Folk Dance Club Kaleidoscope is a Brooklyn-based organization that uses Folk Dance from around the world to educate and empower children and youth, helping them grow into confident, compassionate, and capable leaders. We create a tight-knit community where our students can learn, grow, and connect with others who share their values. Our club strives to inspire a love of learning, encourage respect and teamwork, and help young people stay engaged in a supportive community rather than drifting toward negative street influences.
           </p>
-          <p><a href="#contacts" data-i18n="heroLink">Register or ask a question</a></p>
+          <p data-i18n="heroBenefitsIntro">
+            Besides just learning how to dance, our students:
+          </p>
+          <ul>
+            <li data-i18n="heroBenefitOne">Become stronger and more disciplined through rigorous physical workouts</li>
+            <li data-i18n="heroBenefitTwo">Learn about global history and increase their cultural awareness</li>
+            <li data-i18n="heroBenefitThree">Expand their curiosity and love of reading</li>
+            <li data-i18n="heroBenefitFour">Develop their teamwork, leadership, problem-solving, and communication skills</li>
+          </ul>
+          <p><a href="#contacts" data-i18n="heroLink">Contact us or ask a question</a></p>
         </div>
       </section>
 
@@ -57,8 +68,7 @@
         <div class="container">
           <h2 id="support-title" data-i18n="supportTitle">Support the club</h2>
           <p data-i18n="supportText">
-            The Multicultural Center Kaleidoscope is a nonprofit organization. Explain here
-            how donations will support the club.
+            I haven't figured this part out yet. Will fill this in once I speak to Nastya and she explains how donations for Kaleidoscope work.
           </p>
           <!-- Replace # with a real donation page URL. -->
           <p><a href="#" data-i18n="donateLink">Make a donation</a></p>
@@ -69,24 +79,30 @@
         <div class="container">
           <h2 data-i18n="aboutTitle">About the club</h2>
           <p data-i18n="aboutText">
-            The club gives children and young people a place for dance, physical development,
-            creativity, and learning about the cultures of many peoples.
+            Folk Dance Club Kaleidoscope was founded in 2016 by a family who moved to Brooklyn from Ukraine just 3 years prior. Bringing people from all different backgrounds, ages, religions, and cultures together to practice and perform was our way of giving back to the community. We teach and perform dances from a variety of cultures, including but not limited to Ukrainian, Russian, Georgian, Chinese, Spanish, Gypsy, Israeli, and many others.
+
+One of the main aspects of Kaleidoscope that sets it apart from other dance organizations is the sheer amount of performances we have annually. On average, we have one performance per weekend, with some weekends even having multiple. Our dancers perform all over New York, in places such as public parks, restaurants, libraries, museums, Times Square, One World Trade Center, the Brighton Beach Boardwalk, Washington Square Park, and numerous other places. Every year, we get invited to dozens of events, such as the annual Dance Parade in Manhattan, at which we happily perform. We also travel out of state for performances multiple times per year, mostly to New Jersey and Pennsylvania, but we have also traveled to Miami for a tour and numerous performances over the course of a week, to Nashville to perform at Vanderbilt University, and even to perform at the Russian embassy in Washington, D.C.
+
+With the support of the Multicultural Center Kaleidoscope, Folk Dance Club Kaleidoscope frequently participates as a volunteer organization in annual community events. Every year, students of Folk Dance Club Kaleidoscope and the Multicultural Center Kaleidoscope organize New Year’s performances open to the public. With the agreement of the parents, all proceeds from ticket sales and voluntary donations are directed toward charitable assistance for sick children and their families. There are numerous ways in which Folk Dance Club Kaleidoscope engages with the community, such as the “Kaleidoscope of History” project, in which our students learn about World War II and perform war dances in honor of Victory Day. Additionally, we often perform for elderly people in nursing homes and annually offer free New Year’s themed performances across New York City.
+Folk Dance Club Kaleidoscope does very little traditional advertising, yet the number of children participating in the Club continues to grow. Our best advertising comes from the recommendations of our dancers and their parents, as well as from our many public performances.
+
           </p>
 
-          <h3 data-i18n="goalsTitle">Our goals</h3>
-          <ul>
-            <li data-i18n="goalOne">Regular dance classes and physical training.</li>
-            <li data-i18n="goalTwo">Learning about cultural traditions from around the world.</li>
-            <li data-i18n="goalThree">Building confidence, discipline, and teamwork.</li>
-            <li data-i18n="goalFour">Taking part in community and volunteer projects.</li>
-          </ul>
+          <h3 data-i18n="goalsTitle">Our approach and methodology</h3>
+          <p data-i18n="methodology">At Kaleidoscope, we have developed a teaching methodology that is uniquely efficient. The primary goal that this methodology accomplishes is the development of a life-long love for learning within our students. Our unique teaching method began with folk dance, which blends movement, history, and tradition. Unlike sports or other arts, folk dance has no strict rules, freeing children from the fear of mistakes and encouraging creativity. We want to teach kids how to think before we teach them how to dance. The main way in which we do this is through our emphasis on improvisation during practices and even performances. Every day of practice, we have our youth practice inventing a dance completely on the spot, either on their own or in groups of various sizes, without knowing what music is coming or even what genre it will be. This also provides the more experienced and capable dancers with an opportunity to practice their leadership skills by directing their team to a well choreographed, fun to watch dance.
+
+Additionally, we often incorporate basic mental exercise into our physical workout, such as having the kids answer math, history, literature, and geography-based questions or even guess a song’s nationality just by hearing it. We incentivize our students to improve their knowledge of math, history, geography, and to learn poems, as failure to answer any given question results in more physical work, oftentimes for the whole group.
+
+Our director also often tells informational stories in the fields of statistics, history, and philosophy, explaining to the youth the main takeaway in such a way that anybody can understand. As a result of our teaching methodology, we have seen our students develop critical thinking skills, leadership, and a love for learning.
+
 
           <h3 data-i18n="teamTitle">Our team</h3>
           <!-- Add, remove, or replace these roles and names. -->
           <ul class="plain-list">
-            <li><strong data-i18n="nameOne">First Last</strong> <span data-i18n="roleOne">— club president</span></li>
-            <li><strong data-i18n="nameTwo">First Last</strong> <span data-i18n="roleTwo">— choreographer and costume designer</span></li>
-            <li><strong data-i18n="nameThree">First Last</strong> <span data-i18n="roleThree">— assistant choreographer</span></li>
+            <li><strong data-i18n="nameOne">Valentin Usmanov</strong> <span data-i18n="roleOne">— Club director</span></li>
+            <li><strong data-i18n="nameTwo">Viktoria Markelova</strong> <span data-i18n="roleTwo">— Artistic designer and costume manager</span></li>
+            <li><strong data-i18n="nameThree">Anastasiya Usmanova</strong> <span data-i18n="roleThree">— Choreographer, girls’ trick inventor</span></li>
+            <li><strong data-i18n="nameFour">Fedir Usmanov</strong> <span data-i18n="roleFour">— Choreographer, boys’ trick inventor</span></li>
           </ul>
         </div>
       </section>
@@ -94,43 +110,96 @@
       <section class="section" aria-labelledby="classes-title">
         <div class="container">
           <h2 id="classes-title" data-i18n="classesTitle">Classes</h2>
-          <p data-i18n="classesText">
-            Add age groups, the address, and the current schedule. For example: classes run
-            weekdays from 6:00 PM to 8:00 PM.
-          </p>
-          <ol>
-            <li data-i18n="classOne">Warm-up, stretching, and physical preparation.</li>
-            <li data-i18n="classTwo">Classical dance and choreography fundamentals.</li>
-            <li data-i18n="classThree">Small-group work on movements and tricks.</li>
-            <li data-i18n="classFour">Rehearsal, improvisation, and acting.</li>
-          </ol>
+          <h3 data-i18n="classesSubtitle">Our available packages</h3>
+          <div class="package-grid">
+            <section class="package-card">
+              <h4 data-i18n="packageOneTitle">1. Full-Performance Package</h4>
+              <p data-i18n="packageOnePrice" style="font-size: 0.9rem;">Boys $250 per month, Girls $350 per month</p>
+              <p data-i18n="packageOneText">Includes participation in performances, costume rental, and access to all classes from the schedule. Register before the end of September and attend for all nine months, from September through May, to receive June free. This offer only applies to package 1.</p>
+            </section>
+            <section class="package-card">
+              <h4 data-i18n="packageTwoTitle">2. Single Class</h4>
+              <p data-i18n="packageTwoPrice" style="font-size: 0.9rem;">$40 per class</p>
+              <p data-i18n="packageTwoText">Does not include performances or costume rental. Discuss with the director if you want to transition from a one-class package into a full-performance package or a twice-weekly package. In this case the $40 for the class will be returned.</p>
+            </section>
+            <section class="package-card">
+              <h4 data-i18n="packageThreeTitle">3. Twice-weekly Package</h4>
+              <p data-i18n="packageThreePrice" style="font-size: 0.9rem;">$250 per month</p>
+              <p data-i18n="packageThreeText">Does not include performances or costume rental. Two classes per week for one month. Same price applies to boys and girls.</p>
+            </section>
+            <section class="package-card">
+              <h4 data-i18n="packageFourTitle">4. Parents Group</h4>
+              <p data-i18n="packageFourPrice" style="font-size: 0.9rem;">$30 per class. Fridays 6:30 - 8:00 only.</p>
+              <p data-i18n="packageFourText">This package is only for the moms and dads of children and youth who are already enrolled in the club on a full performance or twice-weekly package.</p>
+            </section>
+          </div>
+
+          <div class="schedule-card">
+            <h3 data-i18n="scheduleTitle">Class Schedule</h3>
+            <div class="schedule-row schedule-header">
+              <span data-i18n="scheduleHeaderDayTime">Day / Time</span>
+              <span data-i18n="scheduleHeaderGroup">Group</span>
+              <span data-i18n="scheduleHeaderAvailability">Availability</span>
+            </div>
+            <div class="schedule-row">
+              <span data-i18n="scheduleRowOneDayTime">Monday–Thursday<br />6:00–8:00 pm</span>
+              <span data-i18n="scheduleRowOneGroup">Open class</span>
+              <span data-i18n="scheduleRowOneAvailability">Available to all students</span>
+            </div>
+            <div class="schedule-row">
+              <span data-i18n="scheduleRowTwoDayTime">Friday<br />5:00–6:30 pm</span>
+              <span data-i18n="scheduleRowTwoGroup">Group 1</span>
+              <span data-i18n="scheduleRowTwoAvailability">Available to all students</span>
+            </div>
+            <div class="schedule-row">
+              <span data-i18n="scheduleRowThreeDayTime">Friday<br />6:30–8:00 pm</span>
+              <span data-i18n="scheduleRowThreeGroup">Group 2</span>
+              <span data-i18n="scheduleRowThreeAvailability">Available only to students approved by the director</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="section" id="news">
+      <section class="section" id="projects">
         <div class="container">
-          <h2 data-i18n="newsTitle">News</h2>
+          <h2 data-i18n="projectsTitle">Our projects</h2>
+          <p data-i18n="projectsIntro">
+            Other than just our standard performances around New York City, Folk Dance Club Kaleidoscope also engages in a few other projects in partnership with Multicultural Center Kaleidoscope.
+
+          </p>
           <article class="content-item">
-            <h3><a href="#" data-i18n="newsOneTitle">Most recent news headline</a></h3>
-            <p data-i18n="newsOneText">Date · A one- or two-sentence summary of the news item.</p>
+            <h3 data-i18n="projectOneTitle">Dance Under The Sky</h3>
+            <p data-i18n="projectOneText">Our annual street festival brings together over 20 dance groups to celebrate folk traditions and diversity in South Brooklyn. Families, schools, and communities gather to enjoy vibrant performances and cultural exchange in an open, welcoming atmosphere.
+
+This multicultural event showcases a variety of folk dances and live music from around the world, highlighting the beauty of different cultures coming together on one stage.
+
+ 
           </article>
           <article class="content-item">
-            <h3><a href="#" data-i18n="newsTwoTitle">Second news headline</a></h3>
-            <p data-i18n="newsTwoText">Date · A one- or two-sentence summary of the news item.</p>
+            <h3 data-i18n="projectTwoTitle">Summer Camp</h3>
+            <p data-i18n="projectTwoText">Our immersive summer camp takes children outside of New York City to a setting where they can learn folk dances, explore new skills, and enjoy recreational activities in nature. Beyond dance, the camp encourages children to try new experiences, build independence, and discover their strengths.
+
+In a fun, family-like environment, campers grow through teamwork, cultural appreciation, and shared adventure. Each day blends structured learning with play and exploration, helping children return home more confident, connected, and inspired.
+
+
           </article>
-          <p><a href="#" data-i18n="allNewsLink">All news</a></p>
+          <article class="content-item">
+            <h3 data-i18n="projectThreeTitle">​Afterschool Program ​(Dance in Schools)</h3>
+            <p data-i18n="projectThreeText">We are a DOE vendor providing folk dance and cultural programs in New York City public schools. Through our afterschool programs, students learn traditional dances from around the world, gaining confidence, teamwork skills, and cultural appreciation.
+
+Each program ends with public showcases at school events and with student participation in the NYC Dance Parade, giving young dancers the chance to perform for the wider community.
+          </article>
         </div>
       </section>
 
       <section class="section" id="events">
         <div class="container">
-          <h2 data-i18n="eventsTitle">Upcoming events</h2>
-          <article class="content-item">
-            <h3 data-i18n="eventName">Event name</h3>
-            <p><strong data-i18n="dateTimeLabel">Date and time:</strong> <span data-i18n="dateTimeValue">Add a date and time</span></p>
-            <p><strong data-i18n="placeLabel">Location:</strong> <span data-i18n="placeValue">Add an address or venue name</span></p>
-            <p data-i18n="eventText">Briefly describe the performance, concert, festival, or gathering.</p>
-          </article>
+          <h2 data-i18n="eventsTitle">Upcoming performances</h2>
+          <p data-i18n="eventOne">August 9 — Summer picnic performance with Cossaks in New Jersey</p>
+          <p data-i18n="eventTwo">August 14 — Performance at Brighton Beach Boardwalk</p>
+          <p data-i18n="eventThree">August 22 — Movie Night performance at Seth Low Park</p>
+          <p data-i18n="eventFour">August 23 — Back to School performance</p>
+          <p data-i18n="eventFive">August 30 — One World Trade Center</p>
         </div>
       </section>
 
@@ -138,23 +207,45 @@
         <div class="container">
           <h2 data-i18n="galleryTitle">Gallery</h2>
           <p data-i18n="galleryText">
-            Replace these blocks with photos or videos from performances and rehearsals.
+            Our Beautiful Gallery
           </p>
           <div class="media-grid">
-            <div class="media-placeholder" data-i18n="mediaOne">Photo or video 1</div>
-            <div class="media-placeholder" data-i18n="mediaTwo">Photo or video 2</div>
-            <div class="media-placeholder" data-i18n="mediaThree">Photo or video 3</div>
+            <div class="media-placeholder"><img src="images/another-photo.jpg" alt="Another performance photo" /></div>
+            <div class="media-placeholder"><img src="images/boardwalk-performance.jpg" alt="Boardwalk performance" /></div>
+            <div class="media-placeholder"><img src="images/dado-handstand.webp" alt="Dado handstand" /></div>
+            <div class="media-placeholder"><img src="images/dasha-pistolet.jpg" alt="Dasha performing" /></div>
+            <div class="media-placeholder"><img src="images/Fedya-jumping.jpg" alt="Fedya jumping" /></div>
+            <div class="media-placeholder"><img src="images/girls-aurafarm.jpg" alt="Girls at Aurafarm" /></div>
+            <div class="media-placeholder"><img src="images/girls-photo.jpg" alt="Girls group photo" /></div>
+            <div class="media-placeholder"><img src="images/group-photo.jpg" alt="Group photo" /></div>
+            <div class="media-placeholder"><img src="images/Hey-image.jpg" alt="Performance image" /></div>
+            <div class="media-placeholder"><img src="images/important-meeting.jpg" alt="Important meeting photo" /></div>
+            <div class="media-placeholder"><img src="images/lezginka-photo.jpg" alt="Lezginka performance" /></div>
+            <div class="media-placeholder"><img src="images/Maslenitsa-performance.jpg" alt="Maslenitsa performance" /></div>
+            <div class="media-placeholder"><img src="images/more-recent-group-photo.webp" alt="Recent group photo" /></div>
+            <div class="media-placeholder"><img src="images/Nastya-aurafarm.jpg" alt="Nastya at Aurafarm" /></div>
+            <div class="media-placeholder"><img src="images/swinging-girls.jpg" alt="Swinging girls performance" /></div>
+            <div class="media-placeholder"><img src="images/war-performance.jpg" alt="War performance" /></div>
+            <div class="media-placeholder"><img src="images/war-standing.jpg" alt="War standing performance" /></div>
+            <div class="media-placeholder"><img src="images/world-trade-center.webp" alt="World Trade Center performance" /></div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="press">
+      <section class="section" id="registration">
         <div class="container">
-          <h2 data-i18n="pressTitle">Press</h2>
+          <h2 data-i18n="registrationTitle">Registration</h2>
+          <p data-i18n="registrationIntro">
+            Ready to join? Register your child for classes, performances, or community programs.
+          </p>
           <ul class="plain-list">
-            <li><a href="#" data-i18n="pressOne">Publication or interview title</a> <span data-i18n="pressDetails">— publication, date</span></li>
-            <li><a href="#" data-i18n="pressTwo">Publication or interview title</a> <span data-i18n="pressDetails">— publication, date</span></li>
+            <li data-i18n="registrationItemOne">Fill out the registration form and share your contact information.</li>
+            <li data-i18n="registrationItemTwo">Choose the program that best fits your child’s age and experience.</li>
+            <li data-i18n="registrationItemThree">Contact us to confirm placement, schedule, and next steps.</li>
           </ul>
+          <p>
+            <a href="registration.html" data-i18n="registrationLink">Start the registration process</a>
+          </p>
         </div>
       </section>
 
@@ -162,112 +253,30 @@
         <div class="container">
           <h2 data-i18n="contactsTitle">Contact</h2>
           <ul class="plain-list">
-            <li><strong data-i18n="addressLabel">Address:</strong> <span data-i18n="addressValue">Add the class address</span></li>
-            <li><strong data-i18n="phoneLabel">Phone:</strong> <a href="tel:+10000000000">+1 (000) 000-0000</a></li>
-            <li><strong data-i18n="emailLabel">Email:</strong> <a href="mailto:hello@example.org">hello@example.org</a></li>
+            <li><strong data-i18n="addressLabel">Address:</strong> <span data-i18n="addressValue">217 Brighton Beach Ave, Brooklyn, NY 11235</span></li>
+            <li><strong data-i18n="phoneLabel">Phone:</strong> <a href="tel:+19175008704">+1 (917) 500-8704</a></li>
+            <li><strong data-i18n="emailLabel">Email:</strong> <a href="mailto:hello@example.org">usmacorp@gmail.com
           </ul>
+
+          <iframe
+            title="Map of 217 Brighton Beach Ave, Brooklyn, NY 11235"
+            src="https://www.google.com/maps?q=217%20Brighton%20Beach%20Ave,%20Brooklyn,%20NY%2011235&z=15&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            style="border:0; width:100%; max-width:700px; height:320px; margin-top:1rem;"
+          ></iframe>
 
           <h3 data-i18n="socialTitle">Find us online</h3>
-          <!-- Replace # with the club's current social-media URLs. -->
           <ul class="plain-list social-list">
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">YouTube</a></li>
-            <li><a href="#">TikTok</a></li>
-            <li><a href="#">Instagram</a></li>
+            <li><a href="https://www.facebook.com/groups/FolkDanceClubKaleidoskope/?ref=bookmarks" target="_blank" rel="noreferrer" data-i18n="facebookLink">Facebook</a></li>
+            <li><a href="https://www.youtube.com/@folkdanceclubkaleidoscope" target="_blank" rel="noreferrer" data-i18n="youtubeLink">YouTube</a></li>
+            <li><a href="https://www.tiktok.com/@club_kaleidoscope?_t=8Z8YG0uyuqM&_r=1" target="_blank" rel="noreferrer" data-i18n="tiktokLink">TikTok</a></li>
+            <li><a href="https://www.instagram.com/club_kaleidoscope?igshid=MDM4ZDc5MmU%3D" target="_blank" rel="noreferrer" data-i18n="instagramLink">Instagram</a></li>
           </ul>
         </div>
       </section>
 
-      <section class="section" id="resources">
-        <div class="container">
-          <h2 data-i18n="resourcesTitle">Learn and get inspiration</h2>
-          <p data-i18n="resourcesIntro">
-            These resources are here for the person updating this website. Start small: make
-            one change, save it, and refresh the page to see what happened.
-          </p>
-
-          <h3 data-i18n="learnTitle">Learn HTML, CSS, and GitHub</h3>
-          <ul>
-            <li>
-              <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development" target="_blank" rel="noreferrer">MDN Learn Web Development</a>
-              <span data-i18n="mdnDescription">— clear beginner lessons for HTML, CSS, and JavaScript.</span>
-            </li>
-            <li>
-              <a href="https://web.dev/learn/css" target="_blank" rel="noreferrer">web.dev Learn CSS</a>
-              <span data-i18n="webDevDescription">— a focused, free CSS course with short lessons.</span>
-            </li>
-            <li>
-              <a href="https://www.freecodecamp.org/learn/2022/responsive-web-design/" target="_blank" rel="noreferrer">freeCodeCamp Responsive Web Design</a>
-              <span data-i18n="freeCodeCampDescription">— guided practice projects for HTML and CSS.</span>
-            </li>
-            <li>
-              <a href="https://skills.github.com/" target="_blank" rel="noreferrer">GitHub Skills</a>
-              <span data-i18n="githubDescription">— interactive courses for GitHub and Git.</span>
-            </li>
-            <li>
-              <a href="https://www.w3.org/WAI/tutorials/images/decision-tree/" target="_blank" rel="noreferrer">W3C image alt-text guide</a>
-              <span data-i18n="accessibilityDescription">— help every visitor understand your images.</span>
-            </li>
-          </ul>
-
-          <h3 data-i18n="codexTitle">Use AI and Codex as a learning partner</h3>
-          <p data-i18n="codexIntro">
-            Codex can help you understand an unfamiliar file, plan a small update, explain an
-            error, or review a change before you publish it. Give it a clear goal and the
-            relevant context, then read and test its work yourself.
-          </p>
-          <ul>
-            <li>
-              <a href="https://developers.openai.com/codex/quickstart" target="_blank" rel="noreferrer">Codex quickstart</a>
-              <span data-i18n="codexQuickstartDescription">— learn how to get started in the ChatGPT desktop app or on the web.</span>
-            </li>
-            <li>
-              <a href="https://openai.com/codex/get-started/" target="_blank" rel="noreferrer">Get started with Codex</a>
-              <span data-i18n="codexGetStartedDescription">— an overview of Codex and the ways it can fit into coding work.</span>
-            </li>
-          </ul>
-
-          <h3 data-i18n="aiWorkflowTitle">A simple AI workflow</h3>
-          <ol>
-            <li data-i18n="aiWorkflowOne">Choose one small goal, such as updating the class schedule or adding a photo.</li>
-            <li data-i18n="aiWorkflowTwo">Tell Codex the goal, the file to change, and any limits such as “keep the design simple.”</li>
-            <li data-i18n="aiWorkflowThree">Ask it to explain what changed and why in beginner-friendly language.</li>
-            <li data-i18n="aiWorkflowFour">Review the changed files, run the local server, and test the page on a phone-sized screen.</li>
-            <li data-i18n="aiWorkflowFive">Keep changes you understand and like; commit them to GitHub when they work.</li>
-          </ol>
-          <p data-i18n="aiSafety">
-            Do not share passwords, API keys, private client information, or anything you would
-            not want published. AI can help you work faster, but you remain responsible for the
-            final website.
-          </p>
-
-          <h3 data-i18n="examplesTitle">Study websites made by Novus</h3>
-          <p data-i18n="examplesIntro">
-            Open these websites as a visitor would. Notice the first message, the main action,
-            how contact information is presented, and what still works on a narrow screen.
-            Take ideas, but do not copy another business’s words, photos, or code.
-          </p>
-          <ul>
-            <li>
-              <a href="https://www.novusnyc.org/" target="_blank" rel="noreferrer">Novus NYC</a>
-              <span data-i18n="novusDescription">— visit “Our Work” for a larger collection of completed projects.</span>
-            </li>
-            <li><a href="https://pho-bar.vercel.app/" target="_blank" rel="noreferrer">Phobar</a></li>
-            <li><a href="https://taqueria-el-buchonsi.vercel.app/" target="_blank" rel="noreferrer">Taqueria El Buchon</a></li>
-            <li><a href="https://www.papazzio.com/" target="_blank" rel="noreferrer">Papazzio</a></li>
-          </ul>
-
-          <h3 data-i18n="checklistTitle">What makes a good website?</h3>
-          <ul>
-            <li data-i18n="checklistOne">A visitor can understand who the organization is and what it offers within a few seconds.</li>
-            <li data-i18n="checklistTwo">The next step is obvious: call, email, register, donate, or view the schedule.</li>
-            <li data-i18n="checklistThree">The address, hours, and contact details are correct and easy to find.</li>
-            <li data-i18n="checklistFour">Navigation is short and uses words visitors understand.</li>
-            <li data-i18n="checklistFive">Text is readable, images have useful descriptions, and the page works on a phone.</li>
-            <li data-i18n="checklistSix">Every page has one clear purpose instead of trying to say everything at once.</li>
-          </ul>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">

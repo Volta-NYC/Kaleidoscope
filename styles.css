@@ -14,6 +14,7 @@ html {
 body {
   margin: 0;
   color: #111;
+  background-color: #d68b8b !important;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -29,7 +30,7 @@ a:focus {
 }
 
 .container {
-  width: min(100% - 2rem, 68rem);
+  width: min(100% - 0.5rem, 96rem);
   margin: 0 auto;
 }
 
@@ -44,13 +45,23 @@ a:focus {
   border-bottom: 0;
 }
 
-.site-name {
-  font-size: 1.25rem;
+.site-title {
+  margin: 0 0 0.5rem;
+  font-size: 2.5rem;
+  line-height: 1.1;
   font-weight: 700;
 }
 
+.site-logo {
+  display: block;
+  width: 100px !important;
+  height: auto !important;
+  max-width: 100%;
+  margin-bottom: 0.75rem;
+}
+
 .site-support {
-  margin: 0.25rem 0 1rem;
+  margin: 0 0 1rem;
 }
 
 .header-nav-row {
@@ -121,21 +132,129 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+  align-items: stretch;
+}
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.package-card {
+  padding: 1rem;
+  border: 1px solid #999;
+  background: #fff;
+}
+
+.package-card h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.package-card p {
+  margin: 0;
+}
+
+.schedule-card {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid #999;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.schedule-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1.2fr;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid #eee;
+}
+
+.schedule-header {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+}
+
+.schedule-row:first-of-type {
+  border-top: 0;
 }
 
 .media-placeholder {
-  display: grid;
-  min-height: 10rem;
-  place-items: center;
-  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  min-height: 12rem;
+  padding: 0;
   border: 1px solid #999;
   text-align: center;
+  overflow: hidden;
+  background: #f5f5f5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.media-placeholder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .social-list {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+  max-width: 40rem;
+}
+
+form label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #999;
+  border-radius: 0;
+  font: inherit;
+}
+
+form input[type="radio"] {
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+form input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+form button {
+  padding: 0.7rem 1rem;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
 }
 
 @media (max-width: 40rem) {

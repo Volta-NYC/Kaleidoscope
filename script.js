@@ -3,78 +3,113 @@ const russianText = {
   siteSupport: 'При поддержке Мультикультурного Центра «Калейдоскоп»',
   mainNavigation: 'Основная навигация',
   navHome: 'Главная',
-  navNews: 'Новости',
+  navProjects: 'Наши проекты',
   navEvents: 'Мероприятия',
   navGallery: 'Галерея',
-  navPress: 'СМИ о нас',
+  navRegistration: 'Регистрация',
   navAbout: 'О нас',
   navContacts: 'Контакты',
   navResources: 'Ресурсы',
-  heroTitle: 'Народный танец, культура и сообщество',
-  heroText: 'Используйте это короткое приветствие, чтобы рассказать, кому помогает клуб, как проходят занятия и почему к вам стоит присоединиться.',
+  heroTitle: 'Наша миссия',
+  heroText: 'Клуб народного танца Kaleidoscope в Бруклине использует танец разных народов, чтобы помогать детям и молодёжи становиться уверенными, доброжелательными и сильными лидерами. Мы создаём тесное сообщество, где ребята учатся, растут и поддерживают друг друга.',
   heroLink: 'Записаться или задать вопрос',
+  heroBenefitsIntro: 'Помимо танца, наши ученики:',
+  heroBenefitOne: 'Становятся более сильными и дисциплинированными благодаря интенсивным тренировкам.',
+  heroBenefitTwo: 'Узнают о мировой истории и расширяют культурную осведомлённость.',
+  heroBenefitThree: 'Расширяют интерес к чтению и любознательность.',
+  heroBenefitFour: 'Развивают командную работу, лидерство, решение задач и коммуникацию.',
   supportTitle: 'Поддержать клуб',
-  supportText: 'Мультикультурный Центр «Калейдоскоп» — некоммерческая организация. Объясните здесь, как пожертвования помогут клубу.',
+  supportText: 'Мультикультурный Центр «Калейдоскоп» — некоммерческая организация. Расскажите здесь, как пожертвования помогут клубу.',
   donateLink: 'Сделать пожертвование',
   aboutTitle: 'О клубе',
-  aboutText: 'Клуб даёт детям и молодёжи пространство для танца, физического развития, творчества и знакомства с культурами разных народов.',
-  goalsTitle: 'Наши цели',
-  goalOne: 'Регулярные занятия танцем и физическая подготовка.',
-  goalTwo: 'Знакомство с культурными традициями разных стран.',
-  goalThree: 'Развитие уверенности, дисциплины и умения работать в команде.',
-  goalFour: 'Участие в жизни сообщества и волонтёрских проектах.',
+  aboutText: 'Клуб народного танца Kaleidoscope был основан в 2016 году семьёй, которая переехала в Бруклин из Украины всего три года назад. Мы собираем людей с разным происхождением, возрастом, религией и культурой, чтобы вместе танцевать и выступать. Мы учим и исполняем танцы самых разных культур — украинские, русские, грузинские, китайские, испанские, цыганские, израильские и многие другие.',
+  goalsTitle: 'Наш подход и методика',
+  methodology: 'В Kaleidoscope мы разработали особую методику обучения, которая помогает детям не только танцевать, но и любить учиться. Наш подход начинается с народного танца, который соединяет движение, историю и традиции. В отличие от спорта и других искусств, народный танец не имеет жёстких правил, поэтому дети меньше боятся ошибок и легче раскрывают творчество. Мы учим ребят думать раньше, чем танцевать. Мы особенно уделяем внимание импровизации на репетициях и выступлениях. На каждом занятии дети придумывают танец с нуля — сами или в группах — без заранее известной музыки и жанра. Это помогает более опытным танцорам развивать лидерство и направлять команду.',
   teamTitle: 'Наша команда',
-  nameOne: 'Имя Фамилия',
-  roleOne: '— президент клуба',
-  nameTwo: 'Имя Фамилия',
-  roleTwo: '— хореограф и художник по костюмам',
-  nameThree: 'Имя Фамилия',
-  roleThree: '— помощник хореографа',
+  nameOne: 'Валентин Усманов',
+  roleOne: '— Руководитель клуба',
+  nameTwo: 'Виктория Маркелова',
+  roleTwo: '— Художественный дизайнер и куратор костюмов',
+  nameThree: 'Анастасия Усманова',
+  roleThree: '— Хореограф, автор трюков для девочек',
+  nameFour: 'Фёдор Усманов',
+  roleFour: '— Хореограф, автор трюков для мальчиков',
   classesTitle: 'Занятия',
-  classesText: 'Добавьте возрастные группы, адрес и актуальное расписание. Например: занятия проходят по будням с 18:00 до 20:00.',
-  classOne: 'Разминка, растяжка и физическая подготовка.',
-  classTwo: 'Основы классического танца и хореографии.',
-  classThree: 'Работа над движениями и трюками в небольших группах.',
-  classFour: 'Репетиция, импровизация и актёрское мастерство.',
-  newsTitle: 'Новости',
-  newsOneTitle: 'Заголовок последней новости',
-  newsOneText: 'Дата · Краткое описание новости в одном или двух предложениях.',
-  newsTwoTitle: 'Заголовок второй новости',
-  newsTwoText: 'Дата · Краткое описание новости в одном или двух предложениях.',
-  allNewsLink: 'Все новости',
-  eventsTitle: 'Ближайшие мероприятия',
-  eventName: 'Название мероприятия',
-  dateTimeLabel: 'Дата и время:',
-  dateTimeValue: 'Добавьте дату и время',
-  placeLabel: 'Место:',
-  placeValue: 'Добавьте адрес или название площадки',
-  eventText: 'Коротко опишите выступление, концерт, фестиваль или встречу.',
+  classesSubtitle: 'Доступные пакеты',
+  packageOneTitle: '1. Пакет полного участия в выступлениях',
+  packageOnePrice: 'Мальчики — 250 долларов в месяц, девочки — 350 долларов в месяц',
+  packageOneText: 'Включает участие в выступлениях, прокат костюмов и доступ ко всем занятиям по расписанию. Запишитесь до конца сентября и посещайте занятия в течение девяти месяцев с сентября по май — тогда июнь будет бесплатным. Это предложение действует только для пакета 1.',
+  packageTwoTitle: '2. Одно занятие',
+  packageTwoPrice: '40 долларов за занятие',
+  packageTwoText: 'Не включает выступления и прокат костюмов. Обсудите с руководителем возможность перехода из пакета одного занятия в пакет полного участия или в пакет два занятия в неделю. В этом случае 40 долларов за занятие будут возвращены.',
+  packageThreeTitle: '3. Пакет два занятия в неделю',
+  packageThreePrice: '250 долларов в месяц',
+  packageThreeText: 'Не включает выступления и прокат костюмов. Два занятия в неделю в течение одного месяца. Цена одинаковая для мальчиков и девочек.',
+  packageFourTitle: '4. Группа родителей',
+  packageFourPrice: '30 долларов за занятие. Только пятницы с 18:30 до 20:00.',
+  packageFourText: 'Этот пакет предназначен только для мам и пап детей и подростков, которые уже записаны в клуб на пакет полного участия или на пакет два занятия в неделю.',
+  scheduleTitle: 'Расписание занятий',
+  scheduleHeaderDayTime: 'День / время',
+  scheduleHeaderGroup: 'Группа',
+  scheduleHeaderAvailability: 'Доступность',
+  scheduleRowOneDayTime: 'Понедельник–четверг<br />18:00–20:00',
+  scheduleRowOneGroup: 'Открытый класс',
+  scheduleRowOneAvailability: 'Доступно всем ученикам',
+  scheduleRowTwoDayTime: 'Пятница<br />17:00–18:30',
+  scheduleRowTwoGroup: 'Группа 1',
+  scheduleRowTwoAvailability: 'Доступно всем ученикам',
+  scheduleRowThreeDayTime: 'Пятница<br />18:30–20:00',
+  scheduleRowThreeGroup: 'Группа 2',
+  scheduleRowThreeAvailability: 'Доступно только ученикам, одобренным руководителем',
+  projectsTitle: 'Наши проекты',
+  projectsIntro: 'Kaleidoscope создаёт значимые культурные, образовательные и общественные проекты для молодых людей и семей.',
+  projectOneTitle: 'Калейдоскоп истории',
+  projectOneText: 'Ученики изучают важные исторические события и исполняют традиционные танцы, чтобы сохранять память, наследие и чувство общности.',
+  projectTwoTitle: 'Городские выступления',
+  projectTwoText: 'Наши танцоры приносят культуру в общественные пространства по всему Нью-Йорку, делясь музыкой, движением и радостью с самыми разными зрителями.',
+  projectThreeTitle: 'Праздничные и благотворительные мероприятия',
+  projectThreeText: 'Мы организуем праздничные выступления и городские события, а часть средств и пожертвований направляем семьям и детям, которым нужна поддержка.',
+  eventsTitle: 'Ближайшие выступления',
+  eventOne: '9 августа — Пикниковое выступление с казаками в Нью-Джерси',
+  eventTwo: '14 августа — Выступление на набережной Брайтон-Бич',
+  eventThree: '22 августа — Выступление на вечере фильмов в парке Сет Лоу',
+  eventFour: '23 августа — Выступление к началу учебного года',
+  eventFive: '30 августа — Один Уорлд Трейд Центр',
   galleryTitle: 'Галерея',
   galleryText: 'Замените эти блоки фотографиями или видео с выступлений и репетиций.',
   mediaOne: 'Фото или видео 1',
   mediaTwo: 'Фото или видео 2',
   mediaThree: 'Фото или видео 3',
-  pressTitle: 'СМИ о нас',
-  pressOne: 'Название публикации или интервью',
-  pressTwo: 'Название публикации или интервью',
-  pressDetails: '— издание, дата',
+  registrationTitle: 'Регистрация',
+  registrationIntro: 'Готовы присоединиться? Зарегистрируйте ребёнка на занятия, выступления или программы сообщества.',
+  registrationItemOne: 'Заполните форму регистрации и укажите свои контактные данные.',
+  registrationItemTwo: 'Выберите программу, которая лучше всего подходит по возрасту и опыту ребёнка.',
+  registrationItemThree: 'Свяжитесь с нами, чтобы подтвердить место, расписание и следующие шаги.',
+  registrationLink: 'Свяжитесь с нами для регистрации',
   contactsTitle: 'Контакты',
   addressLabel: 'Адрес:',
-  addressValue: 'Добавьте адрес занятий',
+  addressValue: '217 Brighton Beach Ave, Brooklyn, NY 11235',
   phoneLabel: 'Телефон:',
   emailLabel: 'Электронная почта:',
   socialTitle: 'Мы в социальных сетях',
   resourcesTitle: 'Учебные материалы и идеи',
   resourcesIntro: 'Эти материалы предназначены для человека, который обновляет этот сайт. Начните с малого: внесите одно изменение, сохраните файл и обновите страницу, чтобы увидеть результат.',
   learnTitle: 'Изучайте HTML, CSS и GitHub',
+  mdnLinkText: 'MDN: изучение веб-разработки',
   mdnDescription: '— понятные уроки для начинающих по HTML, CSS и JavaScript.',
+  webDevLinkText: 'web.dev: изучение CSS',
   webDevDescription: '— бесплатный курс CSS с короткими уроками.',
+  freeCodeCampLinkText: 'freeCodeCamp: адаптивный веб-дизайн',
   freeCodeCampDescription: '— практические проекты с пошаговым изучением HTML и CSS.',
+  githubLinkText: 'GitHub Skills',
   githubDescription: '— интерактивные курсы по GitHub и Git.',
+  accessibilityLinkText: 'Руководство W3C по alt-тексту для изображений',
   accessibilityDescription: '— поможет всем посетителям понять, что изображено на ваших фотографиях.',
   codexTitle: 'Используйте ИИ и Codex как помощника в обучении',
   codexIntro: 'Codex может помочь понять незнакомый файл, спланировать небольшое обновление, объяснить ошибку или проверить изменения перед публикацией. Сформулируйте ясную цель и дайте необходимый контекст, а затем сами прочитайте и протестируйте результат.',
+  codexQuickstartLinkText: 'Краткое руководство по Codex',
   codexQuickstartDescription: '— узнайте, как начать работу в приложении ChatGPT для компьютера или в интернете.',
+  codexGetStartedLinkText: 'Начало работы с Codex',
   codexGetStartedDescription: '— обзор Codex и способов использовать его в работе над кодом.',
   aiWorkflowTitle: 'Простой рабочий процесс с ИИ',
   aiWorkflowOne: 'Выберите одну небольшую цель, например обновить расписание занятий или добавить фотографию.',
@@ -85,6 +120,7 @@ const russianText = {
   aiSafety: 'Не сообщайте пароли, API-ключи, личную информацию клиентов или любые данные, которые вы не хотели бы публиковать. ИИ может помочь работать быстрее, но ответственность за итоговый сайт остаётся за вами.',
   examplesTitle: 'Изучайте сайты, созданные Novus',
   examplesIntro: 'Откройте эти сайты глазами посетителя. Обратите внимание на первое сообщение, главное действие, подачу контактной информации и работу сайта на узком экране. Берите идеи, но не копируйте чужие тексты, фотографии или код.',
+  novusLinkText: 'Novus NYC',
   novusDescription: '— откройте раздел «Our Work», чтобы посмотреть больше завершённых проектов.',
   checklistTitle: 'Что делает сайт хорошим?',
   checklistOne: 'За несколько секунд посетитель понимает, кто эта организация и что она предлагает.',
@@ -93,38 +129,49 @@ const russianText = {
   checklistFour: 'Навигация короткая и использует понятные посетителю слова.',
   checklistFive: 'Текст легко читать, у изображений есть полезные описания, а страница работает на телефоне.',
   checklistSix: 'У каждой страницы есть одна ясная цель, вместо того чтобы пытаться рассказать обо всём сразу.',
+  facebookLink: 'Facebook',
+  youtubeLink: 'YouTube',
+  tiktokLink: 'TikTok',
+  instagramLink: 'Instagram',
   footer: '© 2026 Клуб народного танца «Калейдоскоп»',
 };
 
 const languageToggle = document.querySelector('#language-toggle');
-const translatableElements = document.querySelectorAll('[data-i18n]');
-const translatableAriaLabels = document.querySelectorAll('[data-i18n-aria-label]');
+const translatableElements = Array.from(document.querySelectorAll('[data-i18n]'));
+const translatableAriaLabels = Array.from(document.querySelectorAll('[data-i18n-aria-label]'));
 
 const englishText = Object.fromEntries(
-  [...translatableElements].map((element) => [element.dataset.i18n, element.textContent.trim()]),
+  translatableElements.map((element) => [element.dataset.i18n, element.innerHTML.trim()]),
 );
 
 const englishAriaLabels = Object.fromEntries(
-  [...translatableAriaLabels].map((element) => [
+  translatableAriaLabels.map((element) => [
     element.dataset.i18nAriaLabel,
-    element.getAttribute('aria-label'),
+    element.getAttribute('aria-label') || '',
   ]),
 );
 
 function setLanguage(language) {
-  const text = language === 'ru' ? russianText : englishText;
-  const ariaLabels = language === 'ru' ? russianText : englishAriaLabels;
   const isRussian = language === 'ru';
+  const text = isRussian ? russianText : englishText;
+  const ariaLabels = isRussian ? russianText : englishAriaLabels;
 
   translatableElements.forEach((element) => {
-    element.textContent = text[element.dataset.i18n];
+    const key = element.dataset.i18n;
+    if (key) {
+      const translation = text[key] ?? element.innerHTML.trim();
+      element.innerHTML = translation;
+    }
   });
 
   translatableAriaLabels.forEach((element) => {
-    element.setAttribute('aria-label', ariaLabels[element.dataset.i18nAriaLabel]);
+    const key = element.dataset.i18nAriaLabel;
+    if (key && ariaLabels[key] !== undefined) {
+      element.setAttribute('aria-label', ariaLabels[key]);
+    }
   });
 
-  document.documentElement.lang = language;
+  document.documentElement.lang = isRussian ? 'ru' : 'en';
   document.title = isRussian
     ? 'Клуб народного танца «Калейдоскоп»'
     : 'Folk Dance Club Kaleidoscope';
@@ -137,7 +184,7 @@ function setLanguage(language) {
 }
 
 languageToggle.addEventListener('click', () => {
-  setLanguage(document.documentElement.lang === 'en' ? 'ru' : 'en');
+  setLanguage(document.documentElement.lang === 'ru' ? 'en' : 'ru');
 });
 
 setLanguage('en');

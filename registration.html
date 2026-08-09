@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration | Folk Dance Club Kaleidoscope</title>
+    <link rel="stylesheet" href="styles.css?v=5" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1 class="site-title">Registration</h1>
+        <p class="site-support">This page will host the multi-step registration form.</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="container">
+          <h2>Registration</h2>
+          <p><a href="index.html">Back to the main page</a></p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h3>1. Basic dancer information</h3>
+          <form>
+            <label>
+              Full name
+              <input type="text" name="dancerName" />
+            </label>
+            <label>
+              Date of birth
+              <input type="date" name="dancerDob" />
+            </label>
+            <label>
+              Gender
+              <input type="text" name="dancerGender" />
+            </label>
+            <label>
+              Phone number
+              <input type="tel" name="dancerPhone" />
+            </label>
+            <label>
+              Email address
+              <input type="email" name="dancerEmail" />
+            </label>
+            <label>
+              Address
+              <input type="text" name="dancerAddress" />
+            </label>
+            <label>
+              School currently attending
+              <input type="text" name="dancerSchool" />
+            </label>
+            <label>
+              Current grade
+              <input type="text" name="dancerGrade" />
+            </label>
+          </form>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h3>2. Emergency contact</h3>
+          <form>
+            <label>
+              Emergency contact name
+              <input type="text" name="emergencyName" />
+            </label>
+            <label>
+              Emergency contact phone number
+              <input type="tel" name="emergencyPhone" />
+            </label>
+            <label>
+              Relationship to dancer
+              <input type="text" name="emergencyRelationship" />
+            </label>
+          </form>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h3>3. Medical information</h3>
+          <form>
+            <label>
+              Please describe any relevant medical information
+              <textarea name="medicalInfo" rows="12" cols="40"></textarea>
+            </label>
+          </form>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h3>4. Payment arrangement</h3>
+          <form>
+            <label>Select payment option</label>
+            <label><input type="radio" name="paymentOption" value="full-performance" /> Full-performance</label>
+            <label><input type="radio" name="paymentOption" value="single-class" /> Single class</label>
+            <label><input type="radio" name="paymentOption" value="twice-weekly" /> Twice-weekly</label>
+            <label><input type="radio" name="paymentOption" value="parents-group" /> Parents group</label>
+            <label><input type="radio" name="paymentOption" value="other" /> Other</label>
+
+            <label>
+              Payment amount agreed upon with the director
+              <input type="text" name="paymentAmount" />
+            </label>
+
+            <label>
+              Any additional notes or information
+              <textarea name="paymentNotes" rows="6"></textarea>
+            </label>
+          </form>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h3>5. Additional information</h3>
+          <form>
+            <label>
+              Please input any additional information that you think Kaleidoscope should know
+              <textarea name="additionalInfo" rows="10"></textarea>
+            </label>
+          </form>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h3>6. Rules and permissions</h3>
+          <p style="font-size: 0.95rem; margin-top: 0.25rem;">Please review these terms and conditions before signing.</p>
+          <h4>Folk Dance Club Kaleidoscope rules</h4>
+          <ol>
+            <li>Students must wear clothing suitable for movement. Street clothes and jeans are not permitted in class.</li>
+            <li>Students must treat classmates, teachers, and guests with respect. Bullying, harassment, discrimination, personal attacks, and violence are prohibited.</li>
+            <li>Parents may attend class only with teacher permission. When the director requires a parent to be present, attendance is mandatory for the child to participate.</li>
+            <li>Students and families are responsible for costume care and may be charged for negligent damage. Costumes may not be altered without approval.</li>
+            <li>Families must promptly update personal, emergency, and medical information.</li>
+            <li>Group chats are for dance-school matters. Messages, photos, and videos should not be posted after 10:00 PM. Harassment or unrelated disputes are not permitted.</li>
+            <li>The selected membership and payment amount are confirmed when registration is submitted. After submission, only Kaleidoscope administration may change those payment details.</li>
+            <li>The director may pause performance participation when behavior or safety concerns affect the dancer or others.</li>
+            <li>Concerns and disputes should be brought privately to the director or dance teacher for resolution.</li>
+          </ol>
+
+          <form id="consent-form">
+            <label>
+              <input type="checkbox" name="photoConsent" required />
+              I authorize photography and video during dance-school activities for Kaleidoscope websites, social media, brochures, and promotion.
+            </label>
+            <label>
+              <input type="checkbox" name="rulesConsent" required />
+              I have read and agree to the rules and payment terms.
+            </label>
+            <label>
+              <input type="checkbox" name="accuracyConsent" required />
+              I confirm that all information provided is accurate and complete.
+            </label>
+            <button type="submit">Authorize registration</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h3>7. Electronic signature</h3>
+          <form id="registration-form" action="thank-you.html" method="get">
+            <label>
+              Signature
+              <input type="text" name="electronicSignature" placeholder="Type your full name" />
+            </label>
+            <button type="submit">Authorize registration</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

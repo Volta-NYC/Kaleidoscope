@@ -8,7 +8,7 @@
       content="A simple starter template for Folk Dance Club Kaleidoscope."
     />
     <title>Folk Dance Club Kaleidoscope</title>
-    <link rel="stylesheet" href="styles.css?v=4" />
+    <link rel="stylesheet" href="styles.css?v=10" />
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -18,6 +18,7 @@
         <p class="site-support" data-i18n="siteSupport">
           Supported by the Multicultural Center Kaleidoscope
         </p>
+        <h2 class="site-headline">Folk Dance Club Kaleidoscope is a dance school founded by an immigrant family from Ukraine for the purpose of spreading cultural awareness and educating the Brooklyn youth.</h2>
         <img
           src="images/kaleidoscope-logo.jpg"
           alt="Folk Dance Club Kaleidoscope"
@@ -37,9 +38,12 @@
             </ul>
           </nav>
 
-          <button class="language-toggle" id="language-toggle" type="button">
-            Русский
-          </button>
+          <div class="header-actions">
+            <a class="register-now-button" href="registration.html">Register Now</a>
+            <button class="language-toggle" id="language-toggle" type="button">
+              Русский
+            </button>
+          </div>
         </div>
       </div>
     </header>
@@ -64,45 +68,54 @@
         </div>
       </section>
 
-      <section class="section" aria-labelledby="support-title">
-        <div class="container">
-          <h2 id="support-title" data-i18n="supportTitle">Support the club</h2>
-          <p data-i18n="supportText">
-            I haven't figured this part out yet. Will fill this in once I speak to Nastya and she explains how donations for Kaleidoscope work.
-          </p>
-          <!-- Replace # with a real donation page URL. -->
-          <p><a href="#" data-i18n="donateLink">Make a donation</a></p>
-        </div>
-      </section>
-
       <section class="section" id="about">
         <div class="container">
           <h2 data-i18n="aboutTitle">About the club</h2>
           <p data-i18n="aboutText">
-            Folk Dance Club Kaleidoscope was founded in 2016 by a family who moved to Brooklyn from Ukraine just 3 years prior. Bringing people from all different backgrounds, ages, religions, and cultures together to practice and perform was our way of giving back to the community. We teach and perform dances from a variety of cultures, including but not limited to Ukrainian, Russian, Georgian, Chinese, Spanish, Gypsy, Israeli, and many others.
-
-One of the main aspects of Kaleidoscope that sets it apart from other dance organizations is the sheer amount of performances we have annually. On average, we have one performance per weekend, with some weekends even having multiple. Our dancers perform all over New York, in places such as public parks, restaurants, libraries, museums, Times Square, One World Trade Center, the Brighton Beach Boardwalk, Washington Square Park, and numerous other places. Every year, we get invited to dozens of events, such as the annual Dance Parade in Manhattan, at which we happily perform. We also travel out of state for performances multiple times per year, mostly to New Jersey and Pennsylvania, but we have also traveled to Miami for a tour and numerous performances over the course of a week, to Nashville to perform at Vanderbilt University, and even to perform at the Russian embassy in Washington, D.C.
-
-With the support of the Multicultural Center Kaleidoscope, Folk Dance Club Kaleidoscope frequently participates as a volunteer organization in annual community events. Every year, students of Folk Dance Club Kaleidoscope and the Multicultural Center Kaleidoscope organize New Year’s performances open to the public. With the agreement of the parents, all proceeds from ticket sales and voluntary donations are directed toward charitable assistance for sick children and their families. There are numerous ways in which Folk Dance Club Kaleidoscope engages with the community, such as the “Kaleidoscope of History” project, in which our students learn about World War II and perform war dances in honor of Victory Day. Additionally, we often perform for elderly people in nursing homes and annually offer free New Year’s themed performances across New York City.
-Folk Dance Club Kaleidoscope does very little traditional advertising, yet the number of children participating in the Club continues to grow. Our best advertising comes from the recommendations of our dancers and their parents, as well as from our many public performances.
-
+            Folk Dance Club Kaleidoscope was founded in 2016 by a family who moved to Brooklyn from Ukraine just 3 years prior. Bringing people from all different backgrounds, ages, religions, and cultures together to practice and perform was our way of giving back to the community. We teach and perform dances from a variety of cultures, including but not limited to Ukrainian, Russian, Georgian, Chinese, Spanish, Romani, Israeli, and many others.
           </p>
+          <figure class="about-inline-photo" style="float: right; width: min(42%, 280px); margin: 0 0 1rem 1.5rem;">
+            <img src="images/collective-photo-at-huge-performance.jpg" alt="Kaleidoscope dancers at a large performance" style="width: 100%; height: auto; border-radius: 8px; display: block;" />
+          </figure>
+          <p data-i18n="aboutTextTwo">
+            One of the main aspects of Kaleidoscope that sets it apart from other dance organizations is the sheer amount of performances we have annually. On average, we have one performance per weekend, with some weekends even having multiple. Our dancers perform all over New York, in places such as public parks, restaurants, libraries, museums, Times Square, One World Trade Center, the Brighton Beach Boardwalk, Washington Square Park, and numerous other places. Every year, we get invited to dozens of events, such as the annual Dance Parade in Manhattan, at which we happily perform. We also travel out of state for performances multiple times per year, mostly to New Jersey and Pennsylvania, but we have also traveled to Miami for a tour and numerous performances over the course of a week, to Nashville to perform at Vanderbilt University, and even to perform at the Russian embassy in Washington, D.C.
+          </p>
+          <p data-i18n="aboutTextThree">
+            With the support of the Multicultural Center Kaleidoscope, Folk Dance Club Kaleidoscope frequently participates as a volunteer organization in annual community events. Every year, students of Folk Dance Club Kaleidoscope and the Multicultural Center Kaleidoscope organize New Year’s performances open to the public. With the agreement of the parents, all proceeds from ticket sales and voluntary donations are directed toward charitable assistance for sick children and their families. There are numerous ways in which Folk Dance Club Kaleidoscope engages with the community, such as the “Kaleidoscope of History” project, in which our students learn about World War II and perform war dances in honor of Victory Day. Additionally, we often perform for elderly people in nursing homes and annually offer free New Year’s themed performances across New York City. Folk Dance Club Kaleidoscope does very little traditional advertising, yet the number of children participating in the Club continues to grow. Our best advertising comes from the recommendations of our dancers and their parents, as well as from our many public performances.
+          </p>
+          <figure class="about-inline-photo" style="float: right; width: min(34%, 200px); margin: 0 0 1rem 1.5rem; clear: right;">
+            <img src="images/Tennessee-group-photo.jpg" alt="Kaleidoscope dancers in Tennessee" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; display: block;" />
+          </figure>
 
           <h3 data-i18n="goalsTitle">Our approach and methodology</h3>
-          <p data-i18n="methodology">At Kaleidoscope, we have developed a teaching methodology that is uniquely efficient. The primary goal that this methodology accomplishes is the development of a life-long love for learning within our students. Our unique teaching method began with folk dance, which blends movement, history, and tradition. Unlike sports or other arts, folk dance has no strict rules, freeing children from the fear of mistakes and encouraging creativity. We want to teach kids how to think before we teach them how to dance. The main way in which we do this is through our emphasis on improvisation during practices and even performances. Every day of practice, we have our youth practice inventing a dance completely on the spot, either on their own or in groups of various sizes, without knowing what music is coming or even what genre it will be. This also provides the more experienced and capable dancers with an opportunity to practice their leadership skills by directing their team to a well choreographed, fun to watch dance.
+          <p data-i18n="methodology">
+            At Kaleidoscope, we have developed a teaching methodology that is uniquely efficient. The primary goal that this methodology accomplishes is the development of a life-long love for learning within our students. Our unique teaching method began with folk dance, which blends movement, history, and tradition. Unlike sports or other arts, folk dance has no strict rules, freeing children from the fear of mistakes and encouraging creativity. We want to teach kids how to think before we teach them how to dance. The main way in which we do this is through our emphasis on improvisation during practices and even performances. Every day of practice, we have our youth practice inventing a dance completely on the spot, either on their own or in groups of various sizes, without knowing what music is coming or even what genre it will be. This also provides the more experienced and capable dancers with an opportunity to practice their leadership skills by directing their team to a well choreographed, fun to watch dance.
+          </p>
+          <p data-i18n="methodologyTwo">
+            Additionally, we often incorporate basic mental exercise into our physical workout, such as having the kids answer math, history, literature, and geography-based questions or even guess a song’s nationality just by hearing it. We incentivize our students to improve their knowledge of math, history, geography, and to learn poems, as failure to answer any given question results in more physical work, oftentimes for the whole group.
 
-Additionally, we often incorporate basic mental exercise into our physical workout, such as having the kids answer math, history, literature, and geography-based questions or even guess a song’s nationality just by hearing it. We incentivize our students to improve their knowledge of math, history, geography, and to learn poems, as failure to answer any given question results in more physical work, oftentimes for the whole group.
-
-Our director also often tells informational stories in the fields of statistics, history, and philosophy, explaining to the youth the main takeaway in such a way that anybody can understand. As a result of our teaching methodology, we have seen our students develop critical thinking skills, leadership, and a love for learning.
-
+            Our director also often tells informational stories in the fields of statistics, history, and philosophy, explaining to the youth the main takeaway in such a way that anybody can understand. As a result of our teaching methodology, we have seen our students develop critical thinking skills, leadership, and a love for learning.
+          </p>
 
           <h3 data-i18n="teamTitle">Our team</h3>
           <!-- Add, remove, or replace these roles and names. -->
-          <ul class="plain-list">
-            <li><strong data-i18n="nameOne">Valentin Usmanov</strong> <span data-i18n="roleOne">— Club director</span></li>
-            <li><strong data-i18n="nameTwo">Viktoria Markelova</strong> <span data-i18n="roleTwo">— Artistic designer and costume manager</span></li>
-            <li><strong data-i18n="nameThree">Anastasiya Usmanova</strong> <span data-i18n="roleThree">— Choreographer, girls’ trick inventor</span></li>
-            <li><strong data-i18n="nameFour">Fedir Usmanov</strong> <span data-i18n="roleFour">— Choreographer, boys’ trick inventor</span></li>
+          <ul class="plain-list team-list">
+            <li class="team-member">
+              <img src="images/Valentin-photo.jpg" alt="Valentin Usmanov" class="team-avatar team-avatar-full-face" />
+              <strong data-i18n="nameOne">Valentin Usmanov</strong> <span data-i18n="roleOne">— Club director</span>
+            </li>
+            <li class="team-member">
+              <img src="images/Viktoriya-Viktorovna-photo.jpg" alt="Viktoria Markelova" class="team-avatar team-avatar-full-face" />
+              <strong data-i18n="nameTwo">Viktoria Markelova</strong> <span data-i18n="roleTwo">— Artistic designer, costume, manager, choreographer</span>
+            </li>
+            <li class="team-member">
+              <img src="images/possible-Nastya-image.jpg" alt="Anastasiya Usmanova" class="team-avatar team-avatar-full-face" />
+              <strong data-i18n="nameThree">Anastasiya Usmanova</strong> <span data-i18n="roleThree">— Choreographer, vice-president, head of social media</span>
+            </li>
+            <li class="team-member">
+              <img src="images/Fedya-headshot.jpg" alt="Fedir Usmanov" class="team-avatar team-avatar-full-face" />
+              <strong data-i18n="nameFour">Fedir Usmanov</strong> <span data-i18n="roleFour">— Choreographer, trick inventor</span>
+            </li>
           </ul>
         </div>
       </section>
@@ -114,8 +127,8 @@ Our director also often tells informational stories in the fields of statistics,
           <div class="package-grid">
             <section class="package-card">
               <h4 data-i18n="packageOneTitle">1. Full-Performance Package</h4>
-              <p data-i18n="packageOnePrice" style="font-size: 0.9rem;">Boys $250 per month, Girls $350 per month</p>
-              <p data-i18n="packageOneText">Includes participation in performances, costume rental, and access to all classes from the schedule. Register before the end of September and attend for all nine months, from September through May, to receive June free. This offer only applies to package 1.</p>
+              <p data-i18n="packageOnePrice" style="font-size: 0.9rem;">Boys $250 per month, Girls $350 per month(The difference in price between boys and girls is due to the difference in cost for costume cleaning after performances.)</p>
+              <p data-i18n="packageOneText">Includes participation in performances, costume rental, and access to all classes from the schedule. Register before the end of September and get June free.</p>
             </section>
             <section class="package-card">
               <h4 data-i18n="packageTwoTitle">2. Single Class</h4>
@@ -160,46 +173,53 @@ Our director also often tells informational stories in the fields of statistics,
         </div>
       </section>
 
-      <section class="section" id="projects">
+      <section class="section" id="projects" aria-labelledby="projects-events-title">
         <div class="container">
-          <h2 data-i18n="projectsTitle">Our projects</h2>
-          <p data-i18n="projectsIntro">
-            Other than just our standard performances around New York City, Folk Dance Club Kaleidoscope also engages in a few other projects in partnership with Multicultural Center Kaleidoscope.
+          <h2 id="projects-events-title">Projects & Upcoming Performances</h2>
+          <div class="faq-list">
+            <details class="faq-item" open>
+              <summary data-i18n="projectsTitle">Our projects</summary>
+              <div class="dropdown-content">
+                <p data-i18n="projectsIntro">
+                  Other than just our standard performances around New York City, Folk Dance Club Kaleidoscope also engages in a few other projects in partnership with Multicultural Center Kaleidoscope.
 
-          </p>
-          <article class="content-item">
-            <h3 data-i18n="projectOneTitle">Dance Under The Sky</h3>
-            <p data-i18n="projectOneText">Our annual street festival brings together over 20 dance groups to celebrate folk traditions and diversity in South Brooklyn. Families, schools, and communities gather to enjoy vibrant performances and cultural exchange in an open, welcoming atmosphere.
+                </p>
+                <article class="content-item">
+                  <h3 data-i18n="projectOneTitle">Dance Under The Sky</h3>
+                  <p data-i18n="projectOneText">Our annual street festival brings together over 20 dance groups to celebrate folk traditions and diversity in South Brooklyn. Families, schools, and communities gather to enjoy vibrant performances and cultural exchange in an open, welcoming atmosphere.
 
 This multicultural event showcases a variety of folk dances and live music from around the world, highlighting the beauty of different cultures coming together on one stage.
 
  
-          </article>
-          <article class="content-item">
-            <h3 data-i18n="projectTwoTitle">Summer Camp</h3>
-            <p data-i18n="projectTwoText">Our immersive summer camp takes children outside of New York City to a setting where they can learn folk dances, explore new skills, and enjoy recreational activities in nature. Beyond dance, the camp encourages children to try new experiences, build independence, and discover their strengths.
+                </article>
+                <article class="content-item">
+                  <h3 data-i18n="projectTwoTitle">Summer Camp</h3>
+                  <p data-i18n="projectTwoText">Our immersive summer camp takes children outside of New York City to a setting where they can learn folk dances, explore new skills, and enjoy recreational activities in nature. Beyond dance, the camp encourages children to try new experiences, build independence, and discover their strengths.
 
 In a fun, family-like environment, campers grow through teamwork, cultural appreciation, and shared adventure. Each day blends structured learning with play and exploration, helping children return home more confident, connected, and inspired.
 
 
-          </article>
-          <article class="content-item">
-            <h3 data-i18n="projectThreeTitle">​Afterschool Program ​(Dance in Schools)</h3>
-            <p data-i18n="projectThreeText">We are a DOE vendor providing folk dance and cultural programs in New York City public schools. Through our afterschool programs, students learn traditional dances from around the world, gaining confidence, teamwork skills, and cultural appreciation.
+                </article>
+                <article class="content-item">
+                  <h3 data-i18n="projectThreeTitle">​Afterschool Program ​(Dance in Schools)</h3>
+                  <p data-i18n="projectThreeText">We are a DOE vendor providing folk dance and cultural programs in New York City public schools. Through our afterschool programs, students learn traditional dances from around the world, gaining confidence, teamwork skills, and cultural appreciation.
 
 Each program ends with public showcases at school events and with student participation in the NYC Dance Parade, giving young dancers the chance to perform for the wider community.
-          </article>
-        </div>
-      </section>
+                </article>
+              </div>
+            </details>
 
-      <section class="section" id="events">
-        <div class="container">
-          <h2 data-i18n="eventsTitle">Upcoming performances</h2>
-          <p data-i18n="eventOne">August 9 — Summer picnic performance with Cossaks in New Jersey</p>
-          <p data-i18n="eventTwo">August 14 — Performance at Brighton Beach Boardwalk</p>
-          <p data-i18n="eventThree">August 22 — Movie Night performance at Seth Low Park</p>
-          <p data-i18n="eventFour">August 23 — Back to School performance</p>
-          <p data-i18n="eventFive">August 30 — One World Trade Center</p>
+            <details class="faq-item" id="events">
+              <summary data-i18n="eventsTitle">Upcoming performances</summary>
+              <div class="dropdown-content">
+                <p data-i18n="eventOne">August 9 — Summer picnic performance with Cossaks in New Jersey</p>
+                <p data-i18n="eventTwo">August 14 — Performance at Brighton Beach Boardwalk</p>
+                <p data-i18n="eventThree">August 22 — Movie Night performance at Seth Low Park</p>
+                <p data-i18n="eventFour">August 23 — Back to School performance</p>
+                <p data-i18n="eventFive">August 30 — One World Trade Center</p>
+              </div>
+            </details>
+          </div>
         </div>
       </section>
 
@@ -209,26 +229,43 @@ Each program ends with public showcases at school events and with student partic
           <p data-i18n="galleryText">
             Our Beautiful Gallery
           </p>
-          <div class="media-grid">
-            <div class="media-placeholder"><img src="images/another-photo.jpg" alt="Another performance photo" /></div>
-            <div class="media-placeholder"><img src="images/boardwalk-performance.jpg" alt="Boardwalk performance" /></div>
-            <div class="media-placeholder"><img src="images/dado-handstand.webp" alt="Dado handstand" /></div>
-            <div class="media-placeholder"><img src="images/dasha-pistolet.jpg" alt="Dasha performing" /></div>
-            <div class="media-placeholder"><img src="images/Fedya-jumping.jpg" alt="Fedya jumping" /></div>
-            <div class="media-placeholder"><img src="images/girls-aurafarm.jpg" alt="Girls at Aurafarm" /></div>
-            <div class="media-placeholder"><img src="images/girls-photo.jpg" alt="Girls group photo" /></div>
-            <div class="media-placeholder"><img src="images/group-photo.jpg" alt="Group photo" /></div>
-            <div class="media-placeholder"><img src="images/Hey-image.jpg" alt="Performance image" /></div>
-            <div class="media-placeholder"><img src="images/important-meeting.jpg" alt="Important meeting photo" /></div>
-            <div class="media-placeholder"><img src="images/lezginka-photo.jpg" alt="Lezginka performance" /></div>
-            <div class="media-placeholder"><img src="images/Maslenitsa-performance.jpg" alt="Maslenitsa performance" /></div>
-            <div class="media-placeholder"><img src="images/more-recent-group-photo.webp" alt="Recent group photo" /></div>
-            <div class="media-placeholder"><img src="images/Nastya-aurafarm.jpg" alt="Nastya at Aurafarm" /></div>
-            <div class="media-placeholder"><img src="images/swinging-girls.jpg" alt="Swinging girls performance" /></div>
-            <div class="media-placeholder"><img src="images/war-performance.jpg" alt="War performance" /></div>
-            <div class="media-placeholder"><img src="images/war-standing.jpg" alt="War standing performance" /></div>
-            <div class="media-placeholder"><img src="images/world-trade-center.webp" alt="World Trade Center performance" /></div>
+          <div class="gallery-video">
+            <h3>Featured Video</h3>
+            <div class="video-embed">
+              <iframe src="https://www.youtube.com/embed/sugpzQHJgj0" title="Folk Dance Club “Kaleidoscope”" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
           </div>
+          <div class="media-grid">
+            <figure class="media-card"><div class="media-placeholder"><img src="images/everybody-takes-a-bow.jpg" alt="This happened at the end of a dance when we were at a May 9th memorial performance." /></div><figcaption>End-of-dance bow at a May 9th memorial performance.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/boardwalk-performance.jpg" alt="One of our many, frequent boardwalk performances." /></div><figcaption>One of our regular boardwalk performances.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/dado-handstand.webp" alt="Dado handstand" /></div><figcaption>Skilled dancer performing a trick.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/dasha-pistolet.jpg" alt="Dasha doing pistolet" /></div><figcaption>Dancer performing a pistolet move.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/Fedya-jumping.jpg" alt="Fedya jumping" /></div><figcaption>Choreographer in a split jump during performance.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/girls-dancing-at-festival.jpg" alt="A great image of our girls from a big perfromance a long time ago." /></div><figcaption>Girls dancing at a large festival performance.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/girls-photo-at-very-old-performance.jpg" alt="Another performance though I genuinely don't remember this one." /></div><figcaption>Girls group photo from an older performance.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/group-photo-after-performance.jpg" alt="This was also a while ago, but it's still a great group photo." /></div><figcaption>Group photo taken after a performance.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/incredibly-old-group-photo.jpg" alt="This is an incredibly old group photo." /></div><figcaption>One of our oldest archived group photos.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/important-meeting.jpg" alt="Important meeting photo" /></div><figcaption>Important meeting with deputy from the Russian Federation.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/lezginka-photo.jpg" alt="Lezginka performance" /></div><figcaption>Lezginka performance on stage.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/Maslenitsa-performance.jpg" alt="Maslenitsa performance" /></div><figcaption>Maslenitsa celebration performance.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/more-recent-group-photo.webp" alt="Recent group photo" /></div><figcaption>More recent group portrait.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/Nastya-aurafarm.jpg" alt="Nastya aurafarming" /></div><figcaption>Our choreographer in a featured performance moment.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/swinging-girls.jpg" alt="Max and Irakli swinging girls" /></div><figcaption>Our boys lifting dancers in choreography.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/war-performance.jpg" alt="War performance" /></div><figcaption>Performance dedicated to wartime remembrance.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/war-standing.jpg" alt="Kids standing in commemoration of World War II" /></div><figcaption>Students honoring World War II remembrance.</figcaption></figure>
+            <figure class="media-card"><div class="media-placeholder"><img src="images/world-trade-center.webp" alt="World Trade Center performance" /></div><figcaption>Performance near the World Trade Center.</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="support-title">
+        <div class="container">
+          <h2 id="support-title" data-i18n="supportTitle">Support the club</h2>
+          <p data-i18n="supportText">
+            To support Folk Dance Club Kaleidoscope, please go to the website of our parent organization, Multiculture Center Kaleidoscope. All donations go into funding for our projects, costumes, and a better learning environment for our students.
+          </p>
+          <!-- Replace # with a real donation page URL. -->
+          <p><a href="https://www.multiculturecenterkaleidoscope.org/" data-i18n="donateLink">Visit Multiculture Center Kaleidoscope.</a></p>
         </div>
       </section>
 
@@ -249,31 +286,84 @@ Each program ends with public showcases at school events and with student partic
         </div>
       </section>
 
-      <section class="section" id="contacts">
+      <section class="section" id="contacts" aria-labelledby="contact-faq-title">
         <div class="container">
-          <h2 data-i18n="contactsTitle">Contact</h2>
-          <ul class="plain-list">
-            <li><strong data-i18n="addressLabel">Address:</strong> <span data-i18n="addressValue">217 Brighton Beach Ave, Brooklyn, NY 11235</span></li>
-            <li><strong data-i18n="phoneLabel">Phone:</strong> <a href="tel:+19175008704">+1 (917) 500-8704</a></li>
-            <li><strong data-i18n="emailLabel">Email:</strong> <a href="mailto:hello@example.org">usmacorp@gmail.com
-          </ul>
+          <h2 id="contact-faq-title">Contact & FAQ</h2>
+          <div class="faq-list">
+            <details class="faq-item" open>
+              <summary>Contact us</summary>
+              <div class="dropdown-content">
+                <ul class="plain-list">
+                  <li><strong data-i18n="addressLabel">Address:</strong> <span data-i18n="addressValue">217 Brighton Beach Ave, Brooklyn, NY 11235</span></li>
+                  <li><strong data-i18n="phoneLabel">Phone:</strong> <a href="tel:+19175008704">+1 (917) 500-8704</a></li>
+                  <li><strong data-i18n="emailLabel">Email:</strong> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=usmacorp@gmail.com" target="_blank" rel="noreferrer">usmacorp@gmail.com</a></li>
+                </ul>
 
-          <iframe
-            title="Map of 217 Brighton Beach Ave, Brooklyn, NY 11235"
-            src="https://www.google.com/maps?q=217%20Brighton%20Beach%20Ave,%20Brooklyn,%20NY%2011235&z=15&output=embed"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen
-            style="border:0; width:100%; max-width:700px; height:320px; margin-top:1rem;"
-          ></iframe>
+                <iframe
+                  title="Map of 217 Brighton Beach Ave, Brooklyn, NY 11235"
+                  src="https://www.google.com/maps?q=217%20Brighton%20Beach%20Ave,%20Brooklyn,%20NY%2011235&z=15&output=embed"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allowfullscreen
+                  style="border:0; width:100%; max-width:700px; height:320px; margin-top:1rem;"
+                ></iframe>
 
-          <h3 data-i18n="socialTitle">Find us online</h3>
-          <ul class="plain-list social-list">
-            <li><a href="https://www.facebook.com/groups/FolkDanceClubKaleidoskope/?ref=bookmarks" target="_blank" rel="noreferrer" data-i18n="facebookLink">Facebook</a></li>
-            <li><a href="https://www.youtube.com/@folkdanceclubkaleidoscope" target="_blank" rel="noreferrer" data-i18n="youtubeLink">YouTube</a></li>
-            <li><a href="https://www.tiktok.com/@club_kaleidoscope?_t=8Z8YG0uyuqM&_r=1" target="_blank" rel="noreferrer" data-i18n="tiktokLink">TikTok</a></li>
-            <li><a href="https://www.instagram.com/club_kaleidoscope?igshid=MDM4ZDc5MmU%3D" target="_blank" rel="noreferrer" data-i18n="instagramLink">Instagram</a></li>
-          </ul>
+                <h3><a href="https://www.google.com/maps?q=217%20Brighton%20Beach%20Ave,%20Brooklyn,%20NY%2011235" target="_blank" rel="noreferrer" data-i18n="socialTitle">Find us online</a></h3>
+                <ul class="plain-list social-list">
+                  <li>
+                    <a class="social-link" href="https://www.facebook.com/groups/FolkDanceClubKaleidoskope/?ref=bookmarks" target="_blank" rel="noreferrer" aria-label="Facebook">
+                      <img class="social-icon" src="images/facebook-icon.webp" alt="Facebook icon" />
+                      <span data-i18n="facebookLink">Facebook</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="social-link" href="https://www.youtube.com/@folkdanceclubkaleidoscope" target="_blank" rel="noreferrer" aria-label="YouTube">
+                      <img class="social-icon" src="images/better-image-icon.avif" alt="YouTube icon" />
+                      <span data-i18n="youtubeLink">YouTube</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="social-link" href="https://www.tiktok.com/@club_kaleidoscope?_t=8Z8YG0uyuqM&_r=1" target="_blank" rel="noreferrer" aria-label="TikTok">
+                      <img class="social-icon" src="images/tiktok-icon.jpg" alt="TikTok icon" />
+                      <span data-i18n="tiktokLink">TikTok</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="social-link" href="https://www.instagram.com/club_kaleidoscope?igshid=MDM4ZDc5MmU%3D" target="_blank" rel="noreferrer" aria-label="Instagram">
+                      <img class="social-icon" src="images/instagram-icon.jpg" alt="Instagram icon" />
+                      <span data-i18n="instagramLink">Instagram</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="faq-item" id="faq">
+              <summary>FAQ</summary>
+              <div class="dropdown-content faq-list">
+                <details class="faq-item">
+                  <summary>Who can join Folk Dance Club Kaleidoscope?</summary>
+                  <p>Children and youth of different backgrounds and experience levels are welcome. Please contact us so we can help place your child in the right class group.</p>
+                </details>
+                <details class="faq-item">
+                  <summary>Do students need prior dance experience?</summary>
+                  <p>No prior experience is required. We work with beginners and experienced dancers and support each student at their current level.</p>
+                </details>
+                <details class="faq-item">
+                  <summary>How do I register my child?</summary>
+                  <p>Use the registration section on this page and complete the form. After submission, we will contact you to confirm placement and next steps.</p>
+                </details>
+                <details class="faq-item">
+                  <summary>Where are classes and performances held?</summary>
+                  <p>Most classes take place in our studio on 217 Brighton Beach Ave, and performances happen across New York City and occasionally out of state depending on event invitations.</p>
+                </details>
+                <details class="faq-item">
+                  <summary>How does communication with families work?</summary>
+                  <p>We communicate mostly through a private telegram channel to which we add anybody who joins the club. We also use our social media pages for updates about class schedules, performances, and important announcements. For urgent questions, calling us is the fastest option.</p>
+                </details>
+              </div>
+            </details>
+          </div>
         </div>
       </section>
 

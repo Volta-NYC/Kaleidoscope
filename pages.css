@@ -1,0 +1,134 @@
+/* ═══════════ Kaleidoscope — flat pages ═══════════
+   The palace scene owns the homepage; these are the rooms you land in
+   afterwards. Same palette, same type, no WebGL. Selectors match the
+   existing markup so no page structure had to change. */
+
+:root {
+  --ink: #f8f0dd;
+  --ink-dim: rgba(248, 240, 221, 0.7);
+  --ink-faint: rgba(248, 240, 221, 0.45);
+  --gold: #ffcd6b;
+  --gold-deep: #d9a03c;
+  --night: #0b0d22;
+  --panel: rgba(255, 255, 255, 0.035);
+  --line: rgba(255, 226, 173, 0.2);
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Outfit", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--night);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  /* a faint dusk wash, echoing the sky over the palace */
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(94, 60, 110, 0.5), transparent 70%),
+    radial-gradient(ellipse 70% 40% at 80% 105%, rgba(180, 110, 60, 0.16), transparent 70%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+::selection { background: var(--gold); color: #2a1f08; }
+
+.container { width: min(760px, calc(100% - 2.5rem)); margin-inline: auto; }
+
+/* ── header ── */
+.site-header {
+  padding: clamp(3rem, 12vh, 6rem) 0 clamp(2rem, 6vh, 3.5rem);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(2rem, 6vh, 3.5rem);
+}
+.site-eyebrow {
+  font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--ink-faint); margin-bottom: 1.1rem;
+}
+.site-eyebrow a { color: var(--gold); border-bottom: none; }
+.site-eyebrow a:hover { border-bottom: 1px solid var(--gold); }
+.site-title {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(2.2rem, 7vw, 3.6rem); line-height: 1.02;
+  letter-spacing: -0.022em;
+}
+.site-support, .site-headline {
+  margin-top: 0.9rem; color: var(--ink-dim);
+  font-size: clamp(0.95rem, 2vw, 1.05rem); max-width: 34rem;
+}
+
+/* ── sections ── */
+.section { padding-block: clamp(1.2rem, 4vh, 2.2rem); }
+.section h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: -0.012em;
+  margin-bottom: 0.8rem;
+}
+.section h3 {
+  font-size: 0.7rem; letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--gold); font-weight: 500;
+  margin-bottom: 1.2rem; padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+.section h4 { font-family: var(--serif); font-weight: 400; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.section p { color: var(--ink-dim); }
+.section p + p { margin-top: 0.7em; }
+
+a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255, 205, 107, 0.35); }
+a:hover { border-bottom-color: var(--gold); }
+
+/* ── forms ── */
+form { display: grid; gap: 1.1rem; }
+label {
+  display: grid; gap: 0.4rem;
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-faint); font-weight: 400;
+}
+input, textarea, select {
+  font-family: var(--sans); font-size: 1rem; font-weight: 300;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line); border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  width: 100%;
+  transition: border-color 0.16s ease, background 0.16s ease;
+}
+input::placeholder, textarea::placeholder { color: rgba(248, 240, 221, 0.3); }
+input:focus, textarea:focus, select:focus {
+  outline: none; border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.06);
+}
+textarea { min-height: 7rem; resize: vertical; line-height: 1.6; }
+input[type="checkbox"], input[type="radio"] { width: auto; accent-color: var(--gold); }
+label:has(input[type="checkbox"]), label:has(input[type="radio"]) {
+  grid-auto-flow: column; grid-template-columns: auto 1fr;
+  align-items: center; gap: 0.6rem;
+  text-transform: none; letter-spacing: 0.01em; font-size: 0.95rem;
+  color: var(--ink-dim);
+}
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) opacity(0.5); }
+
+button {
+  font-family: var(--sans); font-size: 0.92rem; font-weight: 600;
+  background: var(--gold); color: #2b2008;
+  border: none; border-radius: 999px;
+  padding: 0.8rem 1.7rem; cursor: pointer;
+  justify-self: start;
+  box-shadow: 0 10px 30px rgba(255, 205, 107, 0.22);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(255, 205, 107, 0.36); }
+
+/* ── footer ── */
+.site-footer {
+  margin-top: clamp(3rem, 10vh, 6rem);
+  padding: 2rem 0 3rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint); font-size: 0.85rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button, a { transition: none; }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "kaleidoscope-palace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Folk Dance Club Kaleidoscope — a voxel palace you scroll through, one lit window per room.",
+  "type": "module",
+  "scripts": {
+    "dev": "npx --yes serve@14 . -l 8765",
+    "vendor": "node scripts/vendor-three.mjs"
+  },
+  "devDependencies": {
+    "three": "0.161.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

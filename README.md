@@ -239,8 +239,75 @@ experienced collaborator for help resolving it.
 
 ```text
 kaleidoscope/
-├── index.html   # Page content and structure
-├── script.js    # English/Russian language switcher
-├── styles.css   # Visual styles
-└── README.md    # This guide
+├── index.html          # The palace: markup, HUD, meta tags
+├── palace.js           # The whole scene — world, camera, rooms, day/night
+├── palace.css          # Styles for the palace page
+├── registration.html   # Registration form
+├── thank-you.html      # Post-registration confirmation
+├── pages.css           # Styles shared by the flat pages
+├── vendor/             # Pinned three.js build (generated — see below)
+├── images/             # Photos, logo, share card
+├── info/               # Source notes the room copy is written from
+├── scripts/            # Maintenance scripts
+├── vercel.json         # Hosting config
+└── README.md           # This guide
 ```
+
+`script.js`, `styles.css`, and `legacy.css` are left over from the earlier
+version of the site. Nothing links to them any more.
+
+## Running it locally
+
+The site is plain static files — no build, no server code. Any static server
+works:
+
+```bash
+npm run dev          # serves the folder at http://localhost:8765
+```
+
+Or, without Node at all:
+
+```bash
+python3 -m http.server 8765
+```
+
+Opening `index.html` directly with `file://` will **not** work: the page loads
+`palace.js` as an ES module, which browsers only allow over http.
+
+### Handy URL parameters
+
+| Parameter | What it does |
+| --- | --- |
+| `?p=0.5` | Jump straight to a point on the journey, `0`–`1` |
+| `?t=1140` | Freeze the clock at a time of day, in minutes past midnight |
+| `?stats=1` | Log the voxel count to the console |
+| `?dev=1` | Expose `window.__kal` for stepping the render loop by hand |
+
+## Updating three.js
+
+The renderer is committed to `vendor/` rather than pulled from a CDN, so the
+site keeps working if a CDN doesn't. To move to a new version, change it in
+`package.json`, then:
+
+```bash
+npm install
+npm run vendor
+```
+
+That copies the pinned build into `vendor/` and stamps the version into the
+import map in `index.html`. Commit both.
+
+## Deploying
+
+Hosted on Vercel as a static site. There is no build step: Vercel serves the
+repository root as-is, which is why `vendor/` is committed.
+
+- **First time:** import the GitHub repo at [vercel.com/new](https://vercel.com/new).
+  Framework preset **Other**, build command **empty**, output directory **root**.
+  `vercel.json` already sets this.
+- **After that:** every push to `main` deploys. Pull requests get previews.
+
+`vercel.json` also turns on clean URLs (`/registration`, not
+`/registration.html`), caches `vendor/` forever, and sets a few security
+headers. `.vercelignore` keeps `node_modules/`, `info/`, and `scripts/` out of
+the deployment.

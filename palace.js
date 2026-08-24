@@ -248,7 +248,16 @@ const w = (grid) => grid * VOX;          // grid → world
 const gr = (world) => Math.round(world / VOX); // world → grid
 
 const VOXELS = [];
-const box = (x, y, z, c) => VOXELS.push({ x, y, z, c });
+/* one voxel per cell: a call onto an occupied cell is dropped, so earlier
+   structures keep their place and the roof slabs below can be poured in
+   afterwards without z-fighting where they meet walls and towers */
+const placed = new Set();
+const box = (x, y, z, c) => {
+  const k = ((x + 512) * 2048 + (y + 512)) * 2048 + (z + 512);
+  if (placed.has(k)) return;
+  placed.add(k);
+  VOXELS.push({ x, y, z, c });
+};
 const col = (c, x, y, z) => (typeof c === "function" ? c(x, y, z) : c);
 
 function slab(x0, x1, z0, z1, y, c) {
@@ -626,6 +635,38 @@ wing(1); wing(-1);
     if (x % 12 < 2) { box(gx, 4, 174, C.gold); box(gx, 5, 174, C.goldLt); }
   }
 });
+
+/* ── roofs ──
+   walls() raises hollow tubes, and every setback left the top open: from
+   above, the eye went straight down the shell to the grass at the bottom.
+   One slab per open top, poured in after everything else — cells already
+   claimed by walls, drums and balustrades stay theirs. Roof colours come
+   from a private RNG so the shared rand() sequence (window lights, petals)
+   is untouched. */
+{
+  let rs = 20260823;
+  const rc = () => ((rs = (rs * 16807) % 2147483647) / 2147483647);
+  const roofC = () => [C.roof, C.roofDk, C.roofLt][(rc() * 3) | 0];
+  const terraceC = () => [C.stone, C.stoneLt, C.stoneDk][(rc() * 3) | 0];
+
+  /* the plinth terrace around the tower's foot */
+  slab(-63, 63, -47, -41, 9, terraceC);
+  slab(-63, 63, 41, 47, 9, terraceC);
+  slab(-63, -57, -40, 40, 9, terraceC);
+  slab(57, 63, -40, 40, 9, terraceC);
+
+  /* one roof per setback, flush inside the storey cornice */
+  for (const tier of TIERS)
+    slab(-tier.hx, tier.hx, -tier.hz, tier.hz, tier.y0 + tier.floors * FLOOR_H - 1, roofC);
+
+  /* attic floor behind the parapet, and a gilded cap sealing the drum */
+  slab(-25, 25, -21, 21, TOP + 15, roofC);
+  disc(0, 0, TOP + 31, 21, C.gold);
+
+  /* the wing pavilions and the gate towers */
+  [-92, 92].forEach((cx) => slab(cx - 11, cx + 11, -29, 29, 48, roofC));
+  [-38, 38].forEach((cx) => slab(cx - 5, cx + 5, 169, 179, 37, roofC));
+}
 
 /* ── allée, lamps, statues ── */
 function cypress(cx, cz, h = 22) {

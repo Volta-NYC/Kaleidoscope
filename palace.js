@@ -41,7 +41,9 @@ if (ROOMS.length !== 11) {
 const canvas = document.getElementById("scene");
 let renderer;
 try {
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
+  /* antialias is off: the scene is drawn through the composer's own target,
+     so canvas MSAA would only cost memory on the final blit */
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: "high-performance" });
 } catch {
   /* No WebGL: hand the visitor the readable page instead of a broken hero. */
   document.body.classList.add("no-webgl", "ready");
@@ -77,6 +79,9 @@ const bloom = new UnrealBloomPass(
   0.85,   // radius
   0.75    // threshold: only genuinely bright things bloom
 );
+/* the halo is low-frequency, so on a phone the whole blur chain runs at half
+   size — a quarter of the fill for much the same glow */
+const BLOOM_SCALE = lowPower ? 0.5 : 1;
 
 const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x10122e, 130, 520);
@@ -85,6 +90,7 @@ const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.5, 16
 composer.addPass(new RenderPass(scene, camera));
 composer.addPass(bloom);
 composer.setSize(innerWidth, innerHeight);
+bloom.setSize(innerWidth * BLOOM_SCALE, innerHeight * BLOOM_SCALE);
 
 const hemi = new THREE.HemisphereLight(0xbfd7ff, 0x54432e, 0.9);
 scene.add(hemi);
@@ -250,10 +256,12 @@ const gr = (world) => Math.round(world / VOX); // world → grid
 const VOXELS = [];
 /* one voxel per cell: a call onto an occupied cell is dropped, so earlier
    structures keep their place and the roof slabs below can be poured in
-   afterwards without z-fighting where they meet walls and towers */
+   afterwards without z-fighting where they meet walls and towers.
+   The same set later answers the neighbour lookups of the face mesher. */
+const cellKey = (x, y, z) => ((x + 512) * 2048 + (y + 512)) * 2048 + (z + 512);
 const placed = new Set();
 const box = (x, y, z, c) => {
-  const k = ((x + 512) * 2048 + (y + 512)) * 2048 + (z + 512);
+  const k = cellKey(x, y, z);
   if (placed.has(k)) return;
   placed.add(k);
   VOXELS.push({ x, y, z, c });
@@ -822,27 +830,69 @@ headland(360, 70, 120, 30, 0x41795a);
   scene.add(mesh);
 }
 
-/* ═════════════════ commit every voxel to one instanced mesh ═════════════════ */
+/* ═════════════════ commit: one mesh of the exposed faces ═════════════════
+   A box per voxel costs twelve triangles apiece — two million a frame here,
+   nearly all of them buried inside the mass and paid for again by the shadow
+   pass. Only faces that touch air are ever seen, so the mesh keeps just
+   those: the same picture, a tenth of the work. This is the single biggest
+   win a phone gets. */
 
-const solidMesh = new THREE.InstancedMesh(
-  new THREE.BoxGeometry(VOX, VOX, VOX),
-  new THREE.MeshLambertMaterial({ color: 0xffffff }),
-  VOXELS.length
-);
-solidMesh.castShadow = true;
-solidMesh.receiveShadow = true;
+const FACE_DIR = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+const FACE_CORNERS = [
+  [[1, 0, 1], [1, 0, 0], [1, 1, 0], [1, 1, 1]],   // +x
+  [[0, 0, 0], [0, 0, 1], [0, 1, 1], [0, 1, 0]],   // -x
+  [[0, 1, 0], [0, 1, 1], [1, 1, 1], [1, 1, 0]],   // +y
+  [[0, 0, 0], [1, 0, 0], [1, 0, 1], [0, 0, 1]],   // -y
+  [[0, 0, 1], [1, 0, 1], [1, 1, 1], [0, 1, 1]],   // +z
+  [[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]],   // -z
+];
+
+let solidFaces = 0;
 {
-  const m = new THREE.Matrix4();
+  for (const s of VOXELS)
+    for (const [dx, dy, dz] of FACE_DIR)
+      if (!placed.has(cellKey(s.x + dx, s.y + dy, s.z + dz))) solidFaces++;
+
+  const pos = new Float32Array(solidFaces * 12);
+  const nor = new Float32Array(solidFaces * 12);
+  const clr = new Float32Array(solidFaces * 12);
+  const idx = new Uint32Array(solidFaces * 6);
   const c = new THREE.Color();
-  VOXELS.forEach((s, i) => {
-    m.makeTranslation(w(s.x), w(s.y) + VOX / 2, w(s.z));
-    solidMesh.setMatrixAt(i, m);
-    solidMesh.setColorAt(i, c.setHex(s.c));
-  });
+  let f = 0;
+  for (const s of VOXELS) {
+    c.setHex(s.c);
+    for (let d = 0; d < 6; d++) {
+      const [dx, dy, dz] = FACE_DIR[d];
+      if (placed.has(cellKey(s.x + dx, s.y + dy, s.z + dz))) continue;
+      const corners = FACE_CORNERS[d];
+      for (let k = 0; k < 4; k++) {
+        const [cx, cy, cz] = corners[k];
+        const o = (f * 4 + k) * 3;
+        pos[o] = (s.x + cx - 0.5) * VOX;
+        pos[o + 1] = (s.y + cy) * VOX;
+        pos[o + 2] = (s.z + cz - 0.5) * VOX;
+        nor[o] = dx; nor[o + 1] = dy; nor[o + 2] = dz;
+        clr[o] = c.r; clr[o + 1] = c.g; clr[o + 2] = c.b;
+      }
+      const b = f * 4, o = f * 6;
+      idx[o] = b; idx[o + 1] = b + 1; idx[o + 2] = b + 2;
+      idx[o + 3] = b; idx[o + 4] = b + 2; idx[o + 5] = b + 3;
+      f++;
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  g.setAttribute("normal", new THREE.BufferAttribute(nor, 3));
+  g.setAttribute("color", new THREE.BufferAttribute(clr, 3));
+  g.setIndex(new THREE.BufferAttribute(idx, 1));
+  const mesh = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ vertexColors: true }));
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  scene.add(mesh);
+  var solidMesh = mesh;   // the ?dev handle reaches it by the old name
 }
-solidMesh.instanceMatrix.needsUpdate = true;
-scene.add(solidMesh);
-if (new URLSearchParams(location.search).has("stats")) console.log(`[palace] ${VOXELS.length} voxels`);
+if (new URLSearchParams(location.search).has("stats"))
+  console.log(`[palace] ${VOXELS.length} voxels, ${solidFaces} exposed faces`);
 
 /* ═══════════════════════════ WINDOWS ═══════════════════════════ */
 
@@ -1588,11 +1638,13 @@ function updateDayNight() {
 /* ═══════════════════════ MAIN LOOP ═══════════════════════ */
 
 let shadowTick = 1;
+/* the world is static and the sun crawls — phones refresh the shadow map
+   half as often, which the eye cannot catch at this softness */
+const SHADOW_EVERY = lowPower ? 0.3 : 0.14;
 function frameStep(dt, time) {
-  /* the world is static and the sun moves slowly — refresh the shadow map a
-     few times a second rather than every frame */
+  /* refresh the shadow map a few times a second rather than every frame */
   shadowTick += dt;
-  if (shadowTick > 0.14) { shadowTick = 0; renderer.shadowMap.needsUpdate = true; }
+  if (shadowTick > SHADOW_EVERY) { shadowTick = 0; renderer.shadowMap.needsUpdate = true; }
 
   if (scroller.glide) {
     const g = scroller.glide;
@@ -1678,7 +1730,7 @@ addEventListener("resize", () => {
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
   composer.setSize(innerWidth, innerHeight);
-  bloom.setSize(innerWidth, innerHeight);
+  bloom.setSize(innerWidth * BLOOM_SCALE, innerHeight * BLOOM_SCALE);
   readScroll();
 });
 

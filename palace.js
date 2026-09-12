@@ -1666,6 +1666,7 @@ function updateDayNight() {
 /* ═══════════════════════ MAIN LOOP ═══════════════════════ */
 
 let shadowTick = 1;
+let firstFramePresented = false;
 /* the world is static and the sun crawls — phones refresh the shadow map
    half as often, which the eye cannot catch at this softness */
 const SHADOW_EVERY = lowPower ? 0.3 : 0.14;
@@ -1727,6 +1728,12 @@ function frameStep(dt, time) {
   });
 
   composer.render();
+  if (!firstFramePresented) {
+    firstFramePresented = true;
+    /* Keep the static poster up until the browser has had a chance to paint
+       this first live frame; otherwise slow GPUs can flash an empty canvas. */
+    requestAnimationFrame(() => document.body.classList.add("ready"));
+  }
 }
 
 function animate() {
@@ -1769,5 +1776,4 @@ if (startP !== null && !Number.isNaN(startP)) {
   targetP = smoothP = startP;
   readScroll();
 }
-document.body.classList.add("ready");
 animate();

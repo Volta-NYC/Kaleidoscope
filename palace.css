@@ -47,6 +47,21 @@ body:not(.ready) #scene,
 body:not(.ready) .hero,
 body:not(.ready) .hud-top { opacity: 0; }
 
+/* A real scene capture is the immediate first paint. It stays in place until
+   the renderer has completed an actual frame, then unobtrusively hands over
+   to the live canvas and controls. `object-fit: cover` gives phones a clean
+   centred portrait crop without loading a second large image. */
+.loading-poster {
+  position: fixed; inset: 0; z-index: 70; overflow: hidden;
+  background: var(--night); pointer-events: none;
+  opacity: 1; visibility: visible;
+  transition: opacity 0.42s ease, visibility 0s linear 0.42s;
+}
+.loading-poster img {
+  display: block; width: 100%; height: 100%; object-fit: cover; object-position: center center;
+}
+body.ready .loading-poster { opacity: 0; visibility: hidden; }
+
 /* ───────────── progress ───────────── */
 .progress-track {
   position: fixed; top: 0; left: 0; right: 0; height: 2px;
@@ -402,6 +417,7 @@ body:not(.ready) .hud-top { opacity: 0; }
 
 /* ───────────── small screens ───────────── */
 @media (max-width: 640px) {
+  .loading-poster img { object-position: 52% center; }
   .hud-top { top: 0.85rem; left: 0.9rem; right: 0.9rem; }
   .brand span { font-size: 0.9rem; }
   .chapter { left: 1rem; bottom: 1.2rem; }
@@ -437,6 +453,7 @@ body:not(.ready) .hud-top { opacity: 0; }
   .marker-dot::after { animation: none; }
   .panel { transition: none; }
   body > *:not(.scroll-space) { transition: none; }
+  .loading-poster { transition: none; }
 }
 
 

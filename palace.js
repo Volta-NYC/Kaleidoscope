@@ -1142,6 +1142,15 @@ function nudge(dy) {
   scroller.active = true;
 }
 
+/* Touch should feel attached to the finger. The old implementation fed every
+   move through the eased wheel path, which made it lag and feel uneven. */
+function dragBy(dy) {
+  scroller.glide = null;
+  scroller.target = clampY(scroller.target + dy);
+  scrollTo(0, scroller.target);
+  scroller.active = false;
+}
+
 /** A timed, eased move — used when something *takes* you somewhere. */
 function glideTo(y, seconds) {
   const to = clampY(y);
@@ -1182,12 +1191,12 @@ addEventListener("touchmove", (e) => {
   touchV = dy / Math.max(1, now - touchT);
   touchY = y;
   touchT = now;
-  nudge(dy * 1.15);
+  dragBy(dy * 1.38);
   e.preventDefault();
 }, { passive: false });
 addEventListener("touchend", () => {
   if (touchY === null) return;
-  nudge(touchV * 300);                      // carry the flick
+  nudge(THREE.MathUtils.clamp(touchV * 240, -280, 280)); // carry a controlled flick
   touchY = null;
 }, { passive: true });
 

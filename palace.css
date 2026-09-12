@@ -49,8 +49,7 @@ body:not(.ready) .hud-top { opacity: 0; }
 
 /* A real scene capture is the immediate first paint. It stays in place until
    the renderer has completed an actual frame, then unobtrusively hands over
-   to the live canvas and controls. `object-fit: cover` gives phones a clean
-   centred portrait crop without loading a second large image. */
+   to the live canvas and controls. */
 .loading-poster {
   position: fixed; inset: 0; z-index: 70; overflow: hidden;
   background: var(--night); pointer-events: none;
@@ -417,7 +416,16 @@ body.ready .loading-poster { opacity: 0; visibility: hidden; }
 
 /* ───────────── small screens ───────────── */
 @media (max-width: 640px) {
-  .loading-poster img { object-position: 52% center; }
+  /* Keep the complete wide capture visible on a portrait phone. A softened
+     duplicate fills the surrounding space, so there is no tight crop or
+     stretched image during the loading handoff. */
+  .loading-poster { display: grid; place-items: center; background: #3a2437; }
+  .loading-poster::before {
+    content: ""; position: absolute; inset: -1.5rem;
+    background: url("images/loading-poster.jpg") center / cover no-repeat;
+    filter: blur(18px) brightness(0.64) saturate(0.82); transform: scale(1.08);
+  }
+  .loading-poster img { position: relative; width: 100%; height: auto; object-fit: contain; object-position: center; }
   .hud-top { top: 0.85rem; left: 0.9rem; right: 0.9rem; }
   .brand span { font-size: 0.9rem; }
   .chapter { left: 1rem; bottom: 1.2rem; }

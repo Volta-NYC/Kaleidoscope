@@ -5,10 +5,11 @@
   "description": "Folk Dance Club Kaleidoscope — a voxel palace you scroll through, one lit window per room.",
   "type": "module",
   "scripts": {
-    "dev": "npx --yes serve@14 . -l 8765",
+    "dev": "serve . -l 8765",
     "vendor": "node scripts/vendor-three.mjs"
   },
   "devDependencies": {
+    "serve": "^14.2.6",
     "three": "0.161.0"
   },
   "engines": {

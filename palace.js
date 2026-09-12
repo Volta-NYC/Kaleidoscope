@@ -1217,7 +1217,15 @@ function scrollToP(p) { glideTo(THREE.MathUtils.clamp(p, 0, 1) * journeyLength()
 
 document.getElementById("brand-home").addEventListener("click", (e) => { e.preventDefault(); scrollToP(0); });
 document.querySelectorAll("[data-goto]").forEach((el) =>
-  el.addEventListener("click", (e) => { e.preventDefault(); scrollToP(Number(el.dataset.goto)); })
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (el.dataset.goto === "first-window") {
+      firstWindowGuideActive = true;
+      scrollToP(ROOM_P[0]);
+      return;
+    }
+    scrollToP(Number(el.dataset.goto));
+  })
 );
 
 /* The approach, then a single revolution around the palace that rises one
@@ -1361,6 +1369,9 @@ function updateMarkers(p, dt) {
   markersFade += (want - markersFade) * (1 - Math.pow(0.02, dt));
   for (const m of markers) {
     const { f, el } = m;
+    const guided = firstWindowGuideActive
+      && f.room === 0
+      && Math.abs(p - ROOM_P[0]) < 0.026;
     _proj.copy(f.pos);
     const dist = camera.position.distanceTo(f.pos);
     /* is the wall it sits on turned toward us? */
@@ -1368,13 +1379,19 @@ function updateMarkers(p, dt) {
     _proj.project(camera);
     const onScreen = _proj.z < 1 && Math.abs(_proj.x) < 0.94 && Math.abs(_proj.y) < 0.9;
     const vis = onScreen && facing > 0.22 && dist < 190 && dist > 12 ? 1 : 0;
-    const alpha = vis * markersFade * THREE.MathUtils.smoothstep(facing, 0.2, 0.5);
+    /* At the guided first stop, keep the target unmistakable even while the
+       camera is settling into its final angle. */
+    const alpha = guided && onScreen
+      ? 1
+      : vis * markersFade * THREE.MathUtils.smoothstep(facing, 0.2, 0.5);
 
     if (alpha < 0.02) {
+      el.classList.remove("guided");
       if (m.shown) { el.style.opacity = "0"; el.style.pointerEvents = "none"; m.shown = false; }
       continue;
     }
     m.shown = true;
+    el.classList.toggle("guided", guided);
     el.style.transform = `translate3d(${((_proj.x + 1) / 2) * innerWidth}px, ${((-_proj.y + 1) / 2) * innerHeight}px, 0)`;
     el.style.opacity = String(alpha);
     el.style.pointerEvents = "auto";
@@ -1441,8 +1458,10 @@ const panelTitle = document.getElementById("panel-title");
 const panelBody = document.getElementById("panel-body");
 const panelCount = document.getElementById("panel-count");
 const panelFig = document.getElementById("panel-figure");
+const firstWindowGuide = document.getElementById("first-window-guide");
 let currentRoom = 0;
 let panelOpen = false;
+let firstWindowGuideActive = false;
 
 function renderPanel() {
   const r = ROOMS[currentRoom];
@@ -1453,6 +1472,9 @@ function renderPanel() {
   panelFig.innerHTML = r.img ? `<img src="${r.img}" alt="${r.imgAlt}" loading="lazy" />` : "";
 }
 function openPanel(i, { fly = true } = {}) {
+  firstWindowGuideActive = false;
+  firstWindowGuide.classList.remove("show");
+  firstWindowGuide.setAttribute("aria-hidden", "true");
   currentRoom = ((i % ROOMS.length) + ROOMS.length) % ROOMS.length;
   /* Selecting a room is also a camera move: the scroll target becomes that
      storey's stop, and the spiral carries us up to it. */
@@ -1508,6 +1530,12 @@ function readScroll() {
   hero.style.opacity = String(fade);
   hero.style.visibility = fade <= 0.02 ? "hidden" : "visible";
   progressBar.style.transform = `scaleX(${targetP})`;
+
+  const showFirstWindowGuide = firstWindowGuideActive
+    && !panelOpen
+    && Math.abs(targetP - ROOM_P[0]) < 0.014;
+  firstWindowGuide.classList.toggle("show", showFirstWindowGuide);
+  firstWindowGuide.setAttribute("aria-hidden", String(!showFirstWindowGuide));
 
   const ch = chapterFor(targetP);
   if (ch.name !== chapterIdx) {

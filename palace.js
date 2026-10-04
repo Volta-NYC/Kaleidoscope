@@ -1085,10 +1085,25 @@ const journeyLength = () => Math.max(1, scrollSpace.offsetHeight - innerHeight);
    they just get there without the inertia. */
 const eased = !reducedMotion;
 
-const scroller = { target: scrollY, active: false, glide: null };
+const scroller = { target: scrollY, active: false, glide: null, wrote: scrollY };
 const clampY = (y) => THREE.MathUtils.clamp(y, 0, maxScroll());
 const inScrollable = (e) =>
   e.composedPath().some((n) => n instanceof Element && n.closest(".panel-inner, .directory, .quick-nav, .hero-inner"));
+/* A wheel only belongs to an element that can still move that way; anything
+   else (the hero copy, a list already at its end) chains to the page and
+   must go through the eased target, or it fights the ease still in flight. */
+const wheelOwnedBy = (e, dy) =>
+  e.composedPath().some((n) => {
+    if (!(n instanceof Element) || n === document.documentElement || n === document.body) return false;
+    if (n.scrollHeight <= n.clientHeight + 1) return false;
+    const oy = getComputedStyle(n).overflowY;
+    if (oy !== "auto" && oy !== "scroll") return false;
+    return dy < 0 ? n.scrollTop > 0 : n.scrollTop + n.clientHeight < n.scrollHeight - 1;
+  });
+function writeScroll(y) {
+  scrollTo(0, y);
+  scroller.wrote = scrollY;
+}
 
 function nudge(dy) {
   scroller.glide = null;                    // a hand on the wheel wins
@@ -1101,14 +1116,14 @@ function nudge(dy) {
 function dragBy(dy) {
   scroller.glide = null;
   scroller.target = clampY(scroller.target + dy);
-  scrollTo(0, scroller.target);
+  writeScroll(scroller.target);
   scroller.active = false;
 }
 
 /** A timed, eased move — used when something *takes* you somewhere. */
 function glideTo(y, seconds) {
   const to = clampY(y);
-  if (!eased) { scrollTo(0, to); scroller.target = to; scroller.active = false; return; }
+  if (!eased) { writeScroll(to); scroller.target = to; scroller.active = false; return; }
   const dist = Math.abs(to - scrollY);
   const dur = seconds ?? THREE.MathUtils.clamp(1.3 + (dist / Math.max(1, maxScroll())) * 3.6, 1.3, 3.6);
   scroller.glide = { from: scrollY, to, t: 0, dur };
@@ -1120,11 +1135,11 @@ function glideTo(y, seconds) {
 addEventListener("wheel", (e) => {
   if (isPanelOpen()) return;
   if (e.ctrlKey) return;                    // let pinch-zoom through
-  if (inScrollable(e)) return;
-  e.preventDefault();
   let d = e.deltaY;
   if (e.deltaMode === 1) d *= 33;
   else if (e.deltaMode === 2) d *= innerHeight;
+  if (wheelOwnedBy(e, d)) return;
+  e.preventDefault();
   nudge(THREE.MathUtils.clamp(d, -200, 200) * 0.55);
 }, { passive: false });
 
@@ -1172,8 +1187,15 @@ addEventListener("keydown", (e) => {
   nudge(d);
 });
 
-/* a scrollbar drag is the one thing that moves the page itself — adopt it */
+/* Anything that moves the page besides the frame loop (scrollbar drag, a
+   native touch scroll, find-in-page) wins: adopt where it left us and drop
+   whatever ease was still in flight, so it can't drag us back. */
 addEventListener("scroll", () => {
+  if (Math.abs(scrollY - scroller.wrote) > 1) {
+    scroller.glide = null;
+    scroller.active = false;
+    scroller.wrote = scrollY;
+  }
   if (!scroller.active) scroller.target = scrollY;
 }, { passive: true });
 
@@ -1585,14 +1607,14 @@ function frameStep(dt, time) {
     const k = Math.min(1, g.t / g.dur);
     /* easeInOutCubic — slow off the mark, slow into the stop */
     const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-    scrollTo(0, g.from + (g.to - g.from) * e);
+    writeScroll(g.from + (g.to - g.from) * e);
     if (k >= 1) { scroller.glide = null; scroller.active = false; }
   } else if (scroller.active) {
     const next = scrollY + (scroller.target - scrollY) * (1 - Math.pow(0.085, dt));
     if (Math.abs(scroller.target - next) < 0.25) {
-      scrollTo(0, scroller.target);
+      writeScroll(scroller.target);
       scroller.active = false;
-    } else scrollTo(0, next);
+    } else writeScroll(next);
   }
 
   smoothP += (targetP - smoothP) * (1 - Math.pow(0.0004, dt));

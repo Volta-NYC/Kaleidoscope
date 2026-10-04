@@ -20,6 +20,23 @@ function link(el) {
   a.textContent = title(el);
   return a;
 }
+function childWindow(el) {
+  const a = link(el);
+  const label = document.createElement('span');
+  label.className = 'window-card-title';
+  label.textContent = title(el);
+  a.replaceChildren(label);
+  const source = el.querySelector('.room-img, .photo-grid img');
+  if (source) {
+    const photo = document.createElement('img');
+    photo.className = 'window-thumbnail';
+    photo.src = source.getAttribute('src');
+    photo.alt = ''; // Decorative: the adjacent title names this destination.
+    photo.decoding = 'async';
+    a.prepend(photo);
+  }
+  return a;
+}
 function closeDirectory() { directory.hidden = true; menuButton.setAttribute('aria-expanded', 'false'); }
 function renderDirectory() {
   const list = document.getElementById('directory-list');
@@ -47,8 +64,12 @@ function renderPanel({ focus = false } = {}) {
   back.href = parent ? `#${parent.id}` : '#';
   back.textContent = `← ${parent ? title(parent) : text('home', 'All paths')}`;
   const nested = document.getElementById('panel-children');
-  nested.replaceChildren(...children(current).map(link));
-  nested.hidden = !nested.childElementCount;
+  nested.replaceChildren(...children(current).map(childWindow));
+  const sections = document.getElementById('panel-sections');
+  sections.hidden = !nested.childElementCount;
+  document.getElementById('panel-sections-title').textContent = current.id === 'dance-club'
+    ? text('club-sections', 'Inside the dance club')
+    : text('center-sections', 'Projects at the center');
   const group = siblings(current);
   document.getElementById('panel-count').textContent = `${group.indexOf(current) + 1} / ${group.length}`;
   for (const a of document.querySelectorAll('.quick-nav a')) {

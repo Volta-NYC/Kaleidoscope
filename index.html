@@ -28,7 +28,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="palace.css?v=10" />
+    <link rel="stylesheet" href="palace.css?v=11" />
   </head>
   <body>
     <canvas id="scene" aria-hidden="true"></canvas>
@@ -85,7 +85,11 @@
         <figure class="panel-figure" id="panel-figure"></figure>
         <p class="panel-kicker" id="panel-kicker"></p>
         <h2 class="panel-title" id="panel-title" tabindex="-1"></h2>
-        <nav id="panel-children" class="nested-windows" aria-label="Explore this path" data-i18n-aria-label="children"></nav>
+        <section id="panel-sections" class="panel-sections" aria-labelledby="panel-sections-title" hidden>
+          <h3 id="panel-sections-title"></h3>
+          <p data-i18n="section-help">Choose a window to explore.</p>
+          <nav id="panel-children" class="nested-windows" aria-labelledby="panel-sections-title"></nav>
+        </section>
         <div class="panel-body" id="panel-body"></div>
         <div class="panel-nav">
           <button data-i18n="prev" id="panel-prev" type="button">← Previous</button>
@@ -105,7 +109,7 @@
  <div class="room-body" data-i18n="dance-club.body"><p class="path-tag">Dance school · Est. 2016</p><p>Learn, rehearse and perform dances from around the world. A Brooklyn home for young dancers, curious minds and a love of movement.</p><p>The Folk Dance Club is a business and the <strong>flagship project of Multicultural Center Kaleidoscope</strong>, a nonprofit. The two share a team and an address.</p></div>
  </article><article class="room" id="multicultural-center" data-parent="" data-entry>
  <h3 class="room-title" data-i18n="multicultural-center.title">Multicultural Center</h3><img class="room-img" src="images/boardwalk-performance.jpg" alt="Folk dance on the Brighton Beach boardwalk." data-i18n-alt="multicultural-center.alt" loading="lazy" decoding="async" />
- <div class="room-body" data-i18n="multicultural-center.body"><p class="path-tag">Nonprofit · Culture &amp; community</p><p>Multicultural Center Kaleidoscope brings people together through cultural, educational and community projects. People of every background are welcome.</p><p>Our flagship project is the <a href="#dance-club">Folk Dance Club</a>, a separately registered business. The center and club are run by the same people and share <strong>217 Brighton Beach Ave, Brooklyn</strong>.</p><p>Explore the projects and community work below.</p></div>
+ <div class="room-body" data-i18n="multicultural-center.body"><p class="path-tag">Nonprofit · Culture &amp; community</p><p>Multicultural Center Kaleidoscope brings people together through cultural, educational and community projects. People of every background are welcome.</p><p>Our flagship project is the <a href="#dance-club">Folk Dance Club</a>, a separately registered business. The center and club are run by the same people and share <strong>217 Brighton Beach Ave, Brooklyn</strong>.</p><p>Choose a project window to learn more.</p></div>
  </article><article class="room" id="room-01" data-parent="dance-club" >
  <h3 class="room-title" data-i18n="room-01.title">Welcome to Kaleidoscope</h3><img class="room-img" src="images/collective-photo-at-huge-performance.jpg" alt="The whole club on stage at a large performance." data-i18n-alt="room-01.alt" loading="lazy" decoding="async" />
  <div class="room-body" data-i18n="room-01.body">
@@ -211,8 +215,11 @@
       <footer class="ledger-footer"><p data-i18n="footer" >Kaleidoscope · 217 Brighton Beach Ave, Brooklyn, NY 11235</p></footer>
     </main>
     <noscript><style>#scene,.hero,.chapter,.markers,.progress-track,.hud-top,.quick-nav{display:none!important} .ledger-head{padding-top:3rem}</style></noscript>
-    <script type="importmap">{ "imports": { "three": "/vendor/three.module.min.js?v=0.161.0" } }</script>
-    <script type="module" src="navigation.js?v=1"></script>
-    <script type="module" src="palace.js?v=27"></script>
+    <script type="importmap">{ "imports": {
+      "three": "/vendor/three.module.min.js?v=0.161.0",
+      "site-navigation": "./navigation.js?v=3"
+    } }</script>
+    <script type="module">import "site-navigation";</script>
+    <script type="module" src="palace.js?v=29"></script>
   </body>
 </html>

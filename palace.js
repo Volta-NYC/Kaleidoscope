@@ -1,13 +1,8 @@
 /* ============================================================================
    Kaleidoscope — the voxel palace on the shore
    ----------------------------------------------------------------------------
-   A single scroll is a single camera move, cut into six acts:
-     I    the boardwalk, far out over the water
-     II   the gate, where the grounds begin
-     III  the court of honour, at the foot of the grand stair
-     IV   the wings, swinging around the east flank
-     V    the garden court, behind the palace
-     VI   dusk, the finale three-quarter
+   One continuous camera move follows the boardwalk and gate to the two
+   entrances, then settles at the multicultural center window.
    Two windows lead to the dance club and multicultural center.
    ========================================================================== */
 
@@ -16,7 +11,7 @@ import { EffectComposer } from "/vendor/three-examples/postprocessing/EffectComp
 import { RenderPass } from "/vendor/three-examples/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "/vendor/three-examples/postprocessing/UnrealBloomPass.js";
 
-import { entries, openEntry, isPanelOpen, isDirectoryOpen } from "./navigation.js?v=1";
+import { entries, openEntry, isPanelOpen, isDirectoryOpen } from "site-navigation";
 import { text } from "./i18n.js";
 
 // Two main windows; project content belongs to each path's nested navigation.
@@ -75,6 +70,14 @@ const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x10122e, 130, 520);
 
 const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.5, 1600);
+function fitCameraViewport() {
+  camera.aspect = innerWidth / innerHeight;
+  // Keep a window in view during the lateral move, even on tall phone screens.
+  const minHorizontalFov = THREE.MathUtils.degToRad(30);
+  camera.fov = Math.max(42, THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(minHorizontalFov / 2) / camera.aspect)));
+  camera.updateProjectionMatrix();
+}
+fitCameraViewport();
 composer.addPass(new RenderPass(scene, camera));
 composer.addPass(bloom);
 composer.setSize(innerWidth, innerHeight);
@@ -100,10 +103,9 @@ scene.add(keyLight, keyLight.target);
 const fillLight = new THREE.DirectionalLight(0xffffff, 0.5);
 scene.add(fillLight, fillLight.target);
 
-/* Lamps inside the lit storeys. Without these the tower is a black slab at
-   night — these are what wash the facade orange around each window. */
+/* One lamp per entrance washes the facade around its interactive window. */
 const storeyLamps = [];
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < ROOMS.length; i++) {
   const l = new THREE.PointLight(0xffb45e, 0, 62, 2);
   storeyLamps.push(l);
   scene.add(l);
@@ -868,12 +870,13 @@ function facePoint(floor, face, alongGrid, worldY) {
 /* ── the ordinary windows: one shared material, so dusk is a single write ── */
 const decorMat = new THREE.MeshBasicMaterial({ color: 0x2a3850 });
 const DECOR = [];
+const ENTRY_FLOORS = FLOORS.slice(0, ROOMS.length);
 for (const fl of FLOORS) {
   for (const face of ["z+", "z-", "x+", "x-"]) {
     const half = face[0] === "z" ? fl.hx : fl.hz;
     for (let a = -half + 11; a <= half - 11; a += 14) {
-      /* leave the middle of the face to this storey's lit window */
-      if (face === fl.face && Math.abs(a - fl.along) < 13) continue;
+      /* Only entrance floors reserve space for an interactive window. */
+      if (ENTRY_FLOORS.includes(fl) && face === fl.face && Math.abs(a - fl.along) < 13) continue;
       DECOR.push({ p: facePoint(fl, face, a, fl.winY), f: face, w: 2.2, h: 4.4 });
       /* a gilded arch and sill, so the opening reads as baroque not curtain wall */
       const gy = gr(fl.winY);
@@ -962,7 +965,7 @@ function featureWindow(roomIndex, floor) {
     glow: 0, target: 0,
   });
 }
-FLOORS.slice(0, 2).forEach((fl, i) => featureWindow(i, fl));
+ENTRY_FLOORS.forEach((fl, i) => featureWindow(i, fl));
 
 const PICKABLE = FEATURED.map((f) => f.pane);
 const byRoom = new Map(FEATURED.map((f) => [f.room, f]));
@@ -1190,9 +1193,8 @@ document.querySelectorAll("[data-goto]").forEach((el) =>
   })
 );
 
-/* The approach, then a single revolution around the palace that rises one
-   storey per stop. Each storey's lit window sits on whichever face the camera
-   will be looking at when it arrives — that is what FLOOR_FACE encodes. */
+/* Keep the route tied to real entrance windows. Decorative floors must never
+   create camera stops: the tour finishes at the last interactive window. */
 
 const APPROACH = [
   { p: 0.00, pos: [0, 9, 272], tgt: [0, 70, 40] },     // I  · far out on the boardwalk
@@ -1202,31 +1204,17 @@ const APPROACH = [
   { p: 0.32, pos: [-12, 14, 146], tgt: [0, 50, 18] },  // III· the court, looking up
 ];
 
-/* where each storey's stop falls on the scroll */
-/* Provisional spacing. The real values are measured off the path below, so
-   that a given amount of scroll always buys the same amount of travel. */
 const ROOM_P = [];
-
-/* one revolution, biased so each stop sits square-on to a face */
-const FLOOR_THETA = [-18, 18, 58, 90, 122, 160, 200, 238, 270, 302, 342]
-  .map((d) => (d * Math.PI) / 180);
-
 const SHOTS = [...APPROACH];
-FLOORS.forEach((fl, i) => {
-  const th = FLOOR_THETA[i];
-  /* The helix tightens as it climbs: down low you need distance to get the
-     tower in behind the storey, up top the tower is narrower and closer works.
-     82 is the ceiling — beyond it the arc would clip the gate. */
-  const radius = 82 - i * 1.4;
-  const win = facePoint(fl, fl.face, fl.along, fl.winY);
+FEATURED.forEach(({ pos, normal }) => {
+  // Approach each pane straight-on, keeping it near the center on phones too.
+  const eye = pos.clone().addScaledVector(normal, 62);
+  eye.y += 3;
   SHOTS.push({
-    p: 0,
-    pos: [Math.sin(th) * radius, fl.winY + 2.5, Math.cos(th) * radius],
-    tgt: [win.x, fl.winY + 14 - i * 1.05, win.z],
+    pos: eye.toArray(),
+    tgt: [pos.x, pos.y + 3, pos.z],
   });
 });
-/* the last beat: fall back and take the whole thing in, at night */
-SHOTS.push({ p: 1.0, pos: [-104, 72, 150], tgt: [0, 56, 0] });
 
 const shotPos = SHOTS.map((s) => new THREE.Vector3(...s.pos));
 const shotTgt = SHOTS.map((s) => new THREE.Vector3(...s.tgt));
@@ -1251,7 +1239,7 @@ function uAtControl(i) {
   const a2 = Math.min(ARC_DIV - 1, Math.floor(f));
   return (arcLengths[a2] + (arcLengths[a2 + 1] - arcLengths[a2]) * (f - a2)) / arcTotal;
 }
-FLOORS.forEach((_, i) => { ROOM_P[i] = uAtControl(APPROACH.length + i); });
+FEATURED.forEach((_, i) => { ROOM_P[i] = uAtControl(APPROACH.length + i); });
 
 const CHAPTERS = [
   { at: 0, no: "I", name: "The Boardwalk" },
@@ -1259,8 +1247,8 @@ const CHAPTERS = [
   { at: Math.max(0.05, uAtControl(4) - 0.04), no: "III", name: "The Great Stair" },
 ];
 
-/** the storey whose stop is closest to a given scroll position */
-function nearestFloor(p) {
+/** The entrance whose stop is closest to the current scroll position. */
+function nearestEntrance(p) {
   let best = 0, bestD = Infinity;
   for (let i = 0; i < ROOM_P.length; i++) {
     const d = Math.abs(p - ROOM_P[i]);
@@ -1268,15 +1256,15 @@ function nearestFloor(p) {
   }
   return best;
 }
-/** During the climb the chapter is simply the storey you are level with. */
+/** After the approach, identify the entrance the camera is visiting. */
 function chapterFor(p) {
   if (p < ROOM_P[0] - 0.03) {
     let c = CHAPTERS[0];
     for (const ch of CHAPTERS) if (p >= ch.at) c = ch;
     return { ...c, name: text(["boardwalk", "gate", "stair"][CHAPTERS.indexOf(c)], c.name) };
   }
-  const i = nearestFloor(p);
-  return { no: String(i + 1).padStart(2, "0"), name: ROOMS[i]?.title || text("grounds", "The Grounds") };
+  const i = nearestEntrance(p);
+  return { no: String(i + 1).padStart(2, "0"), name: ROOMS[i].title };
 }
 
 const _a = new THREE.Vector3(), _b = new THREE.Vector3();
@@ -1464,7 +1452,7 @@ function readScroll() {
       chapterEl.classList.add("in");
     }, 45);
   }
-  chapterEl.style.opacity = targetP > 0.06 && targetP < 0.995 ? "1" : "0";
+  chapterEl.style.opacity = targetP > 0.06 ? "1" : "0";
 
   /* the reading document is up: stand the scene controls down */
   const reading = false; // Content is reached directly through the two paths.
@@ -1547,10 +1535,10 @@ function updateDayNight() {
      the sun is technically already down, so an elevation-driven glow had the
      whole palace blazing while the sky was still bright orange. This way they
      come on the way the brief describes: dark on the boardwalk, full gold by
-     the time you reach the top. */
-  const litProgress = THREE.MathUtils.smoothstep(smoothP, 0.12, 0.86);
+     the time you reach the first entrance. */
+  const litProgress = THREE.MathUtils.smoothstep(smoothP, 0.12, ROOM_P[0]);
 
-  bloom.strength = 0.09 + 1.08 * litProgress;
+  bloom.strength = 0.09 + 0.65 * litProgress;
   bloom.radius = 0.68 + 0.36 * litProgress;
 
   const glow = Math.max(litProgress, night * 0.12);
@@ -1570,7 +1558,7 @@ function updateDayNight() {
     lampMat.color.copy(WIN_DAY).lerp(WIN_NIGHT, Math.max(glow, 0.12)).multiplyScalar(1 + glow * 0.9);
       doorGlow.intensity = glow * 180;
     storeyLamps.forEach((l, i) => {
-      const f = FEATURED[i * 2];
+      const f = FEATURED[i];
       if (!f) return;
       /* just outside the pane, so the light lands on the wall around it */
       l.position.copy(f.pos).addScaledVector(f.normal, 3);
@@ -1621,7 +1609,7 @@ function frameStep(dt, time) {
     f.glow += (f.target - f.glow) * (1 - Math.pow(0.002, dt));
     const flicker = 1 + Math.sin(time * 1.6 + f.pos.x * 0.7) * 0.045;
     const k = Math.min(1, (base * 0.9 + f.glow * 0.85) * flicker);
-    f.mat.color.copy(WIN_DAY).lerp(WIN_NIGHT, k).multiplyScalar(1 + k * 2.0);
+    f.mat.color.copy(WIN_DAY).lerp(WIN_NIGHT, k).multiplyScalar(1 + k * 1.2);
     f.pane.scale.setScalar(1 + f.glow * 0.04);
   }
 
@@ -1672,13 +1660,14 @@ if (urlParams.has("dev")) {
     },
     open: openPanel,
     rooms: ROOMS.map((r) => r.title),
+    tourStops: FEATURED.map((f, i) => ({ room: f.room, progress: ROOM_P[i], position: f.pos.toArray() })),
+    entranceLights: storeyLamps,
     renderer, scene, camera, keyLight, solidMesh,
   };
 }
 
 addEventListener("resize", () => {
-  camera.aspect = innerWidth / innerHeight;
-  camera.updateProjectionMatrix();
+  fitCameraViewport();
   renderer.setSize(innerWidth, innerHeight);
   composer.setSize(innerWidth, innerHeight);
   bloom.setSize(innerWidth * BLOOM_SCALE, innerHeight * BLOOM_SCALE);

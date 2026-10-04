@@ -583,7 +583,7 @@ body.navigation-ready .ledger { display: none; }
 .hero-subtitle { color: var(--ink-dim); margin: 1rem 0 1.7rem; font-size: clamp(1rem, 2vw, 1.2rem); }
 .start-guide-label { margin-bottom: 0.8rem; }
 .path-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; }
-.path-card { display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem; border: 1px solid var(--line); border-radius: 46px 46px 14px 14px; background: rgba(16,14,36,.86); backdrop-filter: blur(14px); color: var(--ink); text-decoration: none; transition: background .2s, border-color .2s; }
+.path-card { display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(16,14,36,.86); backdrop-filter: blur(14px); color: var(--ink); text-decoration: none; transition: background .2s, border-color .2s; }
 .path-card:hover { border-color: var(--gold); background: rgba(51,39,70,.95); }
 .window-icon { color: var(--gold); font-size: 2.2rem; line-height: 1; margin-bottom: 1rem; }
 .path-card h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.15rem, 2.5vw, 1.7rem); }
@@ -605,8 +605,8 @@ body.panel-open .brand { visibility: hidden; }
 .panel-title { font-size: clamp(1.7rem, 3vw, 2.5rem); }
 .path-tag { color: var(--gold); font-size: .8rem; }
 .nested-windows { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .65rem; margin-top: 1.4rem; }
-.nested-windows a { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--line); border-radius: 15px 15px 5px 5px; color: var(--ink); text-decoration: none; font-size: .9rem; background: #ffffff05; }
-.nested-windows a::after { content: '↗'; color: var(--gold); padding-left: .5rem; }
+.nested-windows a { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; font-size: .9rem; background: #ffffff05; }
+.nested-windows a::after { content: '→'; color: var(--gold); margin-left: auto; flex-shrink: 0; }
 .nested-windows a:hover { background: #ffffff10; border-color: var(--gold); }
 .directory { z-index: 64; top: 76px; max-height: calc(100dvh - 165px); overflow-y: auto; overscroll-behavior: contain; }
 .directory li a { display: block; color: var(--gold); text-decoration: none; padding: .65rem; font-size: 1rem; }
@@ -634,7 +634,7 @@ body.no-webgl .scroll-space { height: 0 !important; }
   .hero-title { font-size: clamp(2.6rem, 11vw, 4.4rem); }
   .hero-subtitle { margin: .7rem 0 1rem; font-size: .9rem; }
   .path-choices { gap: .65rem; }
-  .path-card { padding: 1.1rem .7rem; border-radius: 30px 30px 10px 10px; }
+  .path-card { padding: 1.1rem .7rem; border-radius: 16px; }
   .path-card h2 { font-size: 1.16rem; }
   .path-card p { font-size: .78rem; margin: .6rem 0; }
   .path-link { font-size: .66rem; }
@@ -648,8 +648,21 @@ body.no-webgl .scroll-space { height: 0 !important; }
   .photo-grid img { height: 145px; }
   .directory { top: 66px; max-width: calc(100vw - 2rem); }
 }
-.entry-panel .panel-figure img { height: clamp(100px, 16vh, 160px); }
-.nested-windows:not([hidden]) + .panel-body { margin-top: 1.5rem; }
+/* The entrance is a project chooser; put its child windows before the overview. */
+.entry-panel .panel-figure { display: none; }
+.entry-panel .panel-kicker { margin-top: 1.5rem; }
+.panel-sections h3 { font-size: 1rem; font-weight: 500; color: var(--ink); }
+.panel-sections p { color: var(--ink-dim); font-size: .85rem; line-height: 1.5; margin-top: .35rem; }
+.panel-sections .nested-windows { margin-top: .9rem; }
+.panel-sections:not([hidden]) + .panel-body { margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+.nested-windows a { justify-content: flex-start; gap: .75rem; min-height: 78px; padding: .7rem; background: rgba(255,255,255,.035); }
+.window-thumbnail { width: 48px; height: 48px; flex-shrink: 0; object-fit: cover; border-radius: 8px; }
+.window-card-title { flex: 1; line-height: 1.35; overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .nested-windows a { gap: .5rem; padding: .6rem; min-height: 76px; }
+  .window-thumbnail { width: 36px; height: 42px; border-radius: 6px; }
+  .nested-windows a::after { display: none; }
+}
 .panel-inner > .panel-toolbar { margin-left: 0; margin-right: 0; }
 .video-frame iframe { border: 0; }
 .path-card { min-width: 0; }

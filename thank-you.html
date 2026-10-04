@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Thank you — Folk Dance Club Kaleidoscope" />
     <meta property="og:description" content="Your registration has been received." />
-    <meta property="og:image" content="/images/og-cover.jpg" />
+    <meta property="og:image" content="/images/collective-photo-at-huge-performance.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,23 +19,25 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Outfit:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="pages.css?v=1" />
+    <link rel="stylesheet" href="pages.css?v=2" />
   </head>
-  <body>
+  <body data-title-key="thanks-title">
+    <button id="language-toggle" class="page-language" type="button" lang="ru" aria-label="Switch to Russian">Русский</button>
     <header class="site-header">
       <div class="container">
-        <p class="site-eyebrow"><a href="index.html">Kaleidoscope</a> · Brighton Beach, Brooklyn</p>
-        <h1 class="site-title">Thank you for registering</h1>
+        <p class="site-eyebrow"><a href="index.html"><span data-i18n="form-0">Kaleidoscope</span></a> <span data-i18n="form-1">· Brighton Beach, Brooklyn</span></p>
+        <h1 class="site-title"><span data-i18n="form-51">Thank you for registering</span></h1>
       </div>
     </header>
 
     <main>
       <section class="section">
         <div class="container">
-          <p>Your registration has been received. We will be in touch soon.</p>
-          <p><a href="index.html">Back to the palace</a></p>
+          <p><span data-i18n="form-52">Your registration has been received. We will be in touch soon.</span></p>
+          <p><a href="index.html"><span data-i18n="form-6">Back to the palace</span></a></p>
         </div>
       </section>
     </main>
+  <script type="module" src="i18n.js"></script>
   </body>
 </html>

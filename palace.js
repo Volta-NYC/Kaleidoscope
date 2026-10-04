@@ -8,7 +8,7 @@
      IV   the wings, swinging around the east flank
      V    the garden court, behind the palace
      VI   dusk, the finale three-quarter
-   Eleven windows are lit. Each one is a room. Click it to step inside.
+   Two windows lead to the dance club and multicultural center.
    ========================================================================== */
 
 import * as THREE from "three";
@@ -16,25 +16,13 @@ import { EffectComposer } from "/vendor/three-examples/postprocessing/EffectComp
 import { RenderPass } from "/vendor/three-examples/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "/vendor/three-examples/postprocessing/UnrealBloomPass.js";
 
-/* ───────────────────────────── rooms ─────────────────────────────
-   The eleven rooms are authored as real HTML in index.html (#ledger) and
-   read out of the DOM here. One source of truth: what the drawer shows is
-   exactly what a search engine, a screen reader, or a browser without WebGL
-   gets, because it is the same markup. */
+import { entries, openEntry, isPanelOpen, isDirectoryOpen } from "./navigation.js?v=1";
+import { text } from "./i18n.js";
 
-const ROOMS = [...document.querySelectorAll("#ledger .room")].map((el) => ({
-  plate: el.dataset.plate || "",
-  kicker: el.dataset.kicker || "",
-  title: el.querySelector(".room-title").textContent.trim(),
-  img: el.querySelector(".room-img")?.getAttribute("src") || null,
-  imgAlt: el.querySelector(".room-img")?.getAttribute("alt") || "",
-  body: el.querySelector(".room-body").innerHTML,
-  href: `#${el.id}`,
-}));
-
-if (ROOMS.length !== 11) {
-  console.warn(`[palace] expected 11 rooms in #ledger, found ${ROOMS.length}`);
-}
+// Two main windows; project content belongs to each path's nested navigation.
+const ROOMS = entries.map(el => ({ get title() { return el.querySelector('.room-title').textContent; } }));
+const openPanel = openEntry;
+const directoryOpen = isDirectoryOpen;
 
 /* ───────────────────────── renderer & scene ───────────────────────── */
 
@@ -45,7 +33,7 @@ try {
      so canvas MSAA would only cost memory on the final blit */
   renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: "high-performance" });
 } catch {
-  /* No WebGL: hand the visitor the readable page instead of a broken hero. */
+  /* The independent navigation keeps every path available without WebGL. */
   document.body.classList.add("no-webgl", "ready");
   throw new Error("no webgl");
 }
@@ -246,7 +234,7 @@ const pick = (a) => a[(rand() * a.length) | 0];
 /* ───────────────────── voxel primitives ─────────────────────
    Everything is authored on an integer grid, then rendered at half a world
    unit per block. Twice the resolution of a naive voxel scene: fine enough
-   for a moulding or an onion dome's curve, coarse enough to still read as
+   for a moulding or a roof profile, coarse enough to still read as
    blocks. */
 
 const VOX = 0.5;
@@ -307,46 +295,13 @@ function cornice(x0, x1, z0, z1, y, steps, c) {
   }
 }
 
-/* ── the onion dome ──
-   The profile is the whole point: a narrow neck at the drum, a bulge above
-   it, then a long taper to the finial. A hemisphere would read as Roman. */
-const ONION = [
-  [0.00, 0.60], [0.07, 0.80], [0.15, 0.95], [0.24, 1.00], [0.34, 0.99],
-  [0.45, 0.92], [0.56, 0.80], [0.66, 0.66], [0.75, 0.52], [0.83, 0.38],
-  [0.90, 0.25], [0.96, 0.13], [1.00, 0.05],
-];
-function onionRadius(u) {
-  for (let i = 0; i < ONION.length - 1; i++) {
-    const [a, ar] = ONION[i], [b, br] = ONION[i + 1];
-    if (u >= a && u <= b) return ar + ((br - ar) * (u - a)) / (b - a);
+/* Secular pavilion roofs: stepped, low pyramids without religious finials. */
+function pavilionRoof(cx, cz, baseY, radius, shell, trim) {
+  const height = Math.round(radius * 0.65);
+  for (let k = 0; k <= height; k++) {
+    const r = Math.max(1, Math.round(radius * (1 - k / (height + 1))));
+    slab(cx - r, cx + r, cz - r, cz + r, baseY + k, k % 3 === 0 ? trim : shell);
   }
-  return 0.05;
-}
-function onionDome(cx, cz, baseY, R, shell, rib) {
-  const H = Math.round(R * 1.75);
-  for (let k = 0; k <= H; k++) {
-    const u = k / H;
-    const r = R * onionRadius(u);
-    const rNext = R * onionRadius(Math.min(1, (k + 1) / H));
-    if (r < 1.2) { disc(cx, cz, baseY + k, 1.2, rib); continue; }
-    const thick = Math.max(2.2, Math.abs(r - rNext) + 1.8);
-    ring(cx, cz, baseY + k, r, thick, (dx, _y, dz) => {
-      const ax = Math.abs(dx), az = Math.abs(dz);
-      /* eight gilded ribs; between them, flutes in alternating gold.
-         Deterministic, not random — noise here reads as a moth-eaten dome. */
-      if (ax < 1.4 || az < 1.4 || Math.abs(ax - az) < 1.4) return rib;
-      const band = Math.floor((Math.atan2(dz, dx) + Math.PI) / (Math.PI / 8)) % 2;
-      return band ? shell : C.goldDk;
-    });
-  }
-  return baseY + H;
-}
-/** the cross above every dome */
-function crossFinial(cx, cz, y, h = 10) {
-  for (let k = 0; k < h; k++) box(cx, y + k, cz, k < 2 ? C.goldDk : C.gold);
-  const armY = y + h - 4;
-  for (let d = -2; d <= 2; d++) box(cx + d, armY, cz, C.gold);
-  box(cx, y + h, cz, C.goldLt);
 }
 
 /* ═══════════════════════════ THE GROUNDS ═══════════════════════════
@@ -469,8 +424,8 @@ basin.position.set(0, 0.4, 69);
 scene.add(basin);
 
 /* ═══════════════════════════ THE PALACE ═══════════════════════════
-   Eleven storeys, each one an information panel. Three tiers with
-   setbacks, gold onion domes above, low wings either side so it still
+   Eleven decorative storeys. Three tiers with
+   setbacks, stepped pavilion roofs above, low wings either side so it still
    reads as a palace rather than a tower. Grid units: 2 per world unit. */
 
 /* tier: [halfX, halfZ, firstFloor, floorCount] in grid units */
@@ -534,7 +489,7 @@ for (const tier of TIERS) {
       (x, y, z) => ((x + z) % 4 === 0 ? C.gold : C.white));
 }
 
-/* ── attic, drum, and the great onion ── */
+/* ── attic and the central pavilion roof ── */
 const TOP = TIERS[2].y0 + TIERS[2].floors * FLOOR_H;   // 142
 walls(-26, 26, -22, 22, TOP + 3, TOP + 12, (x, y) => (y > TOP + 10 ? C.white : pick([C.wall, C.wall2])));
 cornice(-26, 26, -22, 22, TOP + 13, 3, (i) => (i === 1 ? C.gold : C.white));
@@ -546,14 +501,12 @@ cylinder(0, 0, TOP + 16, TOP + 30, 20, (dx, y, dz) => {
   return Math.abs(Math.sin(a * 6)) > 0.86 ? C.white : C.wall;
 });
 ring(0, 0, TOP + 31, 21, 3, C.gold);
-const domeTop = onionDome(0, 0, TOP + 32, 22, C.gold, C.goldLt);
-crossFinial(0, 0, domeTop + 1, 14);
+pavilionRoof(0, 0, TOP + 32, 22, C.gold, C.goldLt);
 
-/* four lesser onions on the corners of the second setback */
+/* four small pavilion roofs on the corners of the second setback */
 [[-40, -28], [40, -28], [-40, 28], [40, 28]].forEach(([cx, cz]) => {
   cylinder(cx, cz, TOP - 40, TOP - 30, 7, (dx, y) => (y === TOP - 30 ? C.gold : C.white));
-  const t = onionDome(cx, cz, TOP - 29, 8, C.gold, C.goldLt);
-  crossFinial(cx, cz, t + 1, 8);
+  pavilionRoof(cx, cz, TOP - 29, 8, C.gold, C.goldLt);
 });
 
 /* ── the great door and its stair ── */
@@ -610,7 +563,7 @@ function wing(sx) {
   slab(x0, x1, 29, 32, 25, C.gold);
   slab(x0, x1, 29, 32, 26, C.white);
 
-  /* an end pavilion with its own onion */
+  /* an end pavilion with a stepped roof */
   const cx = sx > 0 ? 92 : -92;
   walls(cx - 12, cx + 12, -30, 30, 6, 45, (x, y, z) => {
     const onEdge = Math.abs(x - cx) === 12 || Math.abs(z) === 30;
@@ -620,8 +573,7 @@ function wing(sx) {
   });
   cornice(cx - 12, cx + 12, -30, 30, 46, 3, (i) => (i === 1 ? C.gold : C.white));
   cylinder(cx, 0, 49, 55, 8, (dx, y) => (y === 55 ? C.gold : C.white));
-  const t = onionDome(cx, 0, 56, 9, C.gold, C.goldLt);
-  crossFinial(cx, 0, t + 1, 8);
+  pavilionRoof(cx, 0, 56, 9, C.gold, C.goldLt);
 }
 wing(1); wing(-1);
 
@@ -633,8 +585,7 @@ wing(1); wing(-1);
   walls(cx - 6, cx + 6, 168, 180, 0, 34, (x, y) =>
     y > 30 ? C.white : Math.abs(x - cx) === 6 ? pick([C.wall, C.wall2]) : C.wall);
   cornice(cx - 6, cx + 6, 168, 180, 35, 3, (i) => (i === 1 ? C.gold : C.white));
-  const t = onionDome(cx, 174, 39, 5, C.gold, C.goldLt);
-  crossFinial(cx, 174, t + 1, 6);
+  pavilionRoof(cx, 174, 39, 5, C.gold, C.goldLt);
 });
 [-1, 1].forEach((s) => {
   for (let x = 46; x <= 124; x++) {
@@ -1011,7 +962,7 @@ function featureWindow(roomIndex, floor) {
     glow: 0, target: 0,
   });
 }
-FLOORS.forEach((fl, i) => featureWindow(i, fl));
+FLOORS.slice(0, 2).forEach((fl, i) => featureWindow(i, fl));
 
 const PICKABLE = FEATURED.map((f) => f.pane);
 const byRoom = new Map(FEATURED.map((f) => [f.room, f]));
@@ -1121,7 +1072,7 @@ const startP = urlParams.has("p")
    thing that ever moves the page, so the camera never gets a jolt. */
 
 const scrollSpace = document.querySelector(".scroll-space");
-scrollSpace.style.height = coarsePointer ? "1200vh" : "1650vh";
+scrollSpace.style.height = coarsePointer ? "300vh" : "400vh";
 
 const maxScroll = () => document.documentElement.scrollHeight - innerHeight;
 /* the camera move ends when the spacer does; the document follows */
@@ -1134,7 +1085,7 @@ const eased = !reducedMotion;
 const scroller = { target: scrollY, active: false, glide: null };
 const clampY = (y) => THREE.MathUtils.clamp(y, 0, maxScroll());
 const inScrollable = (e) =>
-  e.composedPath().some((n) => n instanceof Element && n.closest(".panel-inner, .directory"));
+  e.composedPath().some((n) => n instanceof Element && n.closest(".panel-inner, .directory, .quick-nav, .hero-inner"));
 
 function nudge(dy) {
   scroller.glide = null;                    // a hand on the wheel wins
@@ -1164,6 +1115,7 @@ function glideTo(y, seconds) {
 
 /* wheel / trackpad */
 addEventListener("wheel", (e) => {
+  if (isPanelOpen()) return;
   if (e.ctrlKey) return;                    // let pinch-zoom through
   if (inScrollable(e)) return;
   e.preventDefault();
@@ -1176,7 +1128,7 @@ addEventListener("wheel", (e) => {
 /* touch — the same target, with a flick at the end */
 let touchY = null, touchV = 0, touchT = 0;
 addEventListener("touchstart", (e) => {
-  if (inScrollable(e)) { touchY = null; return; }
+  if (isPanelOpen() || inScrollable(e)) { touchY = null; return; }
   touchY = e.touches[0].clientY;
   touchV = 0;
   touchT = performance.now();
@@ -1202,7 +1154,7 @@ addEventListener("touchend", () => {
 
 /* keyboard, when the drawer is not the thing being driven */
 addEventListener("keydown", (e) => {
-  if (panelOpen || directoryOpen()) return;
+  if (isPanelOpen() || directoryOpen()) return;
   if (e.target instanceof Element && e.target.closest("input, textarea, select, a, button")) return;
   const page = innerHeight * 0.85;
   let d = null;
@@ -1224,6 +1176,7 @@ addEventListener("scroll", () => {
 
 function scrollToP(p) { glideTo(THREE.MathUtils.clamp(p, 0, 1) * journeyLength()); }
 
+document.addEventListener("pathhome", () => scrollToP(0));
 document.getElementById("brand-home").addEventListener("click", (e) => { e.preventDefault(); scrollToP(0); });
 document.querySelectorAll("[data-goto]").forEach((el) =>
   el.addEventListener("click", (e) => {
@@ -1265,7 +1218,7 @@ FLOORS.forEach((fl, i) => {
      tower in behind the storey, up top the tower is narrower and closer works.
      82 is the ceiling — beyond it the arc would clip the gate. */
   const radius = 82 - i * 1.4;
-  const win = FEATURED[i].pos;
+  const win = facePoint(fl, fl.face, fl.along, fl.winY);
   SHOTS.push({
     p: 0,
     pos: [Math.sin(th) * radius, fl.winY + 2.5, Math.cos(th) * radius],
@@ -1320,10 +1273,10 @@ function chapterFor(p) {
   if (p < ROOM_P[0] - 0.03) {
     let c = CHAPTERS[0];
     for (const ch of CHAPTERS) if (p >= ch.at) c = ch;
-    return c;
+    return { ...c, name: text(["boardwalk", "gate", "stair"][CHAPTERS.indexOf(c)], c.name) };
   }
   const i = nearestFloor(p);
-  return { no: String(i + 1).padStart(2, "0"), name: ROOMS[i]?.title || `Floor ${i + 1}` };
+  return { no: String(i + 1).padStart(2, "0"), name: ROOMS[i]?.title || text("grounds", "The Grounds") };
 }
 
 const _a = new THREE.Vector3(), _b = new THREE.Vector3();
@@ -1359,9 +1312,10 @@ const markerLayer = document.getElementById("markers");
 const markers = FEATURED.map((f) => {
   const el = document.createElement("button");
   el.type = "button";
+  el.tabIndex = -1;
   el.className = "marker";
   el.innerHTML = `<span class="marker-dot"></span><span class="marker-label">${ROOMS[f.room].title}</span>`;
-  el.setAttribute("aria-label", `Open: ${ROOMS[f.room].title}`);
+  el.setAttribute("aria-label", `${text("open", "Open")}: ${ROOMS[f.room].title}`);
   el.addEventListener("click", () => openPanel(f.room));
   el.addEventListener("pointerenter", () => (f.target = 1));
   el.addEventListener("pointerleave", () => (f.target = 0));
@@ -1395,11 +1349,13 @@ function updateMarkers(p, dt) {
       : vis * markersFade * THREE.MathUtils.smoothstep(facing, 0.2, 0.5);
 
     if (alpha < 0.02) {
+      el.tabIndex = -1;
       el.classList.remove("guided");
       if (m.shown) { el.style.opacity = "0"; el.style.pointerEvents = "none"; m.shown = false; }
       continue;
     }
     m.shown = true;
+    el.tabIndex = 0;
     el.classList.toggle("guided", guided);
     el.style.transform = `translate3d(${((_proj.x + 1) / 2) * innerWidth}px, ${((-_proj.y + 1) / 2) * innerHeight}px, 0)`;
     el.style.opacity = String(alpha);
@@ -1440,7 +1396,7 @@ function setHover(obj, cx, cy) {
   }
   if (obj) {
     const r = ROOMS[obj.userData.room];
-    tooltip.innerHTML = `<b>${r.title}</b><span>${r.plate}</span>`;
+    tooltip.innerHTML = `<b>${r.title}</b>`;
     tooltip.hidden = false;
     tooltip.style.left = `${cx}px`;
     tooltip.style.top = `${cy}px`;
@@ -1461,67 +1417,18 @@ canvas.addEventListener("pointerup", (e) => {
 canvas.addEventListener("pointermove", (e) => setHover(pickAt(e.clientX, e.clientY), e.clientX, e.clientY));
 canvas.addEventListener("pointerleave", clearHover);
 
-const panel = document.getElementById("panel");
-const panelKicker = document.getElementById("panel-kicker");
-const panelTitle = document.getElementById("panel-title");
-const panelBody = document.getElementById("panel-body");
-const panelCount = document.getElementById("panel-count");
-const panelFig = document.getElementById("panel-figure");
 const firstWindowGuide = document.getElementById("first-window-guide");
-let currentRoom = 0;
-let panelOpen = false;
 let firstWindowGuideActive = false;
-
-function renderPanel() {
-  const r = ROOMS[currentRoom];
-  panelKicker.textContent = `${r.plate} · ${r.kicker}`;
-  panelTitle.textContent = r.title;
-  panelBody.innerHTML = r.body;
-  panelCount.textContent = `${String(currentRoom + 1).padStart(2, "0")} / ${String(ROOMS.length).padStart(2, "0")}`;
-  panelFig.innerHTML = r.img ? `<img src="${r.img}" alt="${r.imgAlt}" loading="lazy" />` : "";
-}
-function openPanel(i, { fly = true } = {}) {
+document.addEventListener("pathopen", () => {
   firstWindowGuideActive = false;
-  firstWindowGuide.classList.remove("show");
-  firstWindowGuide.setAttribute("aria-hidden", "true");
-  currentRoom = ((i % ROOMS.length) + ROOMS.length) % ROOMS.length;
-  /* Selecting a room is also a camera move: the scroll target becomes that
-     storey's stop, and the spiral carries us up to it. */
-  if (fly && ROOM_P[currentRoom] !== undefined) scrollToP(ROOM_P[currentRoom]);
-  renderPanel();
-  panel.hidden = false;
-  panelOpen = true;
   clearHover();
-  setTimeout(() => panel.classList.add("open"), 20);
-  directoryEl.hidden = true;
-  document.body.classList.add("panel-open");
-}
-function closePanel() {
-  panel.classList.remove("open");
-  panelOpen = false;
-  document.body.classList.remove("panel-open");
-  setTimeout(() => { if (!panelOpen) panel.hidden = true; }, 450);
-}
-document.getElementById("panel-close").addEventListener("click", closePanel);
-document.getElementById("panel-prev").addEventListener("click", () => openPanel(currentRoom - 1));
-document.getElementById("panel-next").addEventListener("click", () => openPanel(currentRoom + 1));
-
-const directoryEl = document.getElementById("directory");
-const directoryOpen = () => !directoryEl.hidden;
-const directoryList = document.getElementById("directory-list");
-ROOMS.forEach((r, i) => {
-  const li = document.createElement("li");
-  li.innerHTML = `<button type="button"><span class="num">${String(i + 1).padStart(2, "0")}</span><span><b>${r.title}</b><i>${r.plate}</i></span></button>`;
-  li.querySelector("button").addEventListener("click", () => openPanel(i));
-  directoryList.appendChild(li);
 });
-document.getElementById("directory-btn").addEventListener("click", () => {
-  directoryEl.hidden = !directoryEl.hidden;
-});
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") { closePanel(); directoryEl.hidden = true; }
-  if (panelOpen && e.key === "ArrowRight") openPanel(currentRoom + 1);
-  if (panelOpen && e.key === "ArrowLeft") openPanel(currentRoom - 1);
+document.addEventListener("languagechange", () => {
+  for (const { el, f } of markers) {
+    el.querySelector(".marker-label").textContent = ROOMS[f.room].title;
+    el.setAttribute("aria-label", `${text("open", "Open")}: ${ROOMS[f.room].title}`);
+  }
+  readScroll();
 });
 
 /* ═══════════════════════ HUD & PROGRESS ═══════════════════════ */
@@ -1541,7 +1448,7 @@ function readScroll() {
   progressBar.style.transform = `scaleX(${targetP})`;
 
   const showFirstWindowGuide = firstWindowGuideActive
-    && !panelOpen
+    && !isPanelOpen()
     && Math.abs(targetP - ROOM_P[0]) < 0.014;
   firstWindowGuide.classList.toggle("show", showFirstWindowGuide);
   firstWindowGuide.setAttribute("aria-hidden", String(!showFirstWindowGuide));
@@ -1560,7 +1467,7 @@ function readScroll() {
   chapterEl.style.opacity = targetP > 0.06 && targetP < 0.995 ? "1" : "0";
 
   /* the reading document is up: stand the scene controls down */
-  const reading = scrollY > journeyLength() - innerHeight * 0.35;
+  const reading = false; // Content is reached directly through the two paths.
   document.body.classList.toggle("reading", reading);
   if (hovered) clearHover();      // the view moved out from under the pointer
 }

@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Register — Folk Dance Club Kaleidoscope" />
     <meta property="og:description" content="Register a dancer for classes, performances, and community programs at Folk Dance Club Kaleidoscope in Brighton Beach, Brooklyn." />
-    <meta property="og:image" content="/images/og-cover.jpg" />
+    <meta property="og:image" content="/images/collective-photo-at-huge-performance.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,59 +19,60 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Outfit:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="pages.css?v=1" />
+    <link rel="stylesheet" href="pages.css?v=2" />
   </head>
-  <body>
+  <body data-title-key="registration-title">
+    <button id="language-toggle" class="page-language" type="button" lang="ru" aria-label="Switch to Russian">Русский</button>
     <header class="site-header">
       <div class="container">
-        <p class="site-eyebrow"><a href="index.html">Kaleidoscope</a> · Brighton Beach, Brooklyn</p>
-        <h1 class="site-title">Registration</h1>
-        <p class="site-support">This page will host the multi-step registration form.</p>
+        <p class="site-eyebrow"><a href="index.html"><span data-i18n="form-0">Kaleidoscope</span></a> <span data-i18n="form-1">· Brighton Beach, Brooklyn</span></p>
+        <h1 class="site-title"><span data-i18n="form-2">Registration</span></h1>
+        <p class="site-support"><span data-i18n="form-53">The Folk Dance Club is the flagship project of nonprofit Multicultural Center Kaleidoscope.</span></p><p class="site-support"><span data-i18n="form-3">This page will host the multi-step registration form.</span></p>
       </div>
     </header>
 
     <main>
       <section class="section">
         <div class="container">
-          <h2>Register a dancer</h2>
-          <p>Children and youth of every background and level are welcome — no experience required. <a href="index.html">Back to the palace</a>.</p>
+          <h2><span data-i18n="form-4">Register a dancer</span></h2>
+          <p><span data-i18n="form-5">Children and youth of every background and level are welcome — no experience required.</span> <a href="index.html"><span data-i18n="form-6">Back to the palace</span></a>.</p>
         </div>
       </section>
 
       <section class="section">
         <div class="container">
-          <h3>1. Basic dancer information</h3>
+          <h3><span data-i18n="form-7">1. Basic dancer information</span></h3>
           <form>
             <label>
-              Full name
+              <span data-i18n="form-8">Full name</span>
               <input type="text" name="dancerName" />
             </label>
             <label>
-              Date of birth
+              <span data-i18n="form-9">Date of birth</span>
               <input type="date" name="dancerDob" />
             </label>
             <label>
-              Gender
+              <span data-i18n="form-10">Gender</span>
               <input type="text" name="dancerGender" />
             </label>
             <label>
-              Phone number
+              <span data-i18n="form-11">Phone number</span>
               <input type="tel" name="dancerPhone" />
             </label>
             <label>
-              Email address
+              <span data-i18n="form-12">Email address</span>
               <input type="email" name="dancerEmail" />
             </label>
             <label>
-              Address
+              <span data-i18n="form-13">Address</span>
               <input type="text" name="dancerAddress" />
             </label>
             <label>
-              School currently attending
+              <span data-i18n="form-14">School currently attending</span>
               <input type="text" name="dancerSchool" />
             </label>
             <label>
-              Current grade
+              <span data-i18n="form-15">Current grade</span>
               <input type="text" name="dancerGrade" />
             </label>
           </form>
@@ -80,18 +81,18 @@
 
       <section class="section">
         <div class="container">
-          <h3>2. Emergency contact</h3>
+          <h3><span data-i18n="form-16">2. Emergency contact</span></h3>
           <form>
             <label>
-              Emergency contact name
+              <span data-i18n="form-17">Emergency contact name</span>
               <input type="text" name="emergencyName" />
             </label>
             <label>
-              Emergency contact phone number
+              <span data-i18n="form-18">Emergency contact phone number</span>
               <input type="tel" name="emergencyPhone" />
             </label>
             <label>
-              Relationship to dancer
+              <span data-i18n="form-19">Relationship to dancer</span>
               <input type="text" name="emergencyRelationship" />
             </label>
           </form>
@@ -100,10 +101,10 @@
 
       <section class="section">
         <div class="container">
-          <h3>3. Medical information</h3>
+          <h3><span data-i18n="form-20">3. Medical information</span></h3>
           <form>
             <label>
-              Please describe any relevant medical information
+              <span data-i18n="form-21">Please describe any relevant medical information</span>
               <textarea name="medicalInfo" rows="12" cols="40"></textarea>
             </label>
           </form>
@@ -112,22 +113,22 @@
 
       <section class="section">
         <div class="container">
-          <h3>4. Payment arrangement</h3>
+          <h3><span data-i18n="form-22">4. Payment arrangement</span></h3>
           <form>
-            <label>Select payment option</label>
-            <label><input type="radio" name="paymentOption" value="full-performance" /> Full-performance</label>
-            <label><input type="radio" name="paymentOption" value="single-class" /> Single class</label>
-            <label><input type="radio" name="paymentOption" value="twice-weekly" /> Twice-weekly</label>
-            <label><input type="radio" name="paymentOption" value="parents-group" /> Parents group</label>
-            <label><input type="radio" name="paymentOption" value="other" /> Other</label>
+            <label><span data-i18n="form-23">Select payment option</span></label>
+            <label><input type="radio" name="paymentOption" value="full-performance" /> <span data-i18n="form-24">Full-performance</span></label>
+            <label><input type="radio" name="paymentOption" value="single-class" /> <span data-i18n="form-25">Single class</span></label>
+            <label><input type="radio" name="paymentOption" value="twice-weekly" /> <span data-i18n="form-26">Twice-weekly</span></label>
+            <label><input type="radio" name="paymentOption" value="parents-group" /> <span data-i18n="form-27">Parents group</span></label>
+            <label><input type="radio" name="paymentOption" value="other" /> <span data-i18n="form-28">Other</span></label>
 
             <label>
-              Payment amount agreed upon with the director
+              <span data-i18n="form-29">Payment amount agreed upon with the director</span>
               <input type="text" name="paymentAmount" />
             </label>
 
             <label>
-              Any additional notes or information
+              <span data-i18n="form-30">Any additional notes or information</span>
               <textarea name="paymentNotes" rows="6"></textarea>
             </label>
           </form>
@@ -136,10 +137,10 @@
 
       <section class="section">
         <div class="container">
-          <h3>5. Additional information</h3>
+          <h3><span data-i18n="form-31">5. Additional information</span></h3>
           <form>
             <label>
-              Please input any additional information that you think Kaleidoscope should know
+              <span data-i18n="form-32">Please input any additional information that you think Kaleidoscope should know</span>
               <textarea name="additionalInfo" rows="10"></textarea>
             </label>
           </form>
@@ -148,51 +149,52 @@
 
       <section class="section">
         <div class="container">
-          <h3>6. Rules and permissions</h3>
-          <p style="font-size: 0.95rem; margin-top: 0.25rem;">Please review these terms and conditions before signing.</p>
-          <h4>Folk Dance Club Kaleidoscope rules</h4>
+          <h3><span data-i18n="form-33">6. Rules and permissions</span></h3>
+          <p style="font-size: 0.95rem; margin-top: 0.25rem;"><span data-i18n="form-34">Please review these terms and conditions before signing.</span></p>
+          <h4><span data-i18n="form-35">Folk Dance Club Kaleidoscope rules</span></h4>
           <ol>
-            <li>Students must wear clothing suitable for movement. Street clothes and jeans are not permitted in class.</li>
-            <li>Students must treat classmates, teachers, and guests with respect. Bullying, harassment, discrimination, personal attacks, and violence are prohibited.</li>
-            <li>Parents may attend class only with teacher permission. When the director requires a parent to be present, attendance is mandatory for the child to participate.</li>
-            <li>Students and families are responsible for costume care and may be charged for negligent damage. Costumes may not be altered without approval.</li>
-            <li>Families must promptly update personal, emergency, and medical information.</li>
-            <li>Group chats are for dance-school matters. Messages, photos, and videos should not be posted after 10:00 PM. Harassment or unrelated disputes are not permitted.</li>
-            <li>The selected membership and payment amount are confirmed when registration is submitted. After submission, only Kaleidoscope administration may change those payment details.</li>
-            <li>The director may pause performance participation when behavior or safety concerns affect the dancer or others.</li>
-            <li>Concerns and disputes should be brought privately to the director or dance teacher for resolution.</li>
+            <li><span data-i18n="form-36">Students must wear clothing suitable for movement. Street clothes and jeans are not permitted in class.</span></li>
+            <li><span data-i18n="form-37">Students must treat classmates, teachers, and guests with respect. Bullying, harassment, discrimination, personal attacks, and violence are prohibited.</span></li>
+            <li><span data-i18n="form-38">Parents may attend class only with teacher permission. When the director requires a parent to be present, attendance is mandatory for the child to participate.</span></li>
+            <li><span data-i18n="form-39">Students and families are responsible for costume care and may be charged for negligent damage. Costumes may not be altered without approval.</span></li>
+            <li><span data-i18n="form-40">Families must promptly update personal, emergency, and medical information.</span></li>
+            <li><span data-i18n="form-41">Group chats are for dance-school matters. Messages, photos, and videos should not be posted after 10:00 PM. Harassment or unrelated disputes are not permitted.</span></li>
+            <li><span data-i18n="form-42">The selected membership and payment amount are confirmed when registration is submitted. After submission, only Kaleidoscope administration may change those payment details.</span></li>
+            <li><span data-i18n="form-43">The director may pause performance participation when behavior or safety concerns affect the dancer or others.</span></li>
+            <li><span data-i18n="form-44">Concerns and disputes should be brought privately to the director or dance teacher for resolution.</span></li>
           </ol>
 
           <form id="consent-form">
             <label>
               <input type="checkbox" name="photoConsent" required />
-              I authorize photography and video during dance-school activities for Kaleidoscope websites, social media, brochures, and promotion.
+              <span data-i18n="form-45">I authorize photography and video during dance-school activities for Kaleidoscope websites, social media, brochures, and promotion.</span>
             </label>
             <label>
               <input type="checkbox" name="rulesConsent" required />
-              I have read and agree to the rules and payment terms.
+              <span data-i18n="form-46">I have read and agree to the rules and payment terms.</span>
             </label>
             <label>
               <input type="checkbox" name="accuracyConsent" required />
-              I confirm that all information provided is accurate and complete.
+              <span data-i18n="form-47">I confirm that all information provided is accurate and complete.</span>
             </label>
-            <button type="submit">Authorize registration</button>
+            <button type="submit"><span data-i18n="form-48">Authorize registration</span></button>
           </form>
         </div>
       </section>
 
       <section class="section">
         <div class="container">
-          <h3>7. Electronic signature</h3>
+          <h3><span data-i18n="form-49">7. Electronic signature</span></h3>
           <form id="registration-form" action="thank-you.html" method="get">
             <label>
-              Signature
-              <input type="text" name="electronicSignature" placeholder="Type your full name" />
+              <span data-i18n="form-50">Signature</span>
+              <input type="text" name="electronicSignature" placeholder="Type your full name" data-i18n-placeholder="signature-placeholder" />
             </label>
-            <button type="submit">Authorize registration</button>
+            <button type="submit"><span data-i18n="form-48">Authorize registration</span></button>
           </form>
         </div>
       </section>
     </main>
+  <script type="module" src="i18n.js"></script>
   </body>
 </html>

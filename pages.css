@@ -132,3 +132,6 @@ button:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(255, 20
 @media (prefers-reduced-motion: reduce) {
   button, a { transition: none; }
 }
+
+.page-language { position: fixed; top: 1rem; right: 1rem; z-index: 10; padding: .65rem 1rem; font-size: .85rem; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }

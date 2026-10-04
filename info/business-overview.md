@@ -4,7 +4,7 @@
 
 Folk Dance Club Kaleidoscope is a Brooklyn-based dance school founded in 2016 by a family who moved to Brooklyn from Ukraine. The club brings people from different backgrounds, ages, religions, and cultures together to practice and perform.
 
-The club teaches and performs dances from many cultures, including Ukrainian, Russian, Georgian, Chinese, Spanish, Romani, Israeli, and others. It is supported by the Multicultural Center Kaleidoscope.
+The club teaches and performs dances from many cultures, including Ukrainian, Russian, Georgian, Chinese, Spanish, Romani, Israeli, and others. The club is a business registered as the flagship project of nonprofit Multicultural Center Kaleidoscope. The two share a leadership team and the address below. Kaleidoscope is not affiliated with a particular religion.
 
 ## Mission
 

@@ -5,24 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Folk Dance Club Kaleidoscope — a Brooklyn palace of world folk dance, built in voxels. Walk the boardwalk, pass the gate, climb the grand stair, and click any lit window to step inside."
+      content="Multicultural Center Kaleidoscope and its flagship Folk Dance Club. Explore dance classes, cultural projects and community life in Brooklyn."
     />
-    <title>Kaleidoscope · Folk Dance Club — Brighton Beach, Brooklyn</title>
+    <title>Kaleidoscope · Dance &amp; Culture in Brooklyn</title>
     <link rel="icon" href="/images/kaleidoscope-logo.jpg" />
     <meta name="theme-color" content="#0b0d22" />
     <meta name="color-scheme" content="dark" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Folk Dance Club Kaleidoscope" />
-    <meta property="og:title" content="Kaleidoscope — a voxel palace of world folk dance" />
+    <meta property="og:site_name" content="Kaleidoscope" />
+    <meta property="og:title" content="Kaleidoscope — Dance &amp; Culture in Brooklyn" />
     <meta
       property="og:description"
-      content="A Brooklyn folk dance club, built as a palace you can walk up to. Scroll the boardwalk, pass the gate, and click any lit window to step inside."
+      content="Two paths into Kaleidoscope: our nonprofit Multicultural Center and its flagship Folk Dance Club."
     />
-    <meta property="og:image" content="/images/og-cover.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="A voxel palace at dusk, its windows lit, seen from the garden." />
+    <meta property="og:image" content="/images/collective-photo-at-huge-performance.jpg" />
+    <meta property="og:image:alt" content="Kaleidoscope dancers together on stage." />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,134 +28,87 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="preload" as="image" href="images/loading-poster.jpg" fetchpriority="high" />
-    <link rel="stylesheet" href="palace.css?v=9" />
+    <link rel="stylesheet" href="palace.css?v=10" />
   </head>
   <body>
-    <canvas id="scene"></canvas>
-    <!-- A static capture keeps the first paint recognisable while WebGL builds. -->
-    <div id="loading-poster" class="loading-poster" aria-hidden="true">
-      <img src="images/loading-poster.jpg" alt="" fetchpriority="high" decoding="async" />
-    </div>
-
-    <!-- scroll driver — height set by palace.js -->
+    <canvas id="scene" aria-hidden="true"></canvas>
     <div class="scroll-space" aria-hidden="true"></div>
-
     <div class="progress-track" aria-hidden="true"><div id="progress-bar"></div></div>
-
-    <!-- clickable window markers, projected from the 3D scene -->
     <div id="markers" class="markers"></div>
-    <div id="first-window-guide" class="first-window-guide" role="status" aria-live="polite" aria-hidden="true">
-      <span class="first-window-guide-spark" aria-hidden="true">✦</span>
-      <p><strong>Your first window is ready.</strong> Click or tap the glowing window to open <em>Welcome to Kaleidoscope</em>.</p>
-    </div>
-
-    <!-- starter panel (fades into the journey on the first scroll) -->
+    <div id="first-window-guide" hidden></div>
     <header class="hero" id="hero">
       <div class="hero-inner">
-        <p class="hero-kicker">Brighton Beach, Brooklyn · est. 2016</p>
-        <h1 class="hero-title">Kaleidoscope</h1>
-        <p class="hero-rule" aria-hidden="true"></p>
-        <section class="start-guide" aria-labelledby="start-guide-title">
-          <p class="start-guide-label">Begin your visit</p>
-          <h2 id="start-guide-title">Explore the palace your way</h2>
-          <div class="start-guide-options">
-            <div class="start-guide-option">
-              <span class="start-guide-icon" aria-hidden="true">↕</span>
-              <p><strong>Move through the grounds</strong><br />Scroll on desktop, or swipe on your phone, to follow the path around the palace.</p>
-            </div>
-            <div class="start-guide-option">
-              <span class="start-guide-icon" aria-hidden="true">✦</span>
-              <p><strong>Start with the first window</strong><br />We’ll take you there. Then click or tap the glow to open its story; use the card arrows to continue.</p>
-            </div>
-          </div>
-          <p class="start-guide-keyboard"><kbd>←</kbd><kbd>→</kbd> Arrow keys also move between open story cards.</p>
-        </section>
+        <p data-i18n="location" class="hero-kicker">Brighton Beach, Brooklyn · Since 2016</p>
+        <h1 data-i18n="hero-title" class="hero-title">Kaleidoscope</h1>
+        <p data-i18n="hero-subtitle" class="hero-subtitle">Many cultures. One place to belong.</p>
+        <p data-i18n="choose" class="start-guide-label">Choose your path</p>
+        <div class="path-choices">
+          <a class="path-card" href="#dance-club"><span class="window-icon" aria-hidden="true">✧</span>
+            <h2 data-i18n="dance-label" >Folk Dance Club</h2>
+            <p data-i18n="dance-intro" >Classes, rehearsals &amp; performances</p>
+            <span data-i18n="dance-tag" class="path-link">The center’s flagship project →</span>
+          </a>
+          <a class="path-card" href="#multicultural-center"><span class="window-icon" aria-hidden="true">✧</span>
+            <h2 data-i18n="center-label" >Multicultural Center</h2>
+            <p data-i18n="center-intro" >Culture, education &amp; community</p>
+            <span data-i18n="center-tag" class="path-link">Explore our nonprofit →</span>
+          </a>
+        </div>
         <div class="hero-actions">
-          <button class="hero-cta" type="button" data-goto="first-window">Take me to the first window <span aria-hidden="true">↓</span></button>
-          <a class="hero-ghost" href="registration.html">Register for classes</a>
+          <button data-i18n="explore" class="hero-ghost" type="button" data-goto="first-window">Explore the grounds ↓</button>
+          <a data-i18n="register" class="hero-cta" href="registration.html">Register for classes</a>
         </div>
       </div>
-      <div class="hero-scroll-hint" aria-hidden="true">
-        <span>scroll or swipe to begin</span>
-        <svg width="16" height="30" viewBox="0 0 16 30" fill="none">
-          <path d="M8 1v24m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
     </header>
-
-    <!-- corner brand + actions -->
-    <nav class="hud-top" aria-label="Site">
-      <a class="brand" href="#" id="brand-home" aria-label="Kaleidoscope home">
-        <img src="images/kaleidoscope-logo.jpg" alt="" />
-        <span>Калейдоскоп<b>Folk Dance Club</b></span>
-      </a>
+    <nav class="hud-top" aria-label="Site" data-i18n-aria-label="site-nav">
+      <a class="brand" href="#" id="brand-home"> <span class="brand-symbol" aria-hidden="true">✺</span><span><span data-i18n="brand" >Kaleidoscope</span><b data-i18n="brand-subtitle" >Dance &amp; culture</b></span></a>
       <div class="hud-actions">
-        <button id="directory-btn" class="chip" type="button" aria-haspopup="dialog">Rooms</button>
-        <a class="chip chip-gold" href="registration.html">Register</a>
+        <button id="language-toggle" class="chip" type="button" lang="ru" aria-label="Switch to Russian">Русский</button>
+        <button data-i18n="menu" id="directory-btn" class="chip" type="button" aria-expanded="false" aria-controls="directory">Explore</button>
       </div>
     </nav>
-
-    <!-- chapter title, changes as you move through the grounds -->
-    <div class="chapter" id="chapter" aria-hidden="true">
-      <span class="chapter-no" id="chapter-no">I</span>
-      <span class="chapter-name" id="chapter-name">The Boardwalk</span>
-    </div>
-
-    <!-- hover tooltip -->
+    <nav class="quick-nav" aria-label="Quick navigation" data-i18n-aria-label="quick-nav">
+      <a data-i18n="quick-dance" href="#dance-club">Dance club</a>
+      <a data-i18n="quick-center" href="#multicultural-center">Cultural center</a>
+      <a data-i18n="quick-classes" href="#room-04">Classes</a>
+      <a data-i18n="quick-gallery" href="#gallery">Gallery</a>
+      <a data-i18n="quick-contact" href="#room-11">Contact</a>
+    </nav>
+    <div class="chapter" id="chapter" aria-hidden="true"><span class="chapter-no" id="chapter-no">I</span><span class="chapter-name" id="chapter-name"></span></div>
     <div id="tooltip" class="tooltip" hidden></div>
-
-    <!-- room panel -->
     <aside id="panel" class="panel" role="dialog" aria-modal="false" aria-labelledby="panel-title" hidden>
       <div class="panel-inner">
-        <button id="panel-close" class="panel-close" type="button" aria-label="Close panel">×</button>
+        <div class="panel-toolbar">
+          <a data-i18n="back" id="panel-back" href="#">← All paths</a>
+          <button id="panel-close" class="panel-close" type="button" aria-label="Close panel" data-i18n-aria-label="close">×</button>
+        </div>
         <figure class="panel-figure" id="panel-figure"></figure>
         <p class="panel-kicker" id="panel-kicker"></p>
-        <h2 class="panel-title" id="panel-title"></h2>
+        <h2 class="panel-title" id="panel-title" tabindex="-1"></h2>
+        <nav id="panel-children" class="nested-windows" aria-label="Explore this path" data-i18n-aria-label="children"></nav>
         <div class="panel-body" id="panel-body"></div>
         <div class="panel-nav">
-          <button id="panel-prev" type="button">← Prev</button>
+          <button data-i18n="prev" id="panel-prev" type="button">← Previous</button>
           <span id="panel-count"></span>
-          <button id="panel-next" type="button">Next →</button>
+          <button data-i18n="next" id="panel-next" type="button">Next →</button>
         </div>
       </div>
     </aside>
-
-    <!-- all rooms -->
-    <div id="directory" class="directory" role="menu" hidden>
-      <p class="directory-title">The palace at a glance</p>
+    <nav id="directory" class="directory" aria-label="Explore Kaleidoscope" data-i18n-aria-label="directory" hidden>
+      <p data-i18n="directory-title" class="directory-title">Two paths. A shared home.</p>
       <ul id="directory-list"></ul>
-    </div>
-
-
-    <!-- ═══════════════════════════════════════════════════════════════════
-         Every room, as real HTML.
-
-         This is the source of truth: palace.js reads the eleven rooms from
-         here to fill the drawer. It is also what search engines index, what
-         a visitor without WebGL gets, and what anyone who would simply
-         rather read than scroll a camera around a building can scroll to.
-         ═══════════════════════════════════════════════════════════════ -->
+    </nav>
     <main id="ledger" class="ledger">
-      <div class="ledger-head">
-        <p class="ledger-eyebrow">Everything, in plain text</p>
-        <h2 class="ledger-title">Folk Dance Club Kaleidoscope</h2>
-        <p class="ledger-lead">
-          A Brooklyn dance school founded in 2016 by a family who moved here from
-          Ukraine. We teach and perform folk dance from around the world — Ukrainian,
-          Russian, Georgian, Chinese, Spanish, Romani, Israeli and more — and we use
-          it to help children and youth grow into confident, capable leaders.
-        </p>
-        <p class="ledger-lead">
-          <a class="ledger-cta" href="registration.html">Register a dancer</a>
-          <a class="ledger-cta ledger-cta-quiet" href="tel:+19175008704">Call +1 (917) 500-8704</a>
-        </p>
-      </div>
-
-      <article class="room" id="room-01" data-plate="The Rose Window" data-kicker="The Heart of the House">
-        <h3 class="room-title">Welcome to Kaleidoscope</h3>
-        <img class="room-img" src="images/collective-photo-at-huge-performance.jpg" alt="The whole club on stage at a large performance." loading="lazy" decoding="async" />
-        <div class="room-body">
+      <div class="ledger-head"><h2 data-i18n="ledger-title" class="ledger-title">Explore Kaleidoscope</h2></div>
+      <article class="room" id="dance-club" data-parent="" data-entry>
+ <h3 class="room-title" data-i18n="dance-club.title">Folk Dance Club</h3><img class="room-img" src="images/collective-photo-at-huge-performance.jpg" alt="Our dancers together on stage." data-i18n-alt="dance-club.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="dance-club.body"><p class="path-tag">Dance school · Est. 2016</p><p>Learn, rehearse and perform dances from around the world. A Brooklyn home for young dancers, curious minds and a love of movement.</p><p>The Folk Dance Club is a business and the <strong>flagship project of Multicultural Center Kaleidoscope</strong>, a nonprofit. The two share a team and an address.</p></div>
+ </article><article class="room" id="multicultural-center" data-parent="" data-entry>
+ <h3 class="room-title" data-i18n="multicultural-center.title">Multicultural Center</h3><img class="room-img" src="images/boardwalk-performance.jpg" alt="Folk dance on the Brighton Beach boardwalk." data-i18n-alt="multicultural-center.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="multicultural-center.body"><p class="path-tag">Nonprofit · Culture &amp; community</p><p>Multicultural Center Kaleidoscope brings people together through cultural, educational and community projects. People of every background are welcome.</p><p>Our flagship project is the <a href="#dance-club">Folk Dance Club</a>, a separately registered business. The center and club are run by the same people and share <strong>217 Brighton Beach Ave, Brooklyn</strong>.</p><p>Explore the projects and community work below.</p></div>
+ </article><article class="room" id="room-01" data-parent="dance-club" >
+ <h3 class="room-title" data-i18n="room-01.title">Welcome to Kaleidoscope</h3><img class="room-img" src="images/collective-photo-at-huge-performance.jpg" alt="The whole club on stage at a large performance." data-i18n-alt="room-01.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-01.body">
           <p>Folk Dance Club Kaleidoscope uses folk dance from around the world to educate and empower the children and youth of Brooklyn — helping them grow into confident, compassionate, capable leaders.</p>
           <p>Beyond the steps, our dancers gain:</p>
           <ul>
@@ -167,32 +118,23 @@
             <li>Teamwork, leadership &amp; communication</li>
           </ul>
         </div>
-      </article>
-
-      <article class="room" id="room-02" data-plate="West Bay" data-kicker="Under the portico">
-        <h3 class="room-title">Our Story</h3>
-        <img class="room-img" src="images/incredibly-old-group-photo.jpg" alt="An early group photo of the club." loading="lazy" decoding="async" />
-        <div class="room-body">
-          <p>Founded in <strong>2016</strong> by a family who moved to Brooklyn from Ukraine, Kaleidoscope brings together people of different backgrounds, ages, religions, and cultures to practice and perform.</p>
-          <p>We teach and perform dances from Ukraine, Russia, Georgia, China, Spain, Romani traditions, Israel and beyond — supported by the <a href="https://www.multiculturecenterkaleidoscope.org/" target="_blank" rel="noreferrer">Multicultural Center Kaleidoscope</a>.</p>
+ </article><article class="room" id="room-02" data-parent="dance-club" >
+ <h3 class="room-title" data-i18n="room-02.title">Our Story</h3><img class="room-img" src="images/incredibly-old-group-photo.jpg" alt="An early group photo of the club." data-i18n-alt="room-02.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-02.body">
+          <p>Founded in <strong>2016</strong> by a family who moved to Brooklyn from Ukraine, Kaleidoscope brings together people of different backgrounds, ages and cultures to practice and perform.</p>
+          <p>We teach and perform dances from Ukraine, Russia, Georgia, China, Spain, Romani traditions, Israel and beyond — as the flagship project of <a href="#multicultural-center">Multicultural Center Kaleidoscope</a>.</p>
           <p>On average we perform <strong>every weekend</strong>: parks, libraries, museums, Times Square, One World Trade Center, the Brighton Beach Boardwalk — plus tours to New Jersey, Pennsylvania, Miami, Nashville and Washington, D.C.</p>
         </div>
-      </article>
-
-      <article class="room" id="room-03" data-plate="East Bay" data-kicker="Under the portico">
-        <h3 class="room-title">How We Teach</h3>
-        <img class="room-img" src="images/dado-handstand.webp" alt="A dancer mid-handstand during a performance." loading="lazy" decoding="async" />
-        <div class="room-body">
+ </article><article class="room" id="room-03" data-parent="dance-club" >
+ <h3 class="room-title" data-i18n="room-03.title">How We Teach</h3><img class="room-img" src="images/dado-handstand.webp" alt="A dancer mid-handstand during a performance." data-i18n-alt="room-03.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-03.body">
           <p><strong>We teach kids how to think before we teach them how to dance.</strong></p>
           <p>Folk dance has no strict rules — that freedom lifts the fear of mistakes and invites creativity. Improvisation is central: in every practice students invent dances on the spot, without knowing the music, or even the genre, that is coming.</p>
           <p>Experienced dancers direct their own teams, practising real leadership. And woven through the workouts are questions of math, history, literature and geography — sometimes naming a song's nationality by ear alone.</p>
         </div>
-      </article>
-
-      <article class="room" id="room-04" data-plate="West Wing" data-kicker="The Treasury">
-        <h3 class="room-title">Classes &amp; Pricing</h3>
-        <img class="room-img" src="images/girls-dancing-at-festival.jpg" alt="Dancers in costume performing at a festival." loading="lazy" decoding="async" />
-        <div class="room-body">
+ </article><article class="room" id="room-04" data-parent="dance-club" >
+ <h3 class="room-title" data-i18n="room-04.title">Classes &amp; Pricing</h3><img class="room-img" src="images/girls-dancing-at-festival.jpg" alt="Dancers in costume performing at a festival." data-i18n-alt="room-04.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-04.body">
           <ul>
             <li><strong>Full-Performance</strong> — Boys $250/mo · Girls $350/mo (the difference covers costume cleaning). Includes performances, costume rental and every class on the schedule. Register before the end of September and <strong>June is free</strong>.</li>
             <li><strong>Single Class</strong> — $40. No performances or costume rental; move up to another package later and the $40 is returned.</li>
@@ -200,12 +142,9 @@
             <li><strong>Parents Group</strong> — $30 per class, Fridays 6:30–8:00 pm, for parents of enrolled dancers.</li>
           </ul>
         </div>
-      </article>
-
-      <article class="room" id="room-05" data-plate="East Wing" data-kicker="The Clock Room">
-        <h3 class="room-title">Weekly Schedule</h3>
-        <img class="room-img" src="images/swinging-girls.jpg" alt="Dancers mid-swing in rehearsal." loading="lazy" decoding="async" />
-        <div class="room-body">
+ </article><article class="room" id="room-05" data-parent="dance-club" >
+ <h3 class="room-title" data-i18n="room-05.title">Weekly Schedule</h3><img class="room-img" src="images/swinging-girls.jpg" alt="Dancers mid-swing during a performance." data-i18n-alt="room-05.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-05.body">
           <ul>
             <li><strong>Mon–Thu · 6:00–8:00 pm</strong> — Open class, all students</li>
             <li><strong>Fri · 5:00–6:30 pm</strong> — Group 1, all students</li>
@@ -214,49 +153,34 @@
           </ul>
           <p>Most classes meet at the studio, <strong>217 Brighton Beach Ave</strong>, Brooklyn.</p>
         </div>
-      </article>
-
-      <article class="room" id="room-06" data-plate="West Pavilion" data-kicker="The Festival Ground">
-        <h3 class="room-title">Dance Under The Sky</h3>
-        <img class="room-img" src="images/boardwalk-performance.jpg" alt="A performance on the Brighton Beach boardwalk." loading="lazy" decoding="async" />
-        <div class="room-body">
+ </article><article class="room" id="room-06" data-parent="multicultural-center" >
+ <h3 class="room-title" data-i18n="room-06.title">Dance Under The Sky</h3><img class="room-img" src="images/boardwalk-performance.jpg" alt="A performance on the Brighton Beach boardwalk." data-i18n-alt="room-06.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-06.body">
           <p>Our annual street festival brings <strong>20+ dance groups</strong> to South Brooklyn to celebrate folk tradition and difference.</p>
           <p>Families, schools and whole neighbourhoods gather for folk dance and live music from around the world — many cultures sharing one open-air stage.</p>
         </div>
-      </article>
-
-      <article class="room" id="room-07" data-plate="East Pavilion" data-kicker="The Garden Gate">
-        <h3 class="room-title">Summer Camp</h3>
-        <img class="room-img" src="images/Tennessee-group-photo.jpg" alt="The club on a trip out of the city." loading="lazy" decoding="async" />
-        <div class="room-body">
+ </article><article class="room" id="room-07" data-parent="multicultural-center" >
+ <h3 class="room-title" data-i18n="room-07.title">Summer Camp</h3><img class="room-img" src="images/Tennessee-group-photo.jpg" alt="The club on a trip out of the city." data-i18n-alt="room-07.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-07.body">
           <p>Each summer we take children out of New York City to learn folk dances, pick up new skills and play in the open air.</p>
           <p>Camp blends structured learning with adventure. Campers come home more independent, more connected, and surer of what they are good at.</p>
         </div>
-      </article>
-
-      <article class="room" id="room-08" data-plate="East Flank" data-kicker="The Schoolhouse">
-        <h3 class="room-title">Dance in Schools</h3>
-        <img class="room-img" src="images/world-trade-center.webp" alt="Dancers performing at One World Trade Center." loading="lazy" decoding="async" />
-        <div class="room-body">
+ </article><article class="room" id="room-08" data-parent="multicultural-center" >
+ <h3 class="room-title" data-i18n="room-08.title">Dance in Schools</h3><img class="room-img" src="images/world-trade-center.webp" alt="Dancers performing at One World Trade Center." data-i18n-alt="room-08.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-08.body">
           <p>Kaleidoscope is a <strong>DOE vendor</strong>, bringing folk dance and cultural programs into New York City public schools.</p>
           <p>Students learn traditional dances from around the world while building confidence, teamwork and cultural awareness — and every program ends with a public showcase and a place in the NYC Dance Parade.</p>
         </div>
-      </article>
-
-      <article class="room" id="room-09" data-plate="West Flank" data-kicker="The Hall of Memory">
-        <h3 class="room-title">Community &amp; Heart</h3>
-        <img class="room-img" src="images/war-performance.jpg" alt="A Victory Day performance." loading="lazy" decoding="async" />
-        <div class="room-body">
+ </article><article class="room" id="room-09" data-parent="multicultural-center" >
+ <h3 class="room-title" data-i18n="room-09.title">Community &amp; Heart</h3><img class="room-img" src="images/war-performance.jpg" alt="A Victory Day performance." data-i18n-alt="room-09.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-09.body">
           <p>Through the <strong>Kaleidoscope of History</strong> project, students study the Second World War and perform war dances in honour of Victory Day.</p>
           <p>We dance for elders in nursing homes, stage free New Year's performances across the city, and — with parents' agreement — direct ticket proceeds and donations to charitable help for sick children and their families.</p>
           <p>We do almost no advertising. Our dancers and their families are the way people find us.</p>
         </div>
-      </article>
-
-      <article class="room" id="room-10" data-plate="Garden Court" data-kicker="The Portrait Gallery">
-        <h3 class="room-title">Our Team</h3>
-        <img class="room-img" src="images/important-meeting.jpg" alt="The club's leadership in a planning meeting." loading="lazy" decoding="async" />
-        <div class="room-body">
+ </article><article class="room" id="room-10" data-parent="dance-club" >
+ <h3 class="room-title" data-i18n="room-10.title">Our Team</h3><img class="room-img" src="images/important-meeting.jpg" alt="Members of the club gathered around a table." data-i18n-alt="room-10.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-10.body">
           <ul>
             <li><strong>Valentin Usmanov</strong> — Club director</li>
             <li><strong>Viktoria Markelova</strong> — Artistic designer, costume &amp; choreography</li>
@@ -264,75 +188,31 @@
             <li><strong>Fedir Usmanov</strong> — Choreographer, inventor of tricks</li>
           </ul>
         </div>
-      </article>
-
-      <article class="room" id="room-11" data-plate="The Gate Lodge" data-kicker="Where to find us">
-        <h3 class="room-title">Visit Us</h3>
-        <img class="room-img" src="images/more-recent-group-photo.webp" alt="A recent group photo of the club." loading="lazy" decoding="async" />
-        <div class="room-body">
+ </article><article class="room" id="room-11" data-parent="dance-club" >
+ <h3 class="room-title" data-i18n="room-11.title">Visit Us</h3><img class="room-img" src="images/more-recent-group-photo.webp" alt="A recent group photo of the club." data-i18n-alt="room-11.alt" loading="lazy" decoding="async" />
+ <div class="room-body" data-i18n="room-11.body">
           <ul>
             <li><a href="https://www.google.com/maps?q=217%20Brighton%20Beach%20Ave,%20Brooklyn,%20NY%2011235" target="_blank" rel="noreferrer"><strong>217 Brighton Beach Ave</strong>, Brooklyn, NY 11235</a></li>
             <li><a href="tel:+19175008704">+1 (917) 500-8704</a></li>
             <li><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=usmacorp@gmail.com" target="_blank" rel="noreferrer">usmacorp@gmail.com</a></li>
           </ul>
-          <p>Children and youth of every background and level are welcome — no experience required.</p>
+          <p>The Multicultural Center and Folk Dance Club share this address.</p><p>Children and youth of every background and level are welcome — no experience required.</p>
           <a class="panel-btn" href="registration.html">Register now →</a>
-        </div>
-      </article>
-
-      <section class="ledger-contact" id="contact">
-        <h3 class="room-title">Find us</h3>
-        <div class="contact-grid">
-          <div>
-            <h4>The studio</h4>
-            <p>
-              <a href="https://www.google.com/maps?q=217%20Brighton%20Beach%20Ave,%20Brooklyn,%20NY%2011235" target="_blank" rel="noreferrer">217 Brighton Beach Ave<br />Brooklyn, NY 11235</a>
-            </p>
-            <p>
-              <a href="tel:+19175008704">+1 (917) 500-8704</a><br />
-              <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=usmacorp@gmail.com" target="_blank" rel="noreferrer">usmacorp@gmail.com</a>
-            </p>
-            <p><a href="https://www.multiculturecenterkaleidoscope.org/" target="_blank" rel="noreferrer">Multicultural Center Kaleidoscope</a></p>
-          </div>
-          <div>
-            <h4>Online</h4>
-            <ul class="social-list">
+        <ul class="social-list">
               <li><a href="https://www.facebook.com/groups/FolkDanceClubKaleidoskope/?ref=bookmarks" target="_blank" rel="noreferrer"><img src="images/facebook-icon.webp" alt="" loading="lazy" />Facebook</a></li>
               <li><a href="https://www.youtube.com/@folkdanceclubkaleidoscope" target="_blank" rel="noreferrer"><img src="images/better-image-icon.avif" alt="" loading="lazy" />YouTube</a></li>
               <li><a href="https://www.tiktok.com/@club_kaleidoscope?_t=8Z8YG0uyuqM&amp;_r=1" target="_blank" rel="noreferrer"><img src="images/tiktok-icon.jpg" alt="" loading="lazy" />TikTok</a></li>
               <li><a href="https://www.instagram.com/club_kaleidoscope?igshid=MDM4ZDc5MmU%3D" target="_blank" rel="noreferrer"><img src="images/instagram-icon.jpg" alt="" loading="lazy" />Instagram</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="video-frame">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/sugpzQHJgj0"
-            title="Folk Dance Club Kaleidoscope"
-            loading="lazy"
-            frameborder="0"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </section>
-
-      <footer class="ledger-footer">
-        <p>Folk Dance Club Kaleidoscope · 217 Brighton Beach Ave, Brooklyn, NY 11235</p>
-        <p>Supported by the Multicultural Center Kaleidoscope.</p>
-      </footer>
+            </ul><p><a href="https://www.multiculturecenterkaleidoscope.org/" target="_blank" rel="noreferrer">Multicultural Center website ↗</a></p></div>
+ </article><article class="room" id="gallery" data-parent="dance-club" >
+ <h3 class="room-title" data-i18n="gallery.title">Photo Gallery</h3>
+ <div class="room-body" data-i18n="gallery.body"><p>Moments from our stages, studio and travels. Select a photo to see the full image.</p><div class="photo-grid"><a href="images/Fedya-jumping.jpg" target="_blank" rel="noreferrer"><figure><img src="images/Fedya-jumping.jpg" alt="A leap on stage" loading="lazy" decoding="async" /><figcaption>A leap on stage</figcaption></figure></a><a href="images/dasha-pistolet.jpg" target="_blank" rel="noreferrer"><figure><img src="images/dasha-pistolet.jpg" alt="In the spotlight" loading="lazy" decoding="async" /><figcaption>In the spotlight</figcaption></figure></a><a href="images/everybody-takes-a-bow.jpg" target="_blank" rel="noreferrer"><figure><img src="images/everybody-takes-a-bow.jpg" alt="Taking a bow on the boardwalk" loading="lazy" decoding="async" /><figcaption>Taking a bow on the boardwalk</figcaption></figure></a><a href="images/lezginka-photo.jpg" target="_blank" rel="noreferrer"><figure><img src="images/lezginka-photo.jpg" alt="Together in costume" loading="lazy" decoding="async" /><figcaption>Together in costume</figcaption></figure></a><a href="images/group-photo-after-performance.jpg" target="_blank" rel="noreferrer"><figure><img src="images/group-photo-after-performance.jpg" alt="After the performance" loading="lazy" decoding="async" /><figcaption>After the performance</figcaption></figure></a><a href="images/girls-dancing-at-festival.jpg" target="_blank" rel="noreferrer"><figure><img src="images/girls-dancing-at-festival.jpg" alt="Dancing at the festival" loading="lazy" decoding="async" /><figcaption>Dancing at the festival</figcaption></figure></a><a href="images/Maslenitsa-performance.jpg" target="_blank" rel="noreferrer"><figure><img src="images/Maslenitsa-performance.jpg" alt="A moment in the air" loading="lazy" decoding="async" /><figcaption>A moment in the air</figcaption></figure></a><a href="images/world-trade-center.webp" target="_blank" rel="noreferrer"><figure><img src="images/world-trade-center.webp" alt="Dance in the city" loading="lazy" decoding="async" /><figcaption>Dance in the city</figcaption></figure></a><a href="images/incredibly-old-group-photo.jpg" target="_blank" rel="noreferrer"><figure><img src="images/incredibly-old-group-photo.jpg" alt="An early studio memory" loading="lazy" decoding="async" /><figcaption>An early studio memory</figcaption></figure></a></div><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/sugpzQHJgj0" title="Folk Dance Club Kaleidoscope" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div>
+ </article>
+      <footer class="ledger-footer"><p data-i18n="footer" >Kaleidoscope · 217 Brighton Beach Ave, Brooklyn, NY 11235</p></footer>
     </main>
-
-    <noscript>
-      <style>
-        #scene, .hero, .chapter, .markers, .progress-track { display: none !important; }
-        .hud-top { opacity: 1 !important; }
-      </style>
-    </noscript>
-
-    <script type="importmap">
-      { "imports": { "three": "/vendor/three.module.min.js?v=0.161.0" } }
-    </script>
-    <script type="module" src="palace.js?v=26"></script>
+    <noscript><style>#scene,.hero,.chapter,.markers,.progress-track,.hud-top,.quick-nav{display:none!important} .ledger-head{padding-top:3rem}</style></noscript>
+    <script type="importmap">{ "imports": { "three": "/vendor/three.module.min.js?v=0.161.0" } }</script>
+    <script type="module" src="navigation.js?v=1"></script>
+    <script type="module" src="palace.js?v=27"></script>
   </body>
 </html>

@@ -1,8 +1,9 @@
 # Russian copy (from the previous site)
 
 The old site had an English/Russian toggle. These are the Russian strings it
-used, kept here so the translation is not lost. The current site is
-English-only — if the toggle comes back, start from this.
+used, kept here so the translation is not lost. The live English/Russian toggle uses `translations-ru.js`; this file remains
+a historical reference. The current organizational wording follows the owner’s
+clarification: the club is the nonprofit center’s flagship project.
 
 | Key | Russian |
 | --- | --- |

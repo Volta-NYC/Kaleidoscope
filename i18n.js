@@ -1,4 +1,4 @@
-import russian from './translations-ru.js';
+import russian from './translations-ru.js?v=2';
 
 const english = new Map();
 const initialTitle = document.title;

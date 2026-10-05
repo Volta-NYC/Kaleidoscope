@@ -12,7 +12,7 @@ import { RenderPass } from "/vendor/three-examples/postprocessing/RenderPass.js"
 import { UnrealBloomPass } from "/vendor/three-examples/postprocessing/UnrealBloomPass.js";
 
 import { entries, openEntry, isPanelOpen, isDirectoryOpen } from "site-navigation";
-import { text } from "./i18n.js";
+import { text } from "site-i18n";
 
 // Two main windows; project content belongs to each path's nested navigation.
 const ROOMS = entries.map(el => ({ get title() { return el.querySelector('.room-title').textContent; } }));

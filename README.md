@@ -38,8 +38,9 @@ modules. No build step is required. Alternatively, run `npm install` and
 
 The Folk Dance Club path contains the welcome, story, teaching approach, classes,
 schedule, team, contact details and gallery. The Multicultural Center path contains
-Dance Under The Sky, Summer Camp, Dance in Schools and community work. The club’s
-relationship to the center is described in both entrances and on registration.
+the flagship Folk Dance Club, Dance Under The Sky, Summer Camp, Dance in Schools
+and community work. The club’s relationship to the center remains visible while
+viewing either entrance or its child content windows, and on registration.
 
 ## Edit content or add photographs
 
@@ -50,10 +51,13 @@ inputs: translate the label text so entered values remain intact.
 
 Each `.room` article has a unique ID. `data-parent` names its parent entrance;
 `data-entry` marks either of the two top-level entrances. Navigation and child
-links are derived from this structure. Existing room links such as `#room-04`
+links are derived from this structure. `data-project-links` adds related project
+entrances (the center links to its flagship dance club). Existing room links such as `#room-04`
 continue to open the relevant window directly. Each entrance shows its labeled
-project grid first, with photo thumbnails; opening a child window preserves a
-visible link back to that entrance.
+project grid first, with photo thumbnails. Opening a child shows an inset content
+window beneath the parent organization's title and relationship summary. Its back
+link, close button and Escape return to the parent grid; the outer close button
+closes the whole panel. Next/previous controls stay within the same parent.
 
 To extend the gallery, place approved photos in `images/`, then add a linked
 `figure` to the `#gallery` article and its `gallery.body` Russian translation.

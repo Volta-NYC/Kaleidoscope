@@ -61,9 +61,20 @@ closes the whole panel. Next/previous controls stay within the same parent.
 
 To extend the gallery, place approved photos in `images/`, then add a linked
 `figure` to the `#gallery` article and its `gallery.body` Russian translation.
-Include a meaningful caption and alt text in both languages. The current gallery
-uses nine existing photographs. Nastya’s Google Drive gallery has not yet been
-imported; its link is still needed.
+Include a meaningful caption and alt text in both languages. The displayed gallery
+contains 17 new performance photographs in six expandable albums, plus nine older
+photographs in an archive album. The Google Drive ZIP received on 9 October 2026
+has been extracted and organized: the website-ready photos are in
+`images/gallery/`, grouped by visible performance setting. See the
+[photo catalog and contact sheet](info/photo-library-2026-10-09.md) to choose images.
+The catalog maps descriptive filenames back to the originals. Selected photos
+also lead the homepage, both entrances and dance-club content windows. Gallery
+photos retain their full aspect ratios and link to full-size images. Album state
+is preserved when switching languages.
+
+Full original files remain in `media/originals/google-drive-2026-10-09/`, and the
+downloaded ZIP is preserved in the project root. Original sources are excluded
+from Git and deployment; full-dimension WebP copies are ready for the site.
 
 ## Scene preview
 

@@ -62,6 +62,7 @@ function renderDirectory() {
 }
 function renderPanel({ focus = false } = {}) {
   if (!current) return;
+  const albumStates = !focus ? [...projectWindow.querySelectorAll('.gallery-album')].map(el => el.open) : [];
   const parent = byId.get(current.dataset.parent);
   const entry = parent || current;
   panel.classList.toggle('project-open', Boolean(parent));
@@ -88,6 +89,9 @@ function renderPanel({ focus = false } = {}) {
     document.getElementById('project-back').textContent = `← ${title(parent)}`;
     document.getElementById('project-title').textContent = title(current);
     document.getElementById('project-body').innerHTML = current.querySelector('.room-body').innerHTML;
+    projectWindow.querySelectorAll('.gallery-album').forEach((el, index) => {
+      if (index < albumStates.length) el.open = albumStates[index];
+    });
     document.getElementById('project-close').setAttribute('aria-label', `${text('close-project', 'Close project')}: ${title(current)}`);
     const photo = current.querySelector('.room-img');
     const figure = document.getElementById('project-figure');

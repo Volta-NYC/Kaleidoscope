@@ -3,3 +3,5 @@ scripts
 info
 README.md
 package-lock.json
+media/originals
+*.zip

@@ -2,3 +2,7 @@ node_modules/
 .vercel
 .DS_Store
 *.log
+
+# Local photo sources; optimized copies live in images/gallery/.
+/Photos -20261009T231713Z-1-001.zip
+/media/originals/
